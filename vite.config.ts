@@ -30,10 +30,6 @@ export default defineConfig({
           if (id.includes('lenis')) {
             return 'vendor-lenis';
           }
-          // Lucide icons — tree-shakeable but still worth isolating
-          if (id.includes('lucide-react')) {
-            return 'vendor-icons';
-          }
           // React + React DOM + React Router — core runtime
           if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router')) {
             return 'vendor-react';
