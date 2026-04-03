@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useEnquiry } from '../../context/EnquiryContext';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
 import {
@@ -10,6 +10,20 @@ import {
   Globe,
   ArrowRight,
   Plus,
+  Award,
+  Lightbulb,
+  Target,
+  Settings,
+  Eye,
+  RefreshCw,
+  Camera,
+  Share2,
+  CheckCircle,
+  TrendingUp,
+  DollarSign,
+  Layers,
+  Shield,
+  Zap,
 } from 'lucide-react';
 import PerfShowcase from '../../components/PerfShowcase/PerfShowcase';
 import './ServicePage.css';
@@ -17,6 +31,114 @@ import './ServicePage.css';
 /* ── Constants ───────────────────────────────────────────── */
 const COLOR = '#a855f7';
 const GRADIENT = 'linear-gradient(135deg, #a855f7, #7c3aed)';
+
+/* ── Ad Type Cards (PPC Services from reference) ─────────── */
+const adTypes = [
+  {
+    icon: Search,
+    title: 'Search Ads',
+    desc: 'Reach your audience instantly with targeted search ads! Maximize your online presence and drive conversions. Start your campaign today!',
+    color: '#a855f7',
+  },
+  {
+    icon: Eye,
+    title: 'Display Ads',
+    desc: 'Elevate your online presence with captivating display ads. Stand out from the crowd and attract more customers with our visually stunning designs.',
+    color: '#7c3aed',
+  },
+  {
+    icon: Layers,
+    title: 'Discovery Ads',
+    desc: 'Elevate your brand visibility with Discovery Ads. Reach potential customers across Google platforms with captivating visuals. Let\'s ignite your digital presence today.',
+    color: '#a855f7',
+  },
+  {
+    icon: Share2,
+    title: 'Social Media Ads',
+    desc: 'Your key to reaching the right audience at the right time. Let us elevate your brand with targeted campaigns that drive results.',
+    color: '#9333ea',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Remarketing Ads',
+    desc: 'Unlock the power of remarketing ads! Reach out to potential customers who\'ve shown interest in your brand before.',
+    color: '#7c3aed',
+  },
+  {
+    icon: Camera,
+    title: 'E-Commerce Shoot',
+    desc: 'Elevate your online store with stunning E-Commerce shoots. From product photography to lifestyle images, we\'ve got you covered.',
+    color: '#a855f7',
+  },
+];
+
+/* ── Why The Cogent cards ─────────────────────────────────── */
+const whyCogent = [
+  {
+    icon: Award,
+    title: 'Proven Expertise',
+    desc: 'With years of experience and a track record of success, The Cogent is a trusted PPC company in Jaipur. Our team of skilled professionals understands the nuances of PPC advertising, ensuring your campaigns are effective and efficient.',
+  },
+  {
+    icon: Settings,
+    title: 'Tailored Strategies',
+    desc: "We don't believe in one-size-fits-all approaches. At The Cogent, we take the time to understand your business, industry, and objectives. We then develop custom PPC strategies that are specifically tailored to meet your needs and drive results.",
+  },
+  {
+    icon: Shield,
+    title: 'Transparent Communication',
+    desc: "We value transparency and communication. Throughout the entire process, you'll have access to detailed reports and regular updates on the performance of your PPC campaigns. We believe in keeping our clients informed every step of the way.",
+  },
+  {
+    icon: Target,
+    title: 'Results-Driven Approach',
+    desc: "Our ultimate goal is to deliver tangible results for your business. Whether it's increasing website traffic, generating leads, or improving conversions, we focus on measurable outcomes that have a positive impact on your bottom line. With The Cogent as your PPC company in Jaipur, you can trust that your investment will yield significant returns.",
+  },
+  {
+    icon: BarChart3,
+    title: 'Campaign Strategy and Planning',
+    desc: 'Develop campaign strategies & tactical plans, including content creation, ad targeting, & campaign timelines, to drive campaign success and achieve objectives.',
+  },
+  {
+    icon: Globe,
+    title: 'Digital Marketing Campaign Management',
+    desc: 'Expertly execute and manage digital marketing campaigns across various channels, ensuring consistent messaging, optimal targeting, and campaign performance tracking.',
+  },
+];
+
+/* ── Expectations ─────────────────────────────────────────── */
+const expectations = [
+  { icon: Target,      label: 'Targeted Approach' },
+  { icon: BarChart3,   label: 'Measurable Results' },
+  { icon: DollarSign,  label: 'Cost-effectiveness' },
+  { icon: Layers,      label: 'Flexibility and Scalability' },
+  { icon: Shield,      label: 'Transparency & Accountability' },
+  { icon: TrendingUp,  label: 'Higher ROI' },
+];
+
+/* ── Why Choose (4-pillars) ───────────────────────────────── */
+const whyChoose = [
+  {
+    icon: Award,
+    title: 'Expertise',
+    desc: 'Our social media specialists are a group of highly qualified people with a keen grasp of the social media arena, marketing know-how, and several years of experience in the industry.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Innovation',
+    desc: 'We make sure that we are on the edge of the cutting edge by using the most advanced social media tools, techniques, and trends as our selling points.',
+  },
+  {
+    icon: Target,
+    title: 'Results-Driven',
+    desc: 'Our aim is clear, to provide visible results aimed at crossing off your goal list.',
+  },
+  {
+    icon: Settings,
+    title: 'Customized Solutions',
+    desc: 'We are aware that no two businesses are the same. Therefore, our solutions are customized to suit your exact requirements.',
+  },
+];
 
 const services = [
   {
@@ -108,26 +230,83 @@ const results = [
 
 const faqs = [
   {
-    q: 'What is performance marketing and how is it different from brand marketing?',
-    a: "Performance marketing is a results-driven approach where you only pay for measurable outcomes — clicks, leads, or sales. Unlike brand marketing which focuses on awareness, every rupee in performance marketing is tied to a trackable action and a clear ROI.",
+    q: 'What is Performance Marketing?',
+    a: 'Action-driven digital marketing is where businesses are charged only for actions such as clicks, leads, sales, or conversions. You can ensure that you use your marketing budget effectively since you will be paid only for measurable results.',
   },
   {
-    q: 'How much ad spend do I need to get started?',
-    a: "We typically recommend a minimum monthly ad spend of ₹1 lakh to generate statistically significant data. However, the right budget depends on your industry, goals, and CPC benchmarks. We'll advise you on the optimal starting point during our audit.",
+    q: 'Compare and contrast with traditional marketing.',
+    a: 'Whereas, in the traditional marketing process, almost all the cost is front-end, and the conventional approach here is of an advertisement on a television or print — the concept of performance-based marketing is that you only pay when those specific actions are completed, which makes the approach significantly more accountable and results-oriented in terms of results and outcome.',
   },
   {
-    q: 'How long before I see results from performance marketing?',
-    a: "Most campaigns start delivering measurable results within 2–4 weeks of launch. However, the real optimisation and scaling happens between weeks 6–12 as we accumulate conversion data and refine the targeting and creative strategy.",
+    q: 'On which mediums can Performance Marketing be executed?',
+    a: "Performance Marketing uses many digital channels: search engine ads, social media websites, affiliate marketing, and display advertisements. Such a choice depends on your business's target audience and the purpose of its promotion.",
   },
   {
-    q: 'What platforms do you manage campaigns on?',
-    a: "We manage campaigns across Google Ads, Meta (Facebook & Instagram), YouTube, LinkedIn, Snapchat, Pinterest, Amazon Ads, and programmatic platforms like DV360 and The Trade Desk. We recommend the right mix based on where your audience is.",
+    q: 'How to measure and optimize Performance Marketing campaigns?',
+    a: "We'd use robust analytics tools to track critical metrics like conversion rates, cost per acquisition or CPA, and return on investment or ROI. Continuous optimization will allow us to make all the targeting adjustments needed, optimize bids, test different ad creatives at our disposal, and focus on optimizing campaign performance to deliver even better results.",
   },
   {
-    q: 'How do you measure and report on performance?',
-    a: "We set up comprehensive tracking via Google Tag Manager, Meta Pixel, and GA4 from day one. You get a live dashboard with real-time metrics and a detailed monthly report covering ROAS, CPL, CTR, conversion rates, and strategic recommendations.",
+    q: 'Will performance marketing work for my business?',
+    a: 'Performance Marketing can complement any small or big business without regard to the business niche. Our campaigns are all customer-focused on specific objectives, such as lead generation or conversion to sales, which will help ensure efficiency and maximum results.',
   },
 ];
+
+/* ── Ad Type Card — 3D flip + tap on mobile ──────────────── */
+interface AdCardProps {
+  icon: React.ElementType;
+  title: string;
+  desc: string;
+  color: string;
+  index: number;
+  onEnquiry: () => void;
+}
+
+function AdCard({ icon: Icon, title, desc, color, index, onEnquiry }: AdCardProps) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className={`pm-ad-card${flipped ? ' pm-ad-card--flipped' : ''}`}
+      style={{ '--ad-color': color, '--ad-delay': `${index * 0.1}s` } as React.CSSProperties}
+      onClick={() => setFlipped(f => !f)}
+    >
+      <div className="pm-ad-card__inner">
+        {/* Front */}
+        <div className="pm-ad-card__front">
+          <div className="pm-ad-card__glow" />
+          <div className="pm-ad-card__num">0{index + 1}</div>
+          <div className="pm-ad-card__icon"><Icon size={28} /></div>
+          <h3 className="pm-ad-card__title">{title}</h3>
+          <div className="pm-ad-card__arrow">↗</div>
+        </div>
+        {/* Back */}
+        <div className="pm-ad-card__back">
+          <div className="pm-ad-card__back-glow" />
+          <div className="pm-ad-card__back-icon"><Icon size={20} /></div>
+          <h3 className="pm-ad-card__back-title">{title}</h3>
+          <p className="pm-ad-card__desc">{desc}</p>
+          <button
+            className="pm-ad-card__cta"
+            onClick={e => { e.stopPropagation(); onEnquiry(); }}
+          >
+            Get Started <ArrowRight size={13} />
+          </button>
+        </div>
+      </div>
+      {/* Mobile flat view */}
+      <div className="pm-ad-card__flat">
+        <div className="pm-ad-card__flat-top">
+          <div className="pm-ad-card__icon"><Icon size={22} /></div>
+          <span className="pm-ad-card__num pm-ad-card__flat-num">0{index + 1}</span>
+        </div>
+        <h3 className="pm-ad-card__title">{title}</h3>
+        <p className="pm-ad-card__desc">{desc}</p>
+        <button className="pm-ad-card__cta" onClick={e => { e.stopPropagation(); onEnquiry(); }}>
+          Get Started <ArrowRight size={13} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /* ── FAQ Item ────────────────────────────────────────────── */
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -136,9 +315,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
     <div className={`svc-faq-item${open ? ' svc-faq-item--open' : ''}`}>
       <button className="svc-faq-item__trigger" onClick={() => setOpen(!open)}>
         <span>{q}</span>
-        <span className="svc-faq-item__icon">
-          <Plus size={14} />
-        </span>
+        <span className="svc-faq-item__icon"><Plus size={14} /></span>
       </button>
       <div className="svc-faq-item__body">
         <div className="svc-faq-item__body-inner">
@@ -160,23 +337,19 @@ export default function PerformanceMarketing() {
     const rafId = requestAnimationFrame(() => {
       ctx = gsap.context(() => {
         // Hero entrance
-        gsap.to('.svc-hero__tag', { opacity: 1, y: 0, duration: 0.7, delay: 0.3, ease: 'power3.out' });
-        gsap.fromTo('.svc-hero__tag', { y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 0.3, ease: 'power3.out' });
-        gsap.fromTo('.svc-hero__h1', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' });
+        gsap.fromTo('.svc-hero__tag', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 0.3, ease: 'power3.out' });
+        gsap.fromTo('.svc-hero__h1',  { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'power3.out' });
         gsap.fromTo('.svc-hero__sub', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 0.7, ease: 'power3.out' });
         gsap.fromTo('.svc-hero__actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 0.85, ease: 'power3.out' });
-        gsap.fromTo('.svc-hero__stats', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 1.0, ease: 'power3.out' });
+        gsap.fromTo('.svc-hero__stats',   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 1.0,  ease: 'power3.out' });
 
-        // Counter animation for stats
+        // Counter animation
         document.querySelectorAll<HTMLElement>('.pm-counter').forEach((el) => {
           const target = parseFloat(el.dataset.target || '0');
           const isDecimal = el.dataset.decimal === 'true';
           const obj = { val: 0 };
           gsap.to(obj, {
-            val: target,
-            duration: 2,
-            delay: 1.2,
-            ease: 'power2.out',
+            val: target, duration: 2, delay: 1.2, ease: 'power2.out',
             onUpdate: () => {
               el.textContent = isDecimal
                 ? obj.val.toFixed(1) + '×'
@@ -185,7 +358,17 @@ export default function PerformanceMarketing() {
           });
         });
 
-        // Scroll-triggered sections
+        // Ad type cards
+        gsap.fromTo(
+          '.pm-ad-card',
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.pm-ad-grid', start: 'top 85%' },
+          }
+        );
+
+        // Intro
         gsap.fromTo(
           '.pm-intro__text > *',
           { opacity: 0, x: -40 },
@@ -195,8 +378,9 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // Services
         gsap.fromTo(
-          '.svc-card',
+          '.pm-services-grid .svc-card',
           { opacity: 0, y: 40 },
           {
             opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
@@ -204,6 +388,37 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // Why Cogent cards
+        gsap.fromTo(
+          '.pm-why-cogent-card',
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.pm-why-cogent-grid', start: 'top 80%' },
+          }
+        );
+
+        // Expectation items
+        gsap.fromTo(
+          '.pm-expect-item',
+          { opacity: 0, scale: 0.85 },
+          {
+            opacity: 1, scale: 1, duration: 0.5, stagger: 0.09, ease: 'back.out(1.4)',
+            scrollTrigger: { trigger: '.pm-expectations', start: 'top 80%' },
+          }
+        );
+
+        // Why choose 4-pillars
+        gsap.fromTo(
+          '.pm-why-choose-card',
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: '.pm-why-choose-grid', start: 'top 80%' },
+          }
+        );
+
+        // Process
         gsap.fromTo(
           '.svc-process__step',
           { opacity: 0, y: 30 },
@@ -213,8 +428,9 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // Platform pills
         gsap.fromTo(
-          '.svc-pill',
+          '.pm-platforms .svc-pill',
           { opacity: 0, scale: 0.8 },
           {
             opacity: 1, scale: 1, duration: 0.5, stagger: 0.07, ease: 'back.out(1.5)',
@@ -222,6 +438,7 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // Results
         gsap.fromTo(
           '.svc-result-card',
           { opacity: 0, y: 40 },
@@ -231,6 +448,7 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // FAQ
         gsap.fromTo(
           '.svc-faq-item',
           { opacity: 0, x: -30 },
@@ -240,6 +458,7 @@ export default function PerformanceMarketing() {
           }
         );
 
+        // CTA
         gsap.fromTo(
           '.svc-cta > *',
           { opacity: 0, y: 30 },
@@ -266,32 +485,28 @@ export default function PerformanceMarketing() {
     >
       {/* ── Hero ─────────────────────────────────────────── */}
       <section id="performance-marketing-hero" className="svc-hero" aria-labelledby="pm-h1">
-        {/* Orbs */}
         <div className="svc-orb svc-orb--1" style={{ background: COLOR }} />
         <div className="svc-orb svc-orb--2" style={{ background: '#7c3aed' }} />
         <div className="svc-orb svc-orb--3" style={{ background: COLOR }} />
 
         <div className="container">
           <div className="svc-hero__inner">
-            {/* Left */}
             <div className="svc-hero__content">
               <span className="svc-hero__tag" style={{ color: COLOR, borderColor: COLOR }}>
                 Performance Marketing
               </span>
               <h1 id="pm-h1" className="svc-hero__h1">
-                Performance Marketing That Delivers{' '}
-                <span className="text-gradient">Real ROI</span>
+                Drive 2x More Revenue through{' '}
+                <span className="text-gradient">Result Driven Performance Marketing</span>
               </h1>
               <p className="svc-hero__sub">
-                We manage ₹500Cr+ in ad spend across Google, Meta, and programmatic
-                platforms — engineering campaigns that turn every rupee into measurable
-                revenue.
+                We specialise in delivering top-notch PPC services in Jaipur that are tailored to your business goals. With our expertise, we'll help you maximise your reach, engage your audience, and achieve remarkable results through strategic pay-per-click campaigns.
               </p>
               <div className="svc-hero__actions">
-                <button onClick={openEnquiry}  className="btn btn-primary">
+                <button onClick={openEnquiry} className="btn btn-primary">
                   Get a Free Audit <ArrowRight size={16} />
                 </button>
-                <button onClick={openEnquiry}  className="btn btn-outline">
+                <button onClick={openEnquiry} className="btn btn-outline">
                   View Case Studies
                 </button>
               </div>
@@ -311,20 +526,12 @@ export default function PerformanceMarketing() {
               </div>
             </div>
 
-            {/* Right — animated bar chart */}
             <div className="svc-hero__visual" aria-hidden="true">
               <div style={{ width: '100%' }}>
                 <div className="svc-bar-chart">
                   {['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'].map((label, i) => (
-                    <div
-                      key={i}
-                      className="svc-bar"
-                      data-label={label}
-                      style={{
-                        background: GRADIENT,
-                        animationDelay: `${1.2 + i * 0.1}s`,
-                      }}
-                    />
+                    <div key={i} className="svc-bar" data-label={label}
+                      style={{ background: GRADIENT, animationDelay: `${1.2 + i * 0.1}s` }} />
                   ))}
                 </div>
                 <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'var(--color-muted)', marginTop: '1.5rem' }}>
@@ -332,6 +539,92 @@ export default function PerformanceMarketing() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PPC Ad Types ─────────────────────────────────── */}
+      <section id="ppc-ad-types" className="svc-section svc-section--alt" aria-labelledby="pm-ad-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">PPC Services</span>
+            <h2 id="pm-ad-h2">Want to know which of the above ads is the best for your Business</h2>
+            <p>We run every type of paid campaign — pick the format that fits your goal or let us recommend the right mix.</p>
+          </div>
+          <div className="pm-ad-grid">
+            {adTypes.map(({ icon, title, desc, color }, i) => (
+              <AdCard key={title} icon={icon} title={title} desc={desc} color={color} index={i} onEnquiry={openEnquiry} />
+            ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            <button onClick={openEnquiry} className="btn btn-primary">
+              Let's Talk About Your Brand <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The Cogent — Your PPC Company ────────────────── */}
+      <section id="ppc-company-jaipur" className="svc-section" aria-labelledby="pm-why-cogent-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">About The Cogent</span>
+            <h2 id="pm-why-cogent-h2">The Cogent — Your Go-to PPC Company in <span className="text-gradient">Jaipur</span></h2>
+            <p>Six strong reasons why leading brands in Jaipur trust The Cogent to run their performance campaigns.</p>
+          </div>
+          <div className="svc-grid-6 pm-why-cogent-grid">
+            {whyCogent.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="svc-card pm-why-cogent-card">
+                <div className="svc-card__icon-wrap"><Icon size={22} /></div>
+                <h3 className="svc-card__title">{title}</h3>
+                <p className="svc-card__desc">{desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── What You Can Expect ──────────────────────────── */}
+      <section id="performance-marketing-expectations" className="svc-section svc-section--dark pm-expectations" aria-labelledby="pm-expect-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">What to Expect</span>
+            <h2 id="pm-expect-h2">What you can expect from <span className="text-gradient">Performance Marketing</span></h2>
+            <p>Every campaign we run is built around six core promises to your business.</p>
+          </div>
+          <div className="pm-expect-grid">
+            {expectations.map(({ icon: Icon, label }) => (
+              <div key={label} className="pm-expect-item">
+                <div className="pm-expect-item__icon"><Icon size={24} /></div>
+                <CheckCircle size={16} className="pm-expect-item__check" />
+                <span className="pm-expect-item__label">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Choose The Cogent ────────────────────────── */}
+      <section id="why-choose-cogent-ppc" className="svc-section svc-section--alt" aria-labelledby="pm-why-choose-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">Why Choose Us</span>
+            <h2 id="pm-why-choose-h2">Why choose The Cogent for your <span className="text-gradient">Performance Marketing</span></h2>
+            <p>Four pillars that set us apart from every other PPC agency in the market.</p>
+          </div>
+          <div className="svc-grid-4 pm-why-choose-grid">
+            {whyChoose.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="svc-card pm-why-choose-card">
+                <div className="svc-card__icon-wrap"><Icon size={22} /></div>
+                <h3 className="svc-card__title">{title}</h3>
+                <p className="svc-card__desc">{desc}</p>
+              </article>
+            ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            <button onClick={openEnquiry} className="btn btn-primary">
+              Get Started <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
@@ -356,7 +649,7 @@ export default function PerformanceMarketing() {
                 data integration, and creative science to systematically lower your cost
                 per acquisition while scaling your returns.
               </p>
-              <button onClick={openEnquiry}  className="btn btn-outline" style={{ width: 'fit-content' }}>
+              <button onClick={openEnquiry} className="btn btn-outline" style={{ width: 'fit-content' }}>
                 Learn Our Approach <ArrowRight size={14} />
               </button>
             </div>
@@ -370,10 +663,7 @@ export default function PerformanceMarketing() {
                     { h: '90%', l: 'Perf.' },
                     { h: '60%', l: 'Content' },
                   ].map(({ h, l }, i) => (
-                    <div
-                      key={i}
-                      className="svc-bar"
-                      data-label={l}
+                    <div key={i} className="svc-bar" data-label={l}
                       style={{
                         height: h,
                         background: i === 3 ? GRADIENT : 'rgba(255,255,255,0.08)',
@@ -397,17 +687,12 @@ export default function PerformanceMarketing() {
           <div className="svc-section__header">
             <span className="tag">What We Do</span>
             <h2 id="pm-services-h2">Performance Marketing Services</h2>
-            <p>
-              From search intent capture to programmatic retargeting — we cover every
-              paid channel that drives measurable growth.
-            </p>
+            <p>From search intent capture to programmatic retargeting — we cover every paid channel that drives measurable growth.</p>
           </div>
           <div className="svc-grid-6 pm-services-grid">
             {services.map(({ icon: Icon, title, desc }) => (
               <article key={title} className="svc-card">
-                <div className="svc-card__icon-wrap">
-                  <Icon size={22} />
-                </div>
+                <div className="svc-card__icon-wrap"><Icon size={22} /></div>
                 <h3 className="svc-card__title">{title}</h3>
                 <p className="svc-card__desc">{desc}</p>
               </article>
@@ -432,9 +717,7 @@ export default function PerformanceMarketing() {
                   <h3 className="svc-process__title">{step.title}</h3>
                   <p className="svc-process__desc">{step.desc}</p>
                 </div>
-                {i < steps.length - 1 && (
-                  <div key={`c-${i}`} className="svc-process__connector" />
-                )}
+                {i < steps.length - 1 && <div key={`c-${i}`} className="svc-process__connector" />}
               </>
             ))}
           </div>
@@ -450,9 +733,7 @@ export default function PerformanceMarketing() {
             <p>We are certified partners and power users of every major paid media platform.</p>
           </div>
           <div className="svc-pills" style={{ justifyContent: 'center' }}>
-            {platforms.map((p) => (
-              <span key={p} className="svc-pill">{p}</span>
-            ))}
+            {platforms.map((p) => <span key={p} className="svc-pill">{p}</span>)}
           </div>
         </div>
       </section>
@@ -486,9 +767,7 @@ export default function PerformanceMarketing() {
             <h2 id="pm-faq-h2">Performance Marketing Questions Answered</h2>
           </div>
           <div className="svc-faq" role="list">
-            {faqs.map((f) => (
-              <FaqItem key={f.q} q={f.q} a={f.a} />
-            ))}
+            {faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
           </div>
         </div>
       </section>
@@ -496,7 +775,43 @@ export default function PerformanceMarketing() {
       {/* ── Campaign Showcase ────────────────────────────── */}
       <PerfShowcase />
 
-      {/* ── CTA ──────────────────────────────────────────── */}
+      {/* ── Boost Your Brand CTA ─────────────────────────── */}
+      <section id="boost-brand-cta" className="svc-section pm-boost-cta" aria-labelledby="pm-boost-h2">
+        <div className="pm-boost-cta__orb pm-boost-cta__orb--1" />
+        <div className="pm-boost-cta__orb pm-boost-cta__orb--2" />
+        <div className="container">
+          <div className="pm-boost-cta__inner">
+            <div className="pm-boost-cta__content">
+              <span className="tag">Boost Your Brand</span>
+              <h2 id="pm-boost-h2" className="pm-boost-cta__title">
+                Boost your brand for <span className="text-gradient">better Results</span>
+              </h2>
+              <p className="pm-boost-cta__sub">
+                Let our performance team audit your current campaigns and show you exactly where you're leaving money on the table.
+              </p>
+            </div>
+            <div className="pm-boost-cta__metrics">
+              <div className="pm-boost-metric">
+                <span className="pm-boost-metric__num">2×</span>
+                <span className="pm-boost-metric__label">Revenue Growth</span>
+              </div>
+              <div className="pm-boost-metric">
+                <span className="pm-boost-metric__num">64%</span>
+                <span className="pm-boost-metric__label">Lower CPL</span>
+              </div>
+              <div className="pm-boost-metric">
+                <span className="pm-boost-metric__num">12×</span>
+                <span className="pm-boost-metric__label">ROAS</span>
+              </div>
+            </div>
+            <button onClick={openEnquiry} className="btn btn-primary pm-boost-cta__btn">
+              Let's Connect <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ────────────────────────────────────── */}
       <section id="performance-marketing-cta" className="svc-section svc-cta svc-cta--pm" aria-labelledby="pm-cta-h2">
         <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
           <span className="tag">Get Started</span>
@@ -508,10 +823,10 @@ export default function PerformanceMarketing() {
             where you're leaving money on the table.
           </p>
           <div className="svc-cta__actions">
-            <button onClick={openEnquiry}  className="btn btn-primary">
+            <button onClick={openEnquiry} className="btn btn-primary">
               Get Your Free Audit <ArrowRight size={16} />
             </button>
-            <button onClick={openEnquiry}  className="btn btn-outline">
+            <button onClick={openEnquiry} className="btn btn-outline">
               Talk to a Strategist
             </button>
           </div>

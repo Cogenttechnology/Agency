@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useEnquiry } from '../../context/EnquiryContext';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
 import {
@@ -13,6 +13,12 @@ import {
   TrendingUp,
   ArrowRight,
   Plus,
+  Award,
+  Lightbulb,
+  Target,
+  Settings,
+  Camera,
+  Zap,
 } from 'lucide-react';
 import SocialShowcase from '../../components/SocialShowcase/SocialShowcase';
 import './ServicePage.css';
@@ -166,6 +172,141 @@ const faqs = [
   },
 ];
 
+const whyChoose = [
+  {
+    icon: Award,
+    title: 'Expertise',
+    desc: 'Our team comprises qualified specialists with deep industry experience across multiple verticals — delivering strategies that are tested, refined, and proven to perform.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Innovation',
+    desc: 'We leverage cutting-edge tools and stay ahead of current trends — from algorithm changes to emerging content formats — so your brand is always ahead of the curve.',
+  },
+  {
+    icon: Target,
+    title: 'Results-Driven',
+    desc: 'Every campaign is built around measurable business outcomes. We track real KPIs — reach, engagement, conversions — and continuously optimise to hit your goals.',
+  },
+  {
+    icon: Settings,
+    title: 'Customized Solutions',
+    desc: "No cookie-cutter strategies here. Every brand gets a tailored approach built around your specific audience, industry, and objectives — because one size doesn't fit all.",
+  },
+];
+
+const portfolioIndustries = [
+  { name: 'Fashion & Textile', icon: '👗' },
+  { name: 'Gems & Jewellery', icon: '💎' },
+  { name: 'Food & Beverage', icon: '🍽️' },
+  { name: 'Manufacturing', icon: '🏭' },
+  { name: 'Healthcare', icon: '🏥' },
+  { name: 'Others', icon: '✦' },
+];
+
+const smmBestServices = [
+  {
+    icon: BarChart2,
+    title: 'Social Media Audit',
+    desc: 'A comprehensive audit of your social media profiles to determine where you stand and what should be done to make the strategy better.',
+    color: '#f59e0b',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Social Media Strategy',
+    desc: 'Create a specific plan of action that specifies goals, audience, topics of interests, and strategies that will help to maximize the level of audiences\' engagement and achieve the goals of your business.',
+    color: '#d97706',
+  },
+  {
+    icon: MessageCircle,
+    title: 'Community Engagement',
+    desc: 'Communicate with your online audience, maintain a dialogue, answer questions, and address issues to create a favourable profile for your brand.',
+    color: '#f59e0b',
+  },
+  {
+    icon: Users,
+    title: 'Account Setup',
+    desc: 'Develop and manage social network profiles on the most popular sites, making sure that there is the proper branding and keywording and that business data is incorporated into posts.',
+    color: '#b45309',
+  },
+  {
+    icon: PenTool,
+    title: 'Content Creation and Distribution',
+    desc: 'Ensure that the content is organic, well-written, and relevant to the target consumers and ensure that the content is posted to various social media accounts to gain a larger audience.',
+    color: '#d97706',
+  },
+  {
+    icon: Globe,
+    title: 'Analytics and Reporting',
+    desc: 'Employ the use of analytical tools in tracking of the KPIs, the behavior of the audience, and in the collection of data for analysis in an effort to make informed decisions that will improve the SMM campaigns.',
+    color: '#f59e0b',
+  },
+];
+
+/* ── Best Card (3D flip + tap on mobile) ─────────────────── */
+interface BestCardProps {
+  icon: React.ElementType;
+  title: string;
+  desc: string;
+  color: string;
+  index: number;
+  onEnquiry: () => void;
+}
+
+function BestCard({ icon: Icon, title, desc, color, index, onEnquiry }: BestCardProps) {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <div
+      className={`smm-best-card${flipped ? ' smm-best-card--flipped' : ''}`}
+      style={{ '--card-color': color, '--card-delay': `${index * 0.1}s` } as React.CSSProperties}
+      onClick={() => setFlipped(f => !f)}
+    >
+      <div className="smm-best-card__inner">
+        {/* Front */}
+        <div className="smm-best-card__front">
+          <div className="smm-best-card__glow" />
+          <div className="smm-best-card__num">0{index + 1}</div>
+          <div className="smm-best-card__icon">
+            <Icon size={28} />
+          </div>
+          <h3 className="smm-best-card__title">{title}</h3>
+          <div className="smm-best-card__arrow">↗</div>
+        </div>
+        {/* Back */}
+        <div className="smm-best-card__back">
+          <div className="smm-best-card__back-glow" />
+          <div className="smm-best-card__back-icon">
+            <Icon size={20} />
+          </div>
+          <h3 className="smm-best-card__back-title">{title}</h3>
+          <p className="smm-best-card__desc">{desc}</p>
+          <button
+            className="smm-best-card__cta"
+            onClick={e => { e.stopPropagation(); onEnquiry(); }}
+          >
+            Get Started <ArrowRight size={13} />
+          </button>
+        </div>
+      </div>
+      {/* Mobile flat view — always visible, no flip needed */}
+      <div className="smm-best-card__flat">
+        <div className="smm-best-card__flat-top">
+          <div className="smm-best-card__icon">
+            <Icon size={22} />
+          </div>
+          <span className="smm-best-card__num smm-best-card__flat-num">0{index + 1}</span>
+        </div>
+        <h3 className="smm-best-card__title">{title}</h3>
+        <p className="smm-best-card__desc">{desc}</p>
+        <button className="smm-best-card__cta" onClick={e => { e.stopPropagation(); onEnquiry(); }}>
+          Get Started <ArrowRight size={13} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ── Social Feed Mockup Visual ───────────────────────────── */
 function SocialFeedVisual() {
   const feedCards = [
@@ -314,6 +455,52 @@ export default function SocialMediaMarketing() {
           }
         );
 
+        // Best SMM section cards
+        gsap.fromTo(
+          '.smm-best-card',
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.smm-best-grid', start: 'top 85%' },
+          }
+        );
+
+        // Why Choose
+        gsap.fromTo(
+          '.smm-why-grid .smm-why-card',
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: '.smm-why-grid', start: 'top 80%' },
+          }
+        );
+
+        // Studio section
+        gsap.fromTo(
+          '.smm-studio__text > *',
+          { opacity: 0, x: -40 },
+          {
+            opacity: 1, x: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.smm-studio', start: 'top 75%' },
+          }
+        );
+        gsap.fromTo(
+          '.smm-studio__visual',
+          { opacity: 0, x: 40 },
+          {
+            opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: '.smm-studio', start: 'top 75%' },
+          }
+        );
+        gsap.fromTo(
+          '.smm-industry-pill',
+          { opacity: 0, scale: 0.8 },
+          {
+            opacity: 1, scale: 1, duration: 0.45, stagger: 0.07, ease: 'back.out(1.5)',
+            scrollTrigger: { trigger: '.smm-industries', start: 'top 85%' },
+          }
+        );
+
         // CTA
         gsap.fromTo(
           '.svc-cta > *',
@@ -390,6 +577,24 @@ export default function SocialMediaMarketing() {
         </div>
       </section>
 
+      {/* ── Best SMM Company Section ─────────────────────── */}
+      <section id="best-smm-jaipur" className="svc-section smm-best-section" aria-labelledby="smm-best-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">Social Media Marketing</span>
+            <h2 id="smm-best-h2">Best Social Media Marketing<br />Company in <span className="text-gradient">Jaipur</span></h2>
+            <p>
+              Welcome to the hub of strategic and engaging Social Media Management services at The Cogent. Our mission is to cultivate a vibrant digital presence for your brand, foster authentic connections, and elevate your online identity. With data-driven insights and creative strategies, we help you stay ahead in the ever-evolving social landscape. Let us transform your social channels into powerful tools for growth and engagement.
+            </p>
+          </div>
+          <div className="smm-best-grid">
+            {smmBestServices.map(({ icon: Icon, title, desc, color }, i) => (
+              <BestCard key={title} icon={Icon} title={title} desc={desc} color={color} index={i} onEnquiry={openEnquiry} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Social by the Numbers ─────────────────────────── */}
       <section id="social-media-statistics" className="svc-section smm-numbers" aria-labelledby="smm-numbers-h2">
         <div className="container">
@@ -434,6 +639,97 @@ export default function SocialMediaMarketing() {
                 <p className="svc-card__desc">{desc}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Choose The Cogent ────────────────────────── */}
+      <section id="why-choose-cogent" className="svc-section smm-why" aria-labelledby="smm-why-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">Why Choose Us</span>
+            <h2 id="smm-why-h2">Why Choose The Cogent?</h2>
+            <p>Four pillars that separate us from every other social media agency in the market.</p>
+          </div>
+          <div className="svc-grid-4 smm-why-grid">
+            {whyChoose.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="svc-card smm-why-card">
+                <div className="svc-card__icon-wrap">
+                  <Icon size={22} />
+                </div>
+                <h3 className="svc-card__title">{title}</h3>
+                <p className="svc-card__desc">{desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── In-House Studio ──────────────────────────────── */}
+      <section id="inhouse-studio" className="svc-section svc-section--dark smm-studio" aria-labelledby="smm-studio-h2">
+        <div className="container">
+          <div className="svc-intro">
+            <div className="svc-intro__text smm-studio__text">
+              <span className="tag">In-House Production</span>
+              <h2 id="smm-studio-h2">
+                In-House Studio &amp;{' '}
+                <span className="text-gradient">25+ Talented Content Creators</span>
+              </h2>
+              <p>
+                We don't outsource your brand's voice. Our in-house studio is equipped with everything needed to produce scroll-stopping content — from concept to final cut — all under one roof.
+              </p>
+              <p>
+                Our creators specialise in <strong>Moment &amp; Meme Marketing</strong> — real-time trend engagement, cultural event marketing, and viral content built around what's happening right now.
+              </p>
+              <div className="smm-studio__badges">
+                <span className="smm-studio-badge"><Camera size={14} /> In-House Studio</span>
+                <span className="smm-studio-badge"><Zap size={14} /> Moment Marketing</span>
+                <span className="smm-studio-badge"><Users size={14} /> 25+ Creators</span>
+              </div>
+            </div>
+            <div className="svc-intro__visual smm-studio__visual">
+              <div className="smm-studio-card">
+                <div className="smm-studio-card__top">
+                  <div className="smm-studio-card__num">25+</div>
+                  <div className="smm-studio-card__label">Content Creators</div>
+                </div>
+                <div className="smm-studio-card__divider" />
+                <div className="smm-studio-card__row">
+                  <div className="smm-studio-card__stat">
+                    <span className="smm-studio-card__stat-num">100%</span>
+                    <span className="smm-studio-card__stat-key">In-House</span>
+                  </div>
+                  <div className="smm-studio-card__stat">
+                    <span className="smm-studio-card__stat-num">24h</span>
+                    <span className="smm-studio-card__stat-key">Turnaround</span>
+                  </div>
+                  <div className="smm-studio-card__stat">
+                    <span className="smm-studio-card__stat-num">∞</span>
+                    <span className="smm-studio-card__stat-key">Formats</span>
+                  </div>
+                </div>
+                <div className="smm-studio-card__ticker">
+                  <div className="smm-studio-card__ticker-track">
+                    {['Reels', 'Memes', 'Carousels', 'Stories', 'UGC', 'Live', 'Shorts', 'Trends', 'Reels', 'Memes', 'Carousels', 'Stories'].map((t, i) => (
+                      <span key={i} className="smm-studio-card__ticker-item">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Portfolio Industries */}
+          <div className="smm-industries">
+            <p className="smm-industries__label">Industries We've Worked With</p>
+            <div className="smm-industries__grid">
+              {portfolioIndustries.map(({ name, icon }) => (
+                <div key={name} className="smm-industry-pill">
+                  <span className="smm-industry-pill__icon">{icon}</span>
+                  <span>{name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

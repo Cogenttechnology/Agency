@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { EnquiryProvider } from "./context/EnquiryContext";
 import EnquiryModal from "./components/EnquiryModal/EnquiryModal";
+import FloatingCTA from "./components/FloatingCTA/FloatingCTA";
 import useLenis, { getLenis } from "./hooks/useLenis";
 import { useEffect } from "react";
 import { getSeoByPath } from "./lib/seoStore.server";
@@ -88,6 +89,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </main>
           {!isAdmin && <Footer />}
           {!isAdmin && <EnquiryModal />}
+          {!isAdmin && <FloatingCTA />}
         </EnquiryProvider>
         <ScrollRestoration />
         <Scripts />
