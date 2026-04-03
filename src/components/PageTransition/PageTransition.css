@@ -1,0 +1,16 @@
+.page-transition-wrapper {
+  position: relative;
+}
+
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-accent);
+  z-index: 500;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.page-transition-content {
+  min-height: 100vh;
+}

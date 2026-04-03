@@ -1,0 +1,300 @@
+/* ══════════════════════════════════════════
+   ENQUIRY MODAL — compact + mobile-first
+══════════════════════════════════════════ */
+.enq-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Desktop card */
+.enq-card {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  border-radius: 20px;
+  background: rgba(12, 12, 20, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255,255,255,0.04);
+  padding: 1.75rem 2rem;
+}
+
+/* Close button */
+.enq-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.enq-close:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* Header */
+.enq-card__header {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-right: 2.5rem;
+}
+
+.enq-card__badge { width: fit-content; }
+
+.enq-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.enq-card__sub {
+  font-size: 0.82rem;
+  color: var(--color-text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Form layout */
+.enq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.enq-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.enq-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.enq-form__label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-2);
+}
+
+.enq-form__input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.86rem;
+  color: var(--color-text);
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+  box-sizing: border-box;
+}
+.enq-form__input::placeholder { color: rgba(255,255,255,0.2); }
+.enq-form__input:focus {
+  outline: none;
+  border-color: rgba(108, 99, 255, 0.5);
+  background: rgba(108, 99, 255, 0.06);
+}
+
+.enq-form__textarea {
+  resize: none;
+  min-height: 60px;
+}
+
+/* Styled select (mobile) */
+.enq-form__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+/* Multi-select height */
+select[multiple].enq-form__select {
+  background-image: none;
+  padding-right: 0.8rem;
+  min-height: 90px;
+  overflow-y: auto;
+}
+
+select[multiple].enq-form__select option {
+  padding: 0.35rem 0.5rem;
+  background: rgba(18, 18, 30, 0.98);
+  color: rgba(255,255,255,0.75);
+  border-radius: 4px;
+}
+
+select[multiple].enq-form__select option:checked {
+  background: rgba(108, 99, 255, 0.3);
+  color: #fff;
+}
+
+.enq-form__select option {
+  background: #0e0e1a;
+  color: rgba(255,255,255,0.8);
+}
+
+.enq-form__hint {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Service chips (desktop) */
+.enq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.enq-chip {
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.69rem;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--color-text-2);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.enq-chip:hover {
+  border-color: var(--chip-color, #6c63ff);
+  color: var(--chip-color, #6c63ff);
+}
+.enq-chip--active {
+  border-color: var(--chip-color, #6c63ff);
+  background: color-mix(in srgb, var(--chip-color, #6c63ff) 12%, transparent);
+  color: var(--chip-color, #6c63ff);
+}
+
+/* Budget pills (desktop) */
+.enq-budget-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.enq-budget-pill {
+  padding: 0.33rem 0.85rem;
+  border-radius: 7px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: var(--color-text-2);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.enq-budget-pill:hover {
+  border-color: rgba(108,99,255,0.4);
+  color: var(--color-text);
+}
+.enq-budget-pill--active {
+  border-color: rgba(108,99,255,0.6);
+  background: rgba(108,99,255,0.12);
+  color: #fff;
+}
+
+/* Submit */
+.enq-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.1rem;
+  padding: 0.7rem 1.5rem;
+}
+
+/* Success state */
+.enq-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  gap: 0.75rem;
+}
+.enq-success__icon { color: #00d4aa; margin-bottom: 0.25rem; }
+.enq-success h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.enq-success p {
+  color: var(--color-text-2);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+/* ── MOBILE ─────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  /* Overlay fills screen, card slides up from bottom */
+  .enq-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .enq-card {
+    border-radius: 20px 20px 0 0;
+    padding: 1.4rem 1.2rem 1.6rem;
+    max-height: 92dvh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Allow scroll only if content truly overflows */
+  }
+  .enq-card::-webkit-scrollbar { display: none; }
+
+  .enq-form__row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .enq-form { gap: 0.65rem; }
+  .enq-card__header { margin-bottom: 0.85rem; }
+
+  .enq-card__title { font-size: 1.25rem; }
+  .enq-card__sub   { font-size: 0.78rem; }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  .enq-form__row { grid-template-columns: 1fr; }
+}
+
+/* Short viewports (landscape phones) */
+@media (max-height: 680px) and (max-width: 900px) {
+  .enq-card__header { margin-bottom: 0.6rem; }
+  .enq-card__sub    { display: none; }
+  .enq-card__badge  { display: none; }
+  .enq-form { gap: 0.55rem; }
+  .enq-form__textarea { min-height: 48px; }
+}

@@ -1,0 +1,307 @@
+[
+  {
+    "id": "home",
+    "label": "Home",
+    "path": "/",
+    "title": "Cogent Agency — India's Premier Digital Marketing Agency",
+    "metaTitle": "Cogent Agency | Performance Marketing, SEO & Creative Studio",
+    "metaDescription": "Cogent is India's full-service digital marketing agency. We deliver ROI-driven performance marketing, SEO, social media, video production & web development.",
+    "ogImage": "https://cogent.agency/og-home.jpg",
+    "canonical": "https://cogent.agency/",
+    "robots": "index, follow",
+    "keywords": "digital marketing agency india, performance marketing, SEO agency, social media marketing",
+    "schemas": [
+      {
+        "type": "Organization",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Cogent Agency\",\n  \"url\": \"https://cogent.agency\",\n  \"logo\": \"https://cogent.agency/logo.png\",\n  \"sameAs\": [\n    \"https://www.instagram.com/cogent.agency\",\n    \"https://www.linkedin.com/company/cogent-agency\"\n  ],\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+91-00-0000-0000\",\n    \"contactType\": \"customer service\"\n  }\n}"
+      },
+      {
+        "type": "LocalBusiness",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"LocalBusiness\",\n  \"name\": \"Cogent Agency\",\n  \"image\": \"https://cogent.agency/logo.png\",\n  \"url\": \"https://cogent.agency\",\n  \"telephone\": \"+91-00-0000-0000\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"addressLocality\": \"Mumbai\",\n    \"addressCountry\": \"IN\"\n  },\n  \"priceRange\": \"₹₹₹\"\n}"
+      },
+      {
+        "type": "FAQPage",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"What services does Cogent Agency offer?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Cogent Agency offers Performance Marketing, SEO, Social Media Marketing, Video Production, Influencer Marketing, Web Design & Development, and 360° Digital Marketing.\"\n      }\n    }\n  ]\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:16:27.081Z"
+  },
+  {
+    "id": "about",
+    "label": "About",
+    "path": "/about",
+    "title": "About Cogent Agency | Our Story, Team & Mission",
+    "metaTitle": "About Cogent Agency | Digital Marketing Experts Since 2017",
+    "metaDescription": "7+ years of experience, 200+ brands served, and a relentless obsession with results.",
+    "ogImage": "https://cogent.agency/og-about.jpg",
+    "canonical": "https://cogent.agency/about",
+    "robots": "index, follow",
+    "keywords": "about cogent agency, digital marketing team, agency about us",
+    "schemas": [
+      {
+        "type": "Organization",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Organization\",\n  \"name\": \"Cogent Agency\",\n  \"url\": \"https://cogent.agency\",\n  \"logo\": \"https://cogent.agency/logo.png\",\n  \"sameAs\": [\n    \"https://www.instagram.com/cogent.agency\",\n    \"https://www.linkedin.com/company/cogent-agency\"\n  ],\n  \"contactPoint\": {\n    \"@type\": \"ContactPoint\",\n    \"telephone\": \"+91-00-0000-0000\",\n    \"contactType\": \"customer service\"\n  }\n}"
+      },
+      {
+        "type": "WebPage",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"About Cogent Agency\",\n  \"url\": \"https://cogent.agency/about\",\n  \"description\": \"Meet the team behind Cogent Agency.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "services",
+    "label": "Services",
+    "path": "/services",
+    "title": "Our Services | Digital Marketing, SEO, Video & More — Cogent Agency",
+    "metaTitle": "Digital Marketing Services | Cogent Agency",
+    "metaDescription": "Explore Cogent's full suite of digital marketing services — Performance Marketing, SEO, Social Media, Video Production, Influencer Marketing & Web Development.",
+    "ogImage": "https://cogent.agency/og-services.jpg",
+    "canonical": "https://cogent.agency/services",
+    "robots": "index, follow",
+    "keywords": "digital marketing services, SEO services, social media services india",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Digital Marketing Services\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Full-suite digital marketing including SEO, paid ads, social media and video production.\",\n  \"areaServed\": \"IN\"\n}"
+      },
+      {
+        "type": "WebPage",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Services\",\n  \"url\": \"https://cogent.agency/services\",\n  \"description\": \"Full-suite digital marketing services.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "performance-marketing",
+    "label": "Performance Marketing",
+    "path": "/services/performance-marketing",
+    "title": "Performance Marketing Agency India | Google & Meta Ads — Cogent",
+    "metaTitle": "Performance Marketing Services | ROI-Driven Ads — Cogent Agency",
+    "metaDescription": "Cogent delivers ROI-obsessed paid media campaigns across Google, Meta & YouTube. Every rupee tracked, every conversion optimised.",
+    "ogImage": "https://cogent.agency/og-performance.jpg",
+    "canonical": "https://cogent.agency/services/performance-marketing",
+    "robots": "index, follow",
+    "keywords": "performance marketing agency, google ads agency india, meta ads agency",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Performance Marketing\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"ROI-driven paid media campaigns across Google, Meta, and YouTube.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "seo",
+    "label": "SEO",
+    "path": "/services/seo",
+    "title": "SEO Agency India | Organic Growth & Rankings — Cogent Agency",
+    "metaTitle": "SEO Services India | Technical SEO & Content Strategy — Cogent",
+    "metaDescription": "Dominate search rankings with Cogent's data-driven SEO strategy. Technical SEO, content, and link building that compounds month over month.",
+    "ogImage": "https://cogent.agency/og-seo.jpg",
+    "canonical": "https://cogent.agency/services/seo",
+    "robots": "index, follow",
+    "keywords": "SEO agency india, technical SEO, content strategy, link building",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"SEO Services\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Data-driven SEO including technical SEO, content strategy, and link building.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "social-media-marketing",
+    "label": "Social Media Marketing",
+    "path": "/services/social-media-marketing",
+    "title": "Social Media Marketing Agency India | Cogent Agency",
+    "metaTitle": "Social Media Marketing Services | Cogent Agency India",
+    "metaDescription": "Grow your brand with strategic social media content, community management, and paid social campaigns that drive real results.",
+    "ogImage": "https://cogent.agency/og-social.jpg",
+    "canonical": "https://cogent.agency/services/social-media-marketing",
+    "robots": "index, follow",
+    "keywords": "social media marketing agency india, instagram marketing, facebook ads",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Social Media Marketing\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Strategic content, community management, and paid social campaigns.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "video-production",
+    "label": "Video Production",
+    "path": "/services/video-production",
+    "title": "Video Production Agency Mumbai | Brand Films & Reels — Cogent",
+    "metaTitle": "Video Production Services | Brand Films, Reels & Ads — Cogent",
+    "metaDescription": "From concept to final cut — Cogent produces scroll-stopping brand films, reels, ads, and explainer videos from our Mumbai studio.",
+    "ogImage": "https://cogent.agency/og-video.jpg",
+    "canonical": "https://cogent.agency/services/video-production",
+    "robots": "index, follow",
+    "keywords": "video production agency mumbai, brand film production, reel production",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Video Production\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Brand films, reels, ads and explainer videos produced in our studio.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "influencer-marketing",
+    "label": "Influencer Marketing",
+    "path": "/services/influencer-marketing",
+    "title": "Influencer Marketing Agency India | Creator Campaigns — Cogent",
+    "metaTitle": "Influencer Marketing Services | Nano to Mega Creators — Cogent",
+    "metaDescription": "Connect your brand with the right creators. Cogent manages end-to-end influencer campaigns from sourcing to ROI tracking.",
+    "ogImage": "https://cogent.agency/og-influencer.jpg",
+    "canonical": "https://cogent.agency/services/influencer-marketing",
+    "robots": "index, follow",
+    "keywords": "influencer marketing agency india, creator campaigns, influencer management",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Influencer Marketing\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"End-to-end creator partnerships from nano to mega influencers.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "web-development",
+    "label": "Web Design & Dev",
+    "path": "/services/web-development",
+    "title": "Web Design & Development Agency India | React & Next.js — Cogent",
+    "metaTitle": "Web Design & Development Services | Cogent Agency India",
+    "metaDescription": "High-performance websites and digital products built with React and Next.js. Mobile-first, blazing fast, and built to convert.",
+    "ogImage": "https://cogent.agency/og-web.jpg",
+    "canonical": "https://cogent.agency/services/web-development",
+    "robots": "index, follow",
+    "keywords": "web design agency india, react development, next.js agency",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Web Design & Development\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"High-performance React and Next.js websites built to convert.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "360-digital-marketing",
+    "label": "360° Digital Marketing",
+    "path": "/services/360-digital-marketing",
+    "title": "360° Digital Marketing Agency India | Full-Funnel Strategy — Cogent",
+    "metaTitle": "360° Digital Marketing Services | Cogent Agency",
+    "metaDescription": "Full-funnel digital presence across every channel — SEO, paid ads, social, video, influencer and web — all under one roof.",
+    "ogImage": "https://cogent.agency/og-360.jpg",
+    "canonical": "https://cogent.agency/services/360-digital-marketing",
+    "robots": "index, follow",
+    "keywords": "360 degree digital marketing, full funnel marketing, integrated digital marketing",
+    "schemas": [
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"360° Digital Marketing\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Full-funnel integrated digital marketing across every channel.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "studio",
+    "label": "Cogent Studio",
+    "path": "/studio",
+    "title": "Cogent Studio | Podcast, Studio Shoots & Creative Production Mumbai",
+    "metaTitle": "Cogent Studio | Professional Podcast & Shoot Studio Mumbai",
+    "metaDescription": "State-of-the-art creative studio in Mumbai for podcasts, brand shoots, video production and cinematic content.",
+    "ogImage": "https://cogent.agency/og-studio.jpg",
+    "canonical": "https://cogent.agency/studio",
+    "robots": "index, follow",
+    "keywords": "podcast studio mumbai, brand shoot studio, video production studio",
+    "schemas": [
+      {
+        "type": "LocalBusiness",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"LocalBusiness\",\n  \"name\": \"Cogent Agency\",\n  \"image\": \"https://cogent.agency/logo.png\",\n  \"url\": \"https://cogent.agency\",\n  \"telephone\": \"+91-00-0000-0000\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"addressLocality\": \"Mumbai\",\n    \"addressCountry\": \"IN\"\n  },\n  \"priceRange\": \"₹₹₹\"\n}"
+      },
+      {
+        "type": "Service",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Service\",\n  \"name\": \"Cogent Studio\",\n  \"provider\": {\n    \"@type\": \"Organization\",\n    \"name\": \"Cogent Agency\"\n  },\n  \"description\": \"Professional podcast, shoot and video production studio in Mumbai.\",\n  \"areaServed\": \"IN\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "portfolio",
+    "label": "Portfolio",
+    "path": "/portfolio",
+    "title": "Portfolio | Our Work & Case Studies — Cogent Agency",
+    "metaTitle": "Portfolio & Case Studies | Cogent Agency",
+    "metaDescription": "Explore Cogent's work across e-commerce, fintech, healthcare, real estate, SaaS and fashion brands.",
+    "ogImage": "https://cogent.agency/og-portfolio.jpg",
+    "canonical": "https://cogent.agency/portfolio",
+    "robots": "index, follow",
+    "keywords": "digital marketing portfolio, case studies, agency work",
+    "schemas": [
+      {
+        "type": "WebPage",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Portfolio\",\n  \"url\": \"https://cogent.agency/portfolio\",\n  \"description\": \"Explore our work and case studies.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "blog",
+    "label": "Blog",
+    "path": "/blog",
+    "title": "Blog | Digital Marketing Insights & Tips — Cogent Agency",
+    "metaTitle": "Digital Marketing Blog | Cogent Agency Insights",
+    "metaDescription": "Expert insights on SEO, performance marketing, social media, brand strategy and more from the Cogent Agency team.",
+    "ogImage": "https://cogent.agency/og-blog.jpg",
+    "canonical": "https://cogent.agency/blog",
+    "robots": "index, follow",
+    "keywords": "digital marketing blog, SEO tips, marketing insights india",
+    "schemas": [
+      {
+        "type": "WebPage",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Blog\",\n  \"url\": \"https://cogent.agency/blog\",\n  \"description\": \"Digital marketing insights and tips.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  },
+  {
+    "id": "contact",
+    "label": "Contact",
+    "path": "/contact",
+    "title": "Contact Cogent Agency | Get a Free Consultation",
+    "metaTitle": "Contact Us | Cogent Agency — Let's Build Something Big",
+    "metaDescription": "Ready to grow your brand? Get in touch with Cogent Agency. We respond within 24 hours.",
+    "ogImage": "https://cogent.agency/og-contact.jpg",
+    "canonical": "https://cogent.agency/contact",
+    "robots": "index, follow",
+    "keywords": "contact cogent agency, digital marketing consultation, hire marketing agency",
+    "schemas": [
+      {
+        "type": "LocalBusiness",
+        "enabled": true,
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"LocalBusiness\",\n  \"name\": \"Cogent Agency\",\n  \"image\": \"https://cogent.agency/logo.png\",\n  \"url\": \"https://cogent.agency\",\n  \"telephone\": \"+91-00-0000-0000\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"addressLocality\": \"Mumbai\",\n    \"addressCountry\": \"IN\"\n  },\n  \"priceRange\": \"₹₹₹\"\n}"
+      }
+    ],
+    "updatedAt": "2026-03-31T15:13:05.830Z"
+  }
+]

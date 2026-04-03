@@ -1,0 +1,235 @@
+/* ═══════════════════════════════════════════════════════
+   COGENT AGENCY — Design System
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Color Tokens ─────────────────────────────────────── */
+:root {
+  --color-bg:          #080810;
+  --color-bg-2:        #0f0f1a;
+  --color-surface:     #14141f;
+  --color-surface-2:   #1c1c2e;
+  --color-border:      rgba(255, 255, 255, 0.08);
+
+  --color-accent:      #6c63ff;
+  --color-accent-light:#8b85ff;
+  --color-accent-dark: #4a44cc;
+  --color-accent2:     #ff6b6b;
+  --color-accent3:     #00d4aa;
+
+  --color-text:        #f0f0f5;
+  --color-text-2:      #b0b0c0;
+  --color-muted:       #606080;
+
+  --color-gradient-1:  linear-gradient(135deg, #6c63ff 0%, #ff6b6b 100%);
+  --color-gradient-2:  linear-gradient(135deg, #00d4aa 0%, #6c63ff 100%);
+  --color-gradient-hero: linear-gradient(135deg, #080810 0%, #0f0f1a 50%, #141430 100%);
+
+  /* ── Typography ──────────────────────────────────────── */
+  --font-display:  'Outfit', sans-serif;
+  --font-body:     'Plus Jakarta Sans', sans-serif;
+
+  /* ── Spacing ─────────────────────────────────────────── */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   2rem;
+  --space-lg:   4rem;
+  --space-xl:   8rem;
+
+  /* ── Radius ──────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* ── Transitions ─────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-io:  cubic-bezier(0.85, 0, 0.15, 1);
+  --duration: 0.4s;
+
+  /* ── Z-Index Layers ──────────────────────────────────── */
+  --z-base:       1;
+  --z-overlay:    10;
+  --z-nav:        100;
+  --z-cursor:     9999;
+}
+
+/* ── Reset ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+
+/* ── Typography Scale ─────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(3rem, 8vw, 7rem); }
+h2 { font-size: clamp(2rem, 5vw, 4rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h4 { font-size: clamp(1.2rem, 2vw, 1.75rem); }
+
+p { color: var(--color-text-2); line-height: 1.75; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; outline: none; background: transparent; }
+
+/* ── Utility Classes ──────────────────────────────────── */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section--sm {
+  padding: var(--space-lg) 0;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-full);
+  transition: all var(--duration) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent-light);
+  transform: translateX(-101%);
+  transition: transform 0.4s var(--ease-out);
+}
+
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-outline {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--color-surface);
+  border-color: rgba(108, 99, 255, 0.4);
+}
+
+/* ── Glass Effect ─────────────────────────────────────── */
+.glass {
+  background: rgba(14, 14, 30, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+}
+
+/* ── Text Gradient ────────────────────────────────────── */
+.text-gradient {
+  background: var(--color-gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Invisible overflow clip for GSAP reveals ─────────── */
+.clip-reveal { overflow: hidden; }
+
+/* ── Grid ─────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+
+@media (max-width: 1024px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .section  { padding: 5rem 0; }
+  .section--sm { padding: 3rem 0; }
+}
+
+@media (max-width: 480px) {
+  .section  { padding: 3.5rem 0; }
+  .section--sm { padding: 2rem 0; }
+}
+
+/* ── Noise texture overlay ────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: var(--z-overlay);
+  opacity: 0.5;
+}
+
+/* ── Page transition wrapper ──────────────────────────── */
+.page-content {
+  min-height: 100vh;
+}
+
+/* ── Animation: fade-up (used by GSAP as initial state) ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+}

@@ -1,0 +1,147 @@
+/* ── Thank You Page ──────────────────────────────────────── */
+.ty-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Background orbs */
+.ty-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.ty-orb--1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%);
+  top: -100px; left: -100px;
+}
+.ty-orb--2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,212,170,0.14) 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+}
+
+/* Card */
+.ty-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(14, 14, 22, 0.92);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+/* Icon */
+.ty-icon {
+  color: #00d4aa;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 24px rgba(0,212,170,0.4));
+}
+
+/* Heading */
+.ty-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+/* Sub */
+.ty-sub {
+  font-size: 0.95rem;
+  color: var(--color-text-2);
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0 0 1.75rem;
+}
+.ty-sub strong { color: var(--color-text); }
+
+/* Countdown ring */
+.ty-countdown {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
+}
+
+.ty-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.07);
+  stroke-width: 4;
+}
+
+.ty-ring-fill {
+  fill: none;
+  stroke: url(#ty-gradient);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.05s linear;
+}
+
+.ty-countdown__num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.ty-countdown__num span {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #6c63ff, #00d4aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ty-countdown__num small {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Meta */
+.ty-meta {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin: 0 0 2rem;
+}
+
+/* Actions */
+.ty-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .ty-card { padding: 2.25rem 1.5rem; }
+  .ty-actions { flex-direction: column; width: 100%; }
+  .ty-actions .btn { width: 100%; justify-content: center; }
+}
