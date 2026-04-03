@@ -9,6 +9,7 @@ import {
   getSeoByPath,
   saveSeoPage,
   resetSeoPage,
+  type PageSeo,
 } from "../../lib/seoStore.server";
 
 function json(data: unknown, status = 200) {
@@ -39,7 +40,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   switch (_action) {
     case "save": {
-      saveSeoPage(data as Parameters<typeof saveSeoPage>[0]);
+      saveSeoPage(data as unknown as PageSeo);
       return json({ ok: true });
     }
     case "reset": {

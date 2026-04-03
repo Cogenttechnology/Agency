@@ -13,6 +13,7 @@ import {
   deleteBlog,
   publishBlog,
   unpublishBlog,
+  type BlogPost,
 } from "../../lib/blogStore.server";
 
 function json(data: unknown, status = 200) {
@@ -46,13 +47,13 @@ export async function action({ request }: Route.ActionArgs) {
 
   switch (_action) {
     case "create": {
-      const post = saveBlog(data as Parameters<typeof saveBlog>[0]);
+      const post = saveBlog(data as unknown as Omit<BlogPost, "id" | "createdAt" | "updatedAt">);
       return json(post, 201);
     }
     case "update": {
       const { id, ...fields } = data as { id: string; [k: string]: unknown };
       if (!id) return json({ error: "id required" }, 400);
-      const updated = updateBlog(id, fields as Parameters<typeof updateBlog>[1]);
+      const updated = updateBlog(id, fields as Partial<BlogPost>);
       if (!updated) return json({ error: "Not found" }, 404);
       return json(updated);
     }
