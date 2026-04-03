@@ -9,6 +9,8 @@ const navLinks = [
   { path: '/about-us', label: 'About' },
   { path: '/services', label: 'Services' },
   { path: '/portfolio', label: 'Portfolio' },
+  { path: '/content-marketing-agency-in-jaipur', label: 'Content Marketing' },
+  { path: '/marketing-consultant-in-jaipur', label: 'Marketing Consultant' },
   { path: '/blog', label: 'Blog' },
   { path: '/contact', label: 'Contact' },
 ];
