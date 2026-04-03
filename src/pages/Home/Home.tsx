@@ -12,10 +12,10 @@ import './Home.css';
 /* ─── Data ──────────────────────────────────────────────── */
 
 const stats = [
-  { value: 200, suffix: '+', label: 'Projects Delivered' },
-  { value: 98,  suffix: '%', label: 'Client Satisfaction' },
-  { value: 12,  suffix: '×', label: 'Average ROI' },
-  { value: 7,   suffix: '+', label: 'Years of Excellence' },
+  { value: 60,  suffix: '+',    label: 'Marketing Professionals' },
+  { value: 6,   suffix: '+',    label: 'Years in Business' },
+  { value: 99,  suffix: '.9%',  label: 'Client Retention Ratio' },
+  { value: 15,  suffix: '+',    label: 'Industries Served' },
 ];
 
 const channels = [
@@ -31,42 +31,42 @@ const services = [
   {
     icon: Monitor,
     title: 'Web Design & Development',
-    desc: 'We craft high-performance websites and digital products that look stunning and convert visitors into customers.',
+    desc: 'We are designing what you dream of. Developing a website that visually defines your identity. We create a user-friendly website that engages your target consumers.',
     bullets: ['Custom UI/UX design', 'React & Next.js builds', 'Mobile-first & blazing fast', 'CMS integration'],
     color: '#6c63ff',
   },
   {
     icon: Video,
     title: 'Video Production',
-    desc: 'From concept to final cut — we produce scroll-stopping brand films, reels, ads, and explainer videos that tell your story.',
+    desc: 'We bring your brand to life by creating engaging video content that defines you.',
     bullets: ['Brand films & ads', 'Social-first reels', 'Motion graphics', 'Scripting & storyboarding'],
     color: '#ff6b6b',
   },
   {
     icon: Search,
-    title: 'SEO',
-    desc: 'Dominate search rankings with a data-driven SEO strategy that drives qualified organic traffic and compounds over time.',
+    title: 'Search Engine Optimization',
+    desc: 'We aim to raise your website\'s organic traffic and search engine rankings so you can draw the correct target audience.',
     bullets: ['Technical & on-page SEO', 'Content strategy', 'Link building', 'Monthly ranking reports'],
     color: '#00d4aa',
   },
   {
     icon: Share2,
     title: 'Social Media Marketing',
-    desc: 'We grow your brand\'s presence across platforms with content strategies, community management, and paid social campaigns.',
+    desc: 'Boost the visibility of your brand with our social media marketing services.',
     bullets: ['Content calendar & creation', 'Community management', 'Paid social campaigns', 'Analytics & reporting'],
     color: '#f59e0b',
   },
   {
     icon: BarChart2,
     title: 'Performance Marketing',
-    desc: 'ROI-obsessed paid media campaigns across Google, Meta, and beyond — every rupee tracked, every conversion optimised.',
+    desc: 'Unlock growth with marketing strategies that turn your potential into measurable success.',
     bullets: ['Google & Meta Ads', 'Retargeting funnels', 'Landing page optimisation', 'Real-time dashboards'],
     color: '#a855f7',
   },
   {
     icon: Mic2,
     title: 'Influencer Marketing',
-    desc: 'We connect your brand with the right voices — from nano creators to mega influencers — to generate authentic reach and conversions.',
+    desc: 'This is the era of Influencers and they act as the best tool to spread the word about your brand.',
     bullets: ['Creator sourcing & vetting', 'Campaign strategy', 'Content brief & review', 'ROI tracking & reporting'],
     color: '#ec4899',
   },
@@ -74,131 +74,131 @@ const services = [
 
 const industries = [
   {
-    id: 'ecom',
-    industry: 'E-Commerce',
-    project: 'Axion Store',
-    tag: 'Brand + Web',
-    desc: 'Full brand overhaul and e-commerce platform for a luxury lifestyle retailer — from identity to checkout experience.',
-    metric: '3.4× conversion lift',
-    color: '#6c63ff',
-    gradient: 'linear-gradient(135deg,#6c63ff 0%,#3a35cc 100%)',
-  },
-  {
-    id: 'fintech',
-    industry: 'FinTech',
-    project: 'PulseX App',
-    tag: 'UI/UX + Marketing',
-    desc: 'Mobile-first design system and growth campaign for an emerging payments startup targeting Gen Z consumers.',
-    metric: '2M+ app installs',
-    color: '#00d4aa',
-    gradient: 'linear-gradient(135deg,#00d4aa 0%,#0099aa 100%)',
-  },
-  {
-    id: 'health',
-    industry: 'Healthcare',
-    project: 'MediCore',
-    tag: 'Brand Strategy',
-    desc: 'Comprehensive rebranding and digital presence for a multi-city hospital chain with a trusted legacy.',
-    metric: '180% web traffic',
-    color: '#ff6b6b',
-    gradient: 'linear-gradient(135deg,#ff6b6b 0%,#cc3344 100%)',
-  },
-  {
-    id: 'realty',
+    id: 'realestate',
     industry: 'Real Estate',
-    project: 'Skyline Group',
-    tag: 'Digital Marketing',
-    desc: 'Performance-led campaigns across search and social that generated qualified high-intent leads at scale.',
-    metric: '₹420Cr in sales',
+    project: 'KGK Realty',
+    tag: 'Lead Generation',
+    desc: 'Performance-led campaigns across search and social that generated qualified high-intent leads at scale for premium real estate projects.',
+    metric: 'Exceptional lead results',
     color: '#f59e0b',
     gradient: 'linear-gradient(135deg,#f59e0b 0%,#d97706 100%)',
   },
   {
-    id: 'saas',
-    industry: 'SaaS',
-    project: 'Synapse Labs',
-    tag: 'Web + SEO',
-    desc: 'Website redesign and content strategy for a B2B analytics platform, growing organic reach exponentially.',
-    metric: '5× organic growth',
-    color: '#a855f7',
-    gradient: 'linear-gradient(135deg,#a855f7 0%,#7c3aed 100%)',
+    id: 'health',
+    industry: 'Healthcare',
+    project: 'Nav Imperial Hospital',
+    tag: '360° Healthcare Marketing',
+    desc: '360° healthcare marketing services that built a trusted brand from scratch — making Nav Imperial Hospital a recognized name in the region.',
+    metric: 'Brand built from scratch',
+    color: '#ff6b6b',
+    gradient: 'linear-gradient(135deg,#ff6b6b 0%,#cc3344 100%)',
   },
   {
     id: 'fashion',
-    industry: 'Fashion',
-    project: 'Novo Retail',
-    tag: 'Creative Production',
-    desc: 'Campaign shoots, social-first content and influencer strategy that made a D2C fashion brand go viral.',
-    metric: '820K impressions',
+    industry: 'Fashion & Textile',
+    project: 'Sanjay Textile Store',
+    tag: 'Brand Growth',
+    desc: 'Assisted the brand to expand consistently over three years through targeted digital marketing and creative campaigns.',
+    metric: '3 years of growth',
     color: '#ec4899',
     gradient: 'linear-gradient(135deg,#ec4899 0%,#be185d 100%)',
+  },
+  {
+    id: 'realty',
+    industry: 'B2B & Manufacturing',
+    project: 'Manglam Group',
+    tag: 'Integrated Marketing',
+    desc: 'Managed multiple projects delivering exceptional results in lead generation, outdoor marketing, campaigns, and video production.',
+    metric: 'Exceptional results',
+    color: '#6c63ff',
+    gradient: 'linear-gradient(135deg,#6c63ff 0%,#3a35cc 100%)',
+  },
+  {
+    id: 'hospitality',
+    industry: 'Hospitality',
+    project: 'CKS Hospital',
+    tag: 'Video Marketing',
+    desc: 'Digital marketing expertise combined with excellent video marketing elevated the brand to another level.',
+    metric: 'Brand elevated',
+    color: '#00d4aa',
+    gradient: 'linear-gradient(135deg,#00d4aa 0%,#0099aa 100%)',
+  },
+  {
+    id: 'gems',
+    industry: 'Gems & Jewelry',
+    project: 'R-Tech Group',
+    tag: 'Outdoor + Lead Gen',
+    desc: 'Outdoor marketing and lead generation services that considerably enhanced the prominence of the brand.',
+    metric: 'Prominence enhanced',
+    color: '#a855f7',
+    gradient: 'linear-gradient(135deg,#a855f7 0%,#7c3aed 100%)',
   },
 ];
 
 const faqs = [
   {
-    q: 'How long does a typical project take?',
-    a: 'Timelines vary by scope. A brand identity project takes 4–6 weeks, while a full website build ranges from 8–14 weeks. We work in focused sprints to ensure fast, quality delivery without compromising craft.',
+    q: 'What services are included in The Cogent digital marketing package?',
+    a: 'The Cogent provides all Digital Marketing services including Search Engine Optimization (SEO), Social Media Marketing (SMM), Pay-Per-Click (PPC), Search Engine Marketing, Content Marketing, Email Marketing, and Website Analytics.',
   },
   {
-    q: 'Do you work with startups or only established brands?',
-    a: 'Both. We have dedicated packages for early-stage startups and established enterprises. Whether you are launching your first brand or scaling a market leader, we tailor our process to your stage and budget.',
+    q: 'Can digital marketing work for small businesses or startups?',
+    a: 'Yes, if you want to target a large audience, then you must work on digital marketing to grow your business. It is a cost-effective strategy that delivers measurable results regardless of business size.',
   },
   {
-    q: 'What does your onboarding process look like?',
-    a: 'We start with a free 30-minute discovery call to understand your goals. From there, we send a proposal within 48 hours. Once approved, we kick off with a deep-dive strategy session before any execution begins.',
+    q: 'How does The Cogent identify which digital marketing service is right for your business?',
+    a: 'To identify the best digital marketing service, we analyze your business goals, target audience, and current online presence. This ensures every strategy is tailored specifically to your needs.',
   },
   {
-    q: 'Can you handle everything in-house?',
-    a: 'Yes — strategy, creative, technology, and media all under one roof. Our integrated team means faster turnaround, a consistent brand voice, and zero agency handoff gaps.',
+    q: 'Does The Cogent provide reports to track the progress of campaigns?',
+    a: 'Yes, we provide detailed performance reports for all campaigns to ensure transparency and measurable outcomes. You always know exactly what\'s working and where your budget is going.',
   },
   {
-    q: 'What industries do you specialise in?',
-    a: 'We have delivered results across e-commerce, fintech, healthcare, real estate, SaaS, fashion, and FMCG. Our process is industry-agnostic — what matters is your ambition and your audience.',
+    q: 'How much does it cost to hire The Cogent for marketing?',
+    a: 'The cost to hire The Cogent depends on what services you want. Our packages are tailored to your budget and goals — reach out for a custom quote and we\'ll find the right fit for your business.',
   },
   {
-    q: 'How do you measure success?',
-    a: 'Every engagement begins with agreed KPIs — be it brand awareness, lead volume, conversion rate, or ROI. We report against these metrics monthly and optimise campaigns in real time.',
+    q: 'What industries does The Cogent specialise in?',
+    a: 'We have delivered results across 15+ industries including healthcare, real estate, education, fashion & textile, gems & jewelry, hospitality, B2B & manufacturing, and more. Our process adapts to any sector.',
   },
 ];
 
 const clients = [
-  { name: 'Brandify',   color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
-  { name: 'NovaSpark',  color: '#ff6b6b', bg: 'rgba(255,107,107,0.1)' },
-  { name: 'Zenith Co',  color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
-  { name: 'PulseMedia', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-  { name: 'Ecliptic',   color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
-  { name: 'Axion Labs', color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
-  { name: 'Momentum',   color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
-  { name: 'Catalyst',   color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
+  { name: 'Nav Imperial Hospital', color: '#ff6b6b', bg: 'rgba(255,107,107,0.1)' },
+  { name: 'Manglam Group',         color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
+  { name: 'KGK Realty',            color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
+  { name: 'CKS Hospital',          color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
+  { name: 'Sanjay Textile Store',  color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
+  { name: 'R-Tech Group',          color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
+  { name: 'Kirana King',           color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
+  { name: 'R-Tech Group',          color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
 ];
 
 const aboutCards = [
   {
     icon: Lightbulb,
-    title: 'Strategy First',
-    desc: 'Every project starts with deep research and a clear north star — no guesswork, only direction.',
+    title: 'Unique Market Research',
+    desc: 'We have a unique approach to market research to ensure our clients have a competitive advantage in their industry.',
     color: '#6c63ff',
     gradient: 'var(--color-gradient-1)',
   },
   {
     icon: Users,
-    title: 'People-Centred',
-    desc: 'We design for real humans — building experiences that feel intuitive, warm, and intentional.',
+    title: '15+ Industries',
+    desc: 'We are honored to work with more than 15+ industries ranging from healthcare, education, real estate, and many more.',
     color: '#00d4aa',
     gradient: 'linear-gradient(135deg,#00d4aa,#6c63ff)',
   },
   {
     icon: Globe,
-    title: 'Built to Scale',
-    desc: 'From local ambitions to global campaigns, our work is engineered to grow with you.',
+    title: 'Seamless Onboarding',
+    desc: 'Our efficient implementation allows you to start working effectively from day one — no delays, no confusion.',
     color: '#ff6b6b',
     gradient: 'linear-gradient(135deg,#ff6b6b,#f59e0b)',
   },
   {
     icon: Award,
-    title: 'Obsessed with Quality',
-    desc: 'We hold every pixel and every sentence to the highest standard before it leaves our hands.',
+    title: '99.9% Client Retention',
+    desc: 'Our remarkable 99.9% client retention ratio depicts that we are consistently dedicated to providing the best digital marketing services.',
     color: '#f59e0b',
     gradient: 'linear-gradient(135deg,#f59e0b,#ec4899)',
     wide: true,
@@ -207,35 +207,51 @@ const aboutCards = [
 
 const testimonials = [
   {
-    quote: "Cogent completely transformed how our brand shows up online. The strategy was sharp, the creative was stunning, and the results spoke for themselves — 3× more qualified leads in just 90 days.",
-    name: 'Aisha Mehta',
-    title: 'CMO, Axion Labs',
-    initials: 'AM',
-    gradient: 'linear-gradient(135deg,#6c63ff,#3a35cc)',
-    rating: 5,
-  },
-  {
-    quote: "Working with Cogent felt like having a world-class creative team embedded in our startup. They understood our vision instantly and delivered a brand identity we're incredibly proud of.",
-    name: 'Rohan Kapoor',
-    title: 'Founder, PulseX',
-    initials: 'RK',
-    gradient: 'linear-gradient(135deg,#00d4aa,#0099aa)',
-    rating: 5,
-  },
-  {
-    quote: "The website they built for us is fast, beautiful, and converts. Our bounce rate dropped 40% and time-on-site nearly doubled. Best investment we made this year.",
-    name: 'Priya Singh',
-    title: 'Head of Growth, Synapse Labs',
-    initials: 'PS',
+    quote: "The Cogent's 360 healthcare marketing services built our brand from scratch. Their expertise and dedication have made Nav Imperial Hospital a trusted name.",
+    name: 'Dr. Sachin Gupta',
+    title: 'Nav Imperial Hospital',
+    initials: 'SG',
     gradient: 'linear-gradient(135deg,#ff6b6b,#cc3344)',
     rating: 5,
   },
   {
-    quote: "Cogent doesn't just execute briefs — they challenge you to think bigger. Their strategic input helped us reposition our entire product, leading to a successful Series A raise.",
-    name: 'Daniel Osei',
-    title: 'CEO, Skyline Group',
-    initials: 'DO',
+    quote: "The Cogent has managed multiple projects for Manglam Group, delivering exceptional results in lead generation, outdoor marketing, campaigns, and video production.",
+    name: 'Mr. Sanjay Gupta',
+    title: 'Manglam Group',
+    initials: 'SG',
+    gradient: 'linear-gradient(135deg,#6c63ff,#3a35cc)',
+    rating: 5,
+  },
+  {
+    quote: "Their understanding of digital marketing as a professional agency along with their excellent video marketing has taken our brand to another level.",
+    name: 'Dr. Mohd Sharif',
+    title: 'CKS Hospital',
+    initials: 'MS',
+    gradient: 'linear-gradient(135deg,#00d4aa,#0099aa)',
+    rating: 5,
+  },
+  {
+    quote: "We have been partners with The Cogent for their lead generation solutions, and the results have been exceptional.",
+    name: 'Ms. Rashmi',
+    title: 'KGK Realty',
+    initials: 'RS',
     gradient: 'linear-gradient(135deg,#f59e0b,#d97706)',
+    rating: 5,
+  },
+  {
+    quote: "They have greatly assisted our brand to expand over the years especially in the last three years.",
+    name: 'Mr. Aditya Agarwal',
+    title: 'Sanjay Textile Store',
+    initials: 'AA',
+    gradient: 'linear-gradient(135deg,#ec4899,#be185d)',
+    rating: 5,
+  },
+  {
+    quote: "The services provided by The Cogent in the field of outdoor marketing and lead generation have enhanced our prominence considerably.",
+    name: 'Mr. Achal Agarwal',
+    title: 'R-Tech Group',
+    initials: 'AA',
+    gradient: 'linear-gradient(135deg,#a855f7,#7c3aed)',
     rating: 5,
   },
 ];
@@ -429,7 +445,7 @@ export default function Home() {
           <div className="hero__left">
             <div className="hero__eyebrow">
               <span className="hero__eyebrow-dot" />
-              <span className="hero__eyebrow-text">India's Premier Digital Agency</span>
+              <span className="hero__eyebrow-text">Best Digital Marketing Agency in Jaipur, India</span>
             </div>
             <h1 className="hero__title">
               <span className="hero__line-1">We Turn</span>
@@ -439,7 +455,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="hero__sub">
-              360° performance marketing, cinematic content &amp; scalable technology — all under one roof.
+              We are the Best Digital Marketing, Video Production, Performance Marketing &amp; Website Development Agency in Jaipur, India.
             </p>
             <div className="hero__actions">
               <button onClick={openEnquiry} className="btn btn-primary" id="hero-cta">
@@ -452,10 +468,10 @@ export default function Home() {
             </div>
             <div className="hero__metrics">
               {[
-                { num: '200+',   lbl: 'Projects'  },
-                { num: '₹50Cr+', lbl: 'Ad Spend'  },
-                { num: '8×',     lbl: 'Avg ROAS'  },
-                { num: '98%',    lbl: 'Retention' },
+                { num: '60+',    lbl: 'Professionals' },
+                { num: '6+',     lbl: 'Years'         },
+                { num: '99.9%',  lbl: 'Retention'     },
+                { num: '15+',    lbl: 'Industries'     },
               ].map(m => (
                 <div key={m.lbl} className="hero__metric-pill glass">
                   <span className="hero__metric-num text-gradient">{m.num}</span>
@@ -518,9 +534,9 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <span className="tag">What We Do</span>
-            <h2 className="section-heading">Full-Spectrum<br />Marketing Muscle</h2>
+            <h2 className="section-heading">Top-Rated Digital<br />Marketing Services</h2>
             <p className="section-subtext">
-              From bold ideas to measurable results — we cover every angle of your growth story.
+              360° digital marketing, video production, and technology development — all under one roof for your business growth.
             </p>
           </div>
           <div className="services-grid">
@@ -554,7 +570,7 @@ export default function Home() {
           {/* Header */}
           <div className="ind-header">
             <span className="tag">Industries We've Mastered</span>
-            <h2 className="section-heading">Work That Speaks<br />Across Every Sector</h2>
+            <h2 className="section-heading">Results Across<br />Every Industry</h2>
           </div>
 
           {/* Industry tab pills */}
@@ -643,11 +659,12 @@ export default function Home() {
             {/* Left: copy */}
             <div className="about-left">
               <span className="tag">Who We Are</span>
-              <h2 className="section-heading">A Studio Obsessed<br />With Your Growth</h2>
+              <h2 className="section-heading">360° Marketing<br />Under One Roof</h2>
               <p className="about-mission">
-                Cogent is a full-service creative agency built for ambitious brands. We combine
-                sharp strategy, bold design, and performance marketing to help businesses grow
-                faster and stand out louder — from their first campaign to their hundredth.
+                Our service offering encompasses all the elements of digital marketing, video production,
+                and technology development. Having been in business for over six years, our agency is
+                rich in a team of 60+ professionals delivering top-rated results across 15+ industries
+                with a remarkable 99.9% client retention ratio.
               </p>
               <div className="about-pillars">
                 {[
@@ -663,9 +680,9 @@ export default function Home() {
               </div>
               <div className="about-inline-stats">
                 {[
-                  { num: '7+',   lbl: 'Years in Business' },
-                  { num: '200+', lbl: 'Projects Delivered' },
-                  { num: '40+',  lbl: 'Team Members' },
+                  { num: '6+',   lbl: 'Years in Business' },
+                  { num: '15+',  lbl: 'Industries Served' },
+                  { num: '60+',  lbl: 'Team Members' },
                 ].map(s => (
                   <div key={s.lbl}>
                     <span className="about-stat__num">{s.num}</span>
@@ -800,7 +817,7 @@ export default function Home() {
         <div className="container cta-mid">
           <div className="cta-mid__glow" />
           <span className="tag">Let's Collaborate</span>
-          <h2 className="section-heading cta-mid__heading">Your Next Big<br />Campaign Starts Here</h2>
+          <h2 className="section-heading cta-mid__heading">Let's Build Your<br />Brand Together</h2>
           <button onClick={openEnquiry}  className="btn btn-primary" id="home-mid-cta">
             <span>Start a Project</span>
             <ArrowRight size={18} />
@@ -812,7 +829,7 @@ export default function Home() {
       <section className="section--sm marquee-section">
         <div className="marquee-label">
           <span className="marquee-label__line" />
-          Trusted by ambitious brands
+          Trusted by leading brands across India
           <span className="marquee-label__line" />
         </div>
         <div className="marquee-wrapper">
