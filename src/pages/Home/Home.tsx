@@ -673,7 +673,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link to="/about" className="btn btn-outline about-cta">
+              <Link to="/about-us" className="btn btn-outline about-cta">
                 <span>Our Story</span>
                 <ArrowRight size={16} />
               </Link>

@@ -7,18 +7,18 @@ import logoSrc from '../../assets/Logo.png';
 import './Navbar.css';
 
 const serviceLinks = [
-  { path: '/services/performance-marketing', label: 'Performance Marketing', icon: BarChart2,  color: '#a855f7', desc: 'ROI-driven paid media across Google & Meta' },
-  { path: '/services/video-production',      label: 'Video Production',       icon: Video,      color: '#ff6b6b', desc: 'Brand films, reels & ad creatives' },
-  { path: '/services/seo',                   label: 'SEO',                    icon: Search,     color: '#00d4aa', desc: 'Rank higher & drive organic growth' },
-  { path: '/services/social-media-marketing',label: 'Social Media Marketing', icon: Share2,     color: '#f59e0b', desc: 'Content, community & paid social' },
-  { path: '/services/influencer-marketing',  label: 'Influencer Marketing',   icon: Mic2,       color: '#ec4899', desc: 'Authentic reach through creators' },
-  { path: '/services/web-development',        label: 'Web Design & Dev',       icon: Monitor,    color: '#6c63ff', desc: 'High-performance websites & apps' },
-  { path: '/services/360-digital-marketing', label: '360° Digital Marketing', icon: RefreshCw,  color: '#00d4ff', desc: 'Full-funnel presence across every channel' },
+  { path: '/ppc-company-in-jaipur',                              label: 'Performance Marketing', icon: BarChart2,  color: '#a855f7', desc: 'ROI-driven paid media across Google & Meta' },
+  { path: '/services/video-production',                          label: 'Video Production',       icon: Video,      color: '#ff6b6b', desc: 'Brand films, reels & ad creatives' },
+  { path: '/best-seo-company-in-jaipur',                         label: 'SEO',                    icon: Search,     color: '#00d4aa', desc: 'Rank higher & drive organic growth' },
+  { path: '/best-social-media-marketing-company-in-jaipur',      label: 'Social Media Marketing', icon: Share2,     color: '#f59e0b', desc: 'Content, community & paid social' },
+  { path: '/services/influencer-marketing',                      label: 'Influencer Marketing',   icon: Mic2,       color: '#ec4899', desc: 'Authentic reach through creators' },
+  { path: '/website-development-company-in-jaipur',              label: 'Web Design & Dev',       icon: Monitor,    color: '#6c63ff', desc: 'High-performance websites & apps' },
+  { path: '/best-digital-marketing-company-in-jaipur',           label: '360° Digital Marketing', icon: RefreshCw,  color: '#00d4ff', desc: 'Full-funnel presence across every channel' },
 ];
 
 const navLinks = [
   { path: '/',          label: 'Home' },
-  { path: '/about',     label: 'About' },
+  { path: '/about-us',  label: 'About' },
   { path: '/services',  label: 'Services', hasDropdown: true },
   { path: '/portfolio', label: 'Portfolio' },
   { path: '/studio',    label: 'Cogent Studio' },
@@ -116,7 +116,8 @@ export default function Navbar() {
     }
   };
 
-  const isServiceActive = location.pathname.startsWith('/services');
+  const serviceTopPaths = ['/ppc-company-in-jaipur', '/best-seo-company-in-jaipur', '/best-social-media-marketing-company-in-jaipur', '/website-development-company-in-jaipur', '/best-digital-marketing-company-in-jaipur'];
+  const isServiceActive = location.pathname.startsWith('/services') || serviceTopPaths.includes(location.pathname);
 
   return (
     <nav ref={navRef} className="navbar glass">

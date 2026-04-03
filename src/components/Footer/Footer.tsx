@@ -6,7 +6,7 @@ import './Footer.css';
 
 const navLinks = [
   { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
+  { path: '/about-us', label: 'About' },
   { path: '/services', label: 'Services' },
   { path: '/portfolio', label: 'Portfolio' },
   { path: '/blog', label: 'Blog' },
@@ -14,13 +14,13 @@ const navLinks = [
 ];
 
 const services = [
-  { label: 'Web Design & Development', path: '/services' },
-  { label: 'Performance Marketing',    path: '/services/performance-marketing' },
+  { label: 'Web Design & Development', path: '/website-development-company-in-jaipur' },
+  { label: 'Performance Marketing',    path: '/ppc-company-in-jaipur' },
   { label: 'Video Production',         path: '/services/video-production' },
-  { label: 'SEO',                      path: '/services/seo' },
-  { label: 'Social Media Marketing',   path: '/services/social-media-marketing' },
+  { label: 'SEO',                      path: '/best-seo-company-in-jaipur' },
+  { label: 'Social Media Marketing',   path: '/best-social-media-marketing-company-in-jaipur' },
   { label: 'Influencer Marketing',     path: '/services/influencer-marketing' },
-  { label: '360° Digital Marketing',  path: '/services/360-digital-marketing' },
+  { label: '360° Digital Marketing',  path: '/best-digital-marketing-company-in-jaipur' },
 ];
 
 const socials = [
