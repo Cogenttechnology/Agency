@@ -40,7 +40,10 @@ export default defineConfig({
   },
   // Optimize deps pre-bundling
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: ['react', 'react-dom', 'react-router'],
     exclude: ['three', '@react-three/fiber', '@react-three/drei'],
+  },
+  ssr: {
+    noExternal: ['gsap', 'three', '@react-three/fiber', '@react-three/drei', 'lucide-react', 'lenis'],
   },
 });
