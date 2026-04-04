@@ -1,31 +1,51 @@
-import { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
-import * as THREE from 'three';
-
-function ServiceBlob({ color }: { color: string }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
-    meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.15;
-  });
-  return (
-    <Float speed={1.5} floatIntensity={0.5}>
-      <Sphere ref={meshRef} args={[1.2, 48, 48]}>
-        <MeshDistortMaterial color={color} distort={0.4} speed={2} roughness={0.1} metalness={0.7} />
-      </Sphere>
-    </Float>
-  );
-}
+import { useEffect, useRef } from 'react';
+import { gsap } from '../../lib/gsap';
 
 export default function ServiceBlobCanvas({ color }: { color: string }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    // Gentle floating + morphing animation
+    gsap.to(el.querySelector('.svc-blob'), {
+      scale: 1.08,
+      borderRadius: '60% 40% 55% 45% / 45% 55% 40% 60%',
+      duration: 3.5,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+    gsap.to(el.querySelector('.svc-blob'), {
+      y: -14,
+      duration: 2.8,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+    gsap.to(el.querySelector('.svc-blob-inner'), {
+      scale: 0.92,
+      duration: 2.2,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+    gsap.to(el.querySelector('.svc-blob-glow'), {
+      opacity: 0.6,
+      scale: 1.2,
+      duration: 2.5,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    });
+  }, []);
+
   return (
-    <Canvas camera={{ position: [0, 0, 4], fov: 60 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1.5} />
-      <pointLight position={[-5, -5, -5]} intensity={0.5} color={color} />
-      <ServiceBlob color={color} />
-    </Canvas>
+    <div ref={wrapRef} className="svc-blob-wrap" style={{ '--blob-color': color } as React.CSSProperties}>
+      <div className="svc-blob-glow" />
+      <div className="svc-blob">
+        <div className="svc-blob-inner" />
+      </div>
+    </div>
   );
 }
