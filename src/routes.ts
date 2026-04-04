@@ -15,6 +15,7 @@ export default [
   route("studio", "pages/Studio/Studio.tsx"),
   route("contact", "pages/Contact/Contact.tsx"),
   route("thank-you", "pages/ThankYou/ThankYou.tsx"),
+  route("d2c-marketing-agency-in-jaipur", "pages/Services/D2CMarketing.tsx"),
   route("content-marketing-agency-in-jaipur", "pages/Services/ContentMarketing.tsx"),
   route("marketing-consultant-in-jaipur", "pages/Services/MarketingConsultant.tsx"),
   route("blog", "pages/Blog/Blog.tsx"),
