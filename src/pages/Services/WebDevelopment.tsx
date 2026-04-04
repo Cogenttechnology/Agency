@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import WorkShowcase from '../../components/WorkShowcase/WorkShowcase';
 import type { WorkItem } from '../../components/WorkShowcase/WorkShowcase';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 const workItems: WorkItem[] = [
@@ -387,6 +388,7 @@ export default function WebDevelopment() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

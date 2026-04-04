@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { gsap, Flip, ScrollTrigger } from '../../lib/gsap';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Portfolio.css';
 
 const categories = ['All', 'Branding', 'Digital', 'Web', 'Video'];
@@ -123,6 +124,7 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

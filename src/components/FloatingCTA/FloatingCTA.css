@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════
-   FLOATING CTA — 3D + animated, bottom-right corner
+   FLOATING CTA — always-visible pill stack
 ══════════════════════════════════════════════════════ */
 
 .fcta {
@@ -10,259 +10,205 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0;
-  /* 3D scene */
-  perspective: 800px;
+  gap: 0.6rem;
 }
 
-/* ── Backdrop (click-away close) ──────────────────── */
-.fcta__backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-/* ── Action buttons container ─────────────────────── */
-.fcta__actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.75rem;
-  margin-bottom: 0.85rem;
-  pointer-events: none;
-}
-
-.fcta--open .fcta__actions {
-  pointer-events: auto;
-}
-
-/* ── Individual action button ─────────────────────── */
-.fcta__btn {
+/* ── Pill button ──────────────────────────────────── */
+.fcta__pill {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.6rem 1.1rem 0.6rem 0.8rem;
+  gap: 0.55rem;
+  padding: 0.65rem 1.1rem 0.65rem 0.75rem;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   white-space: nowrap;
   color: #fff;
-  box-shadow:
-    0 8px 24px rgba(0,0,0,0.35),
-    0 2px 8px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-  transform: translateY(20px) scale(0.85) rotateX(-8deg);
-  opacity: 0;
-  transition:
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 0.3s ease,
-    box-shadow 0.25s ease;
-  transform-style: preserve-3d;
-  /* stagger delays set per-button */
-}
-
-.fcta--open .fcta__btn {
-  transform: translateY(0) scale(1) rotateX(0deg);
-  opacity: 1;
-}
-
-.fcta__btn:hover {
-  transform: translateY(-3px) scale(1.04) rotateX(0deg) !important;
-  box-shadow:
-    0 14px 32px rgba(0,0,0,0.45),
-    0 4px 12px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-}
-
-.fcta__btn:active {
-  transform: translateY(0) scale(0.97) !important;
-}
-
-/* Stagger delays */
-.fcta__btn--enquiry  { transition-delay: 0.08s; }
-.fcta__btn--phone    { transition-delay: 0.04s; }
-.fcta__btn--whatsapp { transition-delay: 0s;    }
-
-/* Colors */
-.fcta__btn--whatsapp {
-  background: linear-gradient(135deg, #25d366, #128c55);
-}
-.fcta__btn--phone {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-}
-.fcta__btn--enquiry {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-
-/* Icon wrapper */
-.fcta__btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.25);
-}
-
-/* Label */
-.fcta__btn-label {
-  padding-right: 0.1rem;
-}
-
-/* ── Toggle FAB ───────────────────────────────────── */
-.fcta__fab {
-  position: relative;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 8px 28px rgba(168, 85, 247, 0.55),
-    0 2px 8px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-  transform-style: preserve-3d;
-  transition:
-    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease;
+  text-decoration: none;
+  overflow: hidden;
   outline: none;
+  /* entrance animation */
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fcta-slide-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.fcta__fab:hover {
-  transform: translateY(-4px) scale(1.08) rotateZ(8deg);
+/* Stagger each pill's entrance */
+.fcta__pill--wa      { animation-delay: 0.0s; }
+.fcta__pill--call    { animation-delay: 0.1s; }
+.fcta__pill--enquiry { animation-delay: 0.2s; }
+
+@keyframes fcta-slide-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Colors & shadows ─────────────────────────────── */
+.fcta__pill--wa {
+  background: linear-gradient(135deg, #25d366 0%, #128c55 100%);
   box-shadow:
-    0 14px 40px rgba(168, 85, 247, 0.7),
-    0 4px 14px rgba(0,0,0,0.35),
+    0 6px 20px rgba(37, 211, 102, 0.45),
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.fcta__pill--call {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  box-shadow:
+    0 6px 20px rgba(59, 130, 246, 0.45),
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.fcta__pill--enquiry {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow:
+    0 6px 20px rgba(245, 158, 11, 0.45),
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* ── Hover lift ───────────────────────────────────── */
+.fcta__pill {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+
+.fcta__pill--wa:hover {
+  transform: translateX(-5px) scale(1.05);
+  box-shadow:
+    0 12px 32px rgba(37, 211, 102, 0.6),
+    0 4px 10px rgba(0,0,0,0.25),
     inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
-.fcta__fab:active {
-  transform: scale(0.93);
-}
-
-.fcta--open .fcta__fab {
-  background: linear-gradient(135deg, #6b7280, #374151);
+.fcta__pill--call:hover {
+  transform: translateX(-5px) scale(1.05);
   box-shadow:
-    0 6px 20px rgba(0,0,0,0.4),
-    0 2px 8px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.1);
+    0 12px 32px rgba(59, 130, 246, 0.6),
+    0 4px 10px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
-/* Rotating ring decoration */
-.fcta__fab-ring {
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 2px dashed rgba(168, 85, 247, 0.4);
-  animation: fcta-ring-spin 6s linear infinite;
-  pointer-events: none;
-  will-change: transform;
+.fcta__pill--enquiry:hover {
+  transform: translateX(-5px) scale(1.05);
+  box-shadow:
+    0 12px 32px rgba(245, 158, 11, 0.6),
+    0 4px 10px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
-.fcta--open .fcta__fab-ring {
-  border-color: rgba(107, 114, 128, 0.35);
-  animation-play-state: paused;
+.fcta__pill:active {
+  transform: scale(0.96) !important;
 }
 
-@keyframes fcta-ring-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Icon wrapper inside FAB */
-.fcta__fab-icon {
-  position: relative;
-  z-index: 1;
+/* ── Icon circle ──────────────────────────────────── */
+.fcta__pill-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.15);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.fcta--open .fcta__fab-icon {
-  transform: rotate(90deg);
+.fcta__pill:hover .fcta__pill-icon {
+  transform: scale(1.15) rotate(-8deg);
 }
 
-/* Pulse ring animation */
-.fcta__fab-pulse {
+/* ── Label ────────────────────────────────────────── */
+.fcta__pill-label {
+  padding-right: 0.15rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* ── Animated shine sweep ─────────────────────────── */
+.fcta__pill-glow {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: rgba(168, 85, 247, 0.35);
-  animation: fcta-pulse 2.4s ease-out infinite;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
   pointer-events: none;
-  will-change: transform, opacity;
 }
 
-@keyframes fcta-pulse {
-  0%   { transform: scale(1);   opacity: 0.7; }
-  70%  { transform: scale(1.7); opacity: 0;   }
-  100% { transform: scale(1.7); opacity: 0;   }
+.fcta__pill:hover .fcta__pill-glow {
+  transform: translateX(100%);
 }
 
-/* ── Mobile adjustments ───────────────────────────── */
+/* ── WhatsApp pulse dot ───────────────────────────── */
+.fcta__pill--wa::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.9;
+  animation: fcta-dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fcta-dot-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.9; }
+  50%       { transform: scale(1.5); opacity: 0.4; }
+}
+
+/* ── Mobile — icon-only circles ──────────────────── */
 @media (max-width: 600px) {
   .fcta {
     bottom: 1.25rem;
     right: 1.25rem;
+    gap: 0.5rem;
   }
 
-  .fcta__fab {
-    width: 52px;
-    height: 52px;
-  }
-
-  .fcta__btn {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.9rem 0.5rem 0.65rem;
-  }
-
-  .fcta__btn-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .fcta__btn-label {
-    display: none;  /* icon-only on very small screens */
-  }
-
-  .fcta__btn {
-    padding: 0.55rem;
+  .fcta__pill {
+    width: 48px;
+    height: 48px;
+    padding: 0;
     border-radius: 50%;
-    width: 46px;
-    height: 46px;
     justify-content: center;
   }
 
-  .fcta__btn-icon {
+  .fcta__pill-label { display: none; }
+
+  .fcta__pill-icon {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
     background: transparent;
     box-shadow: none;
   }
+
+  /* hide the pulse dot on mobile to avoid overlap */
+  .fcta__pill--wa::after { display: none; }
 }
 
-/* ── Reduced motion ─────────────────────────────────────── */
+/* ── Reduced motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .fcta__fab-ring,
-  .fcta__fab-pulse {
+  .fcta__pill {
     animation: none !important;
-  }
-
-  .fcta__fab,
-  .fcta__btn,
-  .fcta__fab-icon {
+    opacity: 1;
+    transform: none;
     transition: none !important;
   }
+
+  .fcta__pill--wa::after { animation: none !important; }
+  .fcta__pill-glow       { display: none; }
 }

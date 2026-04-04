@@ -108,11 +108,11 @@ button { cursor: pointer; border: none; outline: none; background: transparent; 
 }
 
 .section {
-  padding: var(--space-xl) 0;
+  padding: 5.5rem 0;
 }
 
 .section--sm {
-  padding: var(--space-lg) 0;
+  padding: 3rem 0;
 }
 
 .tag {
@@ -203,8 +203,8 @@ button { cursor: pointer; border: none; outline: none; background: transparent; 
 
 @media (max-width: 768px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .section  { padding: 5rem 0; }
-  .section--sm { padding: 3rem 0; }
+  .section  { padding: 4rem 0; }
+  .section--sm { padding: 2.5rem 0; }
 }
 
 @media (max-width: 480px) {

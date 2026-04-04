@@ -21,6 +21,7 @@ import {
   Zap,
 } from 'lucide-react';
 import SocialShowcase from '../../components/SocialShowcase/SocialShowcase';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 /* ── Constants ───────────────────────────────────────────── */
@@ -854,6 +855,7 @@ export default function SocialMediaMarketing() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

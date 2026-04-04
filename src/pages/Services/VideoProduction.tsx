@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import VideoShowcase from '../../components/VideoShowcase/VideoShowcase';
 import type { VideoItem } from '../../components/VideoShowcase/VideoShowcase';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 // ── Vite asset imports — actual project work ──────────────
@@ -955,6 +956,7 @@ export default function VideoProduction() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

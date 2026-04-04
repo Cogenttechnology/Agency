@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Mail, Phone, MapPin, Send, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Contact.css';
 
 const services = [
@@ -319,6 +320,7 @@ export default function Contact() {
         </div>
       </section>
 
+      <ClientLogos />
     </div>
   );
 }

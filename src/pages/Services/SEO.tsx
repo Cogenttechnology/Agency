@@ -28,6 +28,7 @@ import {
   Target,
 } from 'lucide-react';
 import SeoShowcase from '../../components/SeoShowcase/SeoShowcase';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 
@@ -906,6 +907,7 @@ export default function SEO() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   Monitor, Video, Search, Share2, BarChart2, Mic2, Mail,
 } from 'lucide-react';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Home.css';
 
 /* ─── Data ──────────────────────────────────────────────── */
@@ -162,16 +163,6 @@ const faqs = [
   },
 ];
 
-const clients = [
-  { name: 'Nav Imperial Hospital', color: '#ff6b6b', bg: 'rgba(255,107,107,0.1)' },
-  { name: 'Manglam Group',         color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
-  { name: 'KGK Realty',            color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-  { name: 'CKS Hospital',          color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
-  { name: 'Sanjay Textile Store',  color: '#ec4899', bg: 'rgba(236,72,153,0.1)' },
-  { name: 'R-Tech Group',          color: '#a855f7', bg: 'rgba(168,85,247,0.1)' },
-  { name: 'Kirana King',           color: '#6c63ff', bg: 'rgba(108,99,255,0.1)' },
-  { name: 'R-Tech Group',          color: '#00d4aa', bg: 'rgba(0,212,170,0.1)' },
-];
 
 const aboutCards = [
   {
@@ -779,7 +770,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════ FAQ ══════════════════ */}
-      <section className="section faq-section">
+      <section className="section--sm faq-section">
         <div className="container">
           <div className="faq-inner">
             {/* Left: sticky heading */}
@@ -813,7 +804,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════ CTA MID ══════════════════ */}
-      <section className="section cta-mid-section">
+      <section className="section--sm cta-mid-section">
         <div className="container cta-mid">
           <div className="cta-mid__glow" />
           <span className="tag">Let's Collaborate</span>
@@ -826,40 +817,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════ MARQUEE ══════════════════ */}
-      <section className="section--sm marquee-section">
-        <div className="marquee-label">
-          <span className="marquee-label__line" />
-          Trusted by leading brands across India
-          <span className="marquee-label__line" />
-        </div>
-        <div className="marquee-wrapper">
-          <div className="marquee-track">
-            {[...clients, ...clients].map((c, i) => (
-              <span
-                key={i}
-                className="marquee-item"
-                style={{ '--m-color': c.color, '--m-bg': c.bg } as React.CSSProperties}
-              >
-                <span className="marquee-item__dot" />
-                {c.name}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="marquee-wrapper marquee-wrapper--reverse">
-          <div className="marquee-track marquee-track--reverse">
-            {[...clients].reverse().concat([...clients].reverse()).map((c, i) => (
-              <span
-                key={i}
-                className="marquee-item marquee-item--outline"
-                style={{ '--m-color': c.color, '--m-bg': c.bg } as React.CSSProperties}
-              >
-                {c.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClientLogos />
 
     </div>
   );

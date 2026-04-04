@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef } from 'react';
 import { useEnquiry } from '../../context/EnquiryContext';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Services.css';
 
 const ServiceBlobCanvas = lazy(() => import('../../components/3D/ServiceBlobCanvas'));
@@ -119,6 +120,7 @@ export default function Services() {
           </div>
         </section>
       ))}
+      <ClientLogos />
     </div>
   );
 }

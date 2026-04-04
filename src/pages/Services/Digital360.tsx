@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import FaqAccordion from '../../components/FaqAccordion/FaqAccordion';
 import './ServicePage.css';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Digital360.css';
 
 /* ── Constants ───────────────────────────────────────────── */
@@ -800,6 +801,7 @@ export default function Digital360() {
         </div>
       </section>
 
+      <ClientLogos />
     </div>
   );
 }

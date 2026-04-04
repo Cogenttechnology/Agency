@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Plus,
 } from 'lucide-react';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 /* ── Constants ─────────────────────────────────────────────── */
@@ -510,6 +511,7 @@ export default function MarketingConsultant() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

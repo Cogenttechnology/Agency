@@ -23,6 +23,7 @@ import {
   Globe,
 } from 'lucide-react';
 import './ServicePage.css';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './D2CMarketing.css';
 
 /* ── Constants ─────────────────────────────────────── */
@@ -704,6 +705,7 @@ export default function D2CMarketing() {
         </div>
       </section>
 
+      <ClientLogos />
     </div>
   );
 }

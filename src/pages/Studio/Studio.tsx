@@ -17,6 +17,7 @@ import {
   Play,
 } from 'lucide-react';
 import '../Services/ServicePage.css';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './Studio.css';
 
 /* ── Constants ──────────────────────────────────────────── */
@@ -849,6 +850,7 @@ export default function Studio() {
         </div>
       </section>
 
+      <ClientLogos />
     </div>
   );
 }

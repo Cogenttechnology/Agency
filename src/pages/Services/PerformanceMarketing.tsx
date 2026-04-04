@@ -26,6 +26,7 @@ import {
   Zap,
 } from 'lucide-react';
 import PerfShowcase from '../../components/PerfShowcase/PerfShowcase';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './ServicePage.css';
 
 /* ── Constants ───────────────────────────────────────────── */
@@ -253,7 +254,7 @@ const faqs = [
 
 /* ── Ad Type Card — 3D flip + tap on mobile ──────────────── */
 interface AdCardProps {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ size?: number }>;
   title: string;
   desc: string;
   color: string;
@@ -832,6 +833,7 @@ export default function PerformanceMarketing() {
           </div>
         </div>
       </section>
+      <ClientLogos />
     </div>
   );
 }

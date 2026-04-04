@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
 import FaqAccordion from '../../components/FaqAccordion/FaqAccordion';
+import ClientLogos from '../../components/ClientLogos/ClientLogos';
 import './About.css';
 
 /* ─── Data ──────────────────────────────────────────────── */
@@ -96,12 +97,7 @@ const team = [
   { name: 'Mr. Aunip Jain',   role: 'Head of Digital Strategy',  initials: 'AJ', gradient: 'linear-gradient(135deg,#ec4899,#be185d)' },
 ];
 
-const clients = [
-  'Manglam Group', 'Nav Imperial Hospital', 'KGK Realty', 'CKS Hospital',
-  'Sanjay Textile Store', 'R-Tech Group', 'Kirana King', 'Saras Dairy',
-  'SBI Bank', 'Swiggy', 'Kuku FM', 'Vivo', 'Clarks Jaipur',
-  'Shubhashish Group', 'Rajasthan Government', 'Hero',
-];
+
 
 const faqs = [
   {
@@ -408,30 +404,7 @@ export default function About() {
       </section>
 
       {/* ══════════════ CLIENTS MARQUEE ══════════════ */}
-      <section className="section--sm about-clients-section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="tag">Trusted By</span>
-            <h2 className="section-heading mt-sm">
-              The Trust Motivates Us<br />to Deliver the Best
-            </h2>
-          </div>
-        </div>
-        <div className="about-marquee-wrapper">
-          <div className="about-marquee-track">
-            {[...clients, ...clients].map((c, i) => (
-              <span key={i} className="about-marquee-item">{c}</span>
-            ))}
-          </div>
-        </div>
-        <div className="about-marquee-wrapper about-marquee-wrapper--reverse">
-          <div className="about-marquee-track about-marquee-track--reverse">
-            {[...clients].reverse().concat([...clients].reverse()).map((c, i) => (
-              <span key={i} className="about-marquee-item about-marquee-item--outline">{c}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClientLogos />
 
       {/* ══════════════ FAQ ══════════════ */}
       <section className="section about-faq-section">
