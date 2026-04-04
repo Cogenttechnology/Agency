@@ -19,7 +19,7 @@ import {
   Code2,
   AlertCircle,
   Mic,
-  Youtube,
+  PlayCircle,
   Store,
   Globe,
   Award,
@@ -300,7 +300,7 @@ const faqs = [
 
 /* ── Sub-components ──────────────────────────────────────── */
 interface ManagedCardProps {
-  icon: React.ElementType;
+  icon: React.FC<{ size?: number; className?: string }>;
   title: string;
   desc: string;
   color: string;
