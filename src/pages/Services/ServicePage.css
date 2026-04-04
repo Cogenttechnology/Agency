@@ -2808,3 +2808,408 @@
     gap: 0.75rem;
   }
 }
+
+/* ══════════════════════════════════════════════════════
+   SEO PAGE — new sections
+══════════════════════════════════════════════════════ */
+
+/* ── Proven Results ───────────────────────────────── */
+.seo-proven__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.seo-proven__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.seo-proven__text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.seo-proven__text p {
+  color: var(--color-text-2);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.seo-proven__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.seo-proven-stat {
+  background: rgba(0, 212, 170, 0.06);
+  border: 1px solid rgba(0, 212, 170, 0.18);
+  border-radius: 16px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seo-proven-stat:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 170, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 212, 170, 0.12);
+}
+
+.seo-proven-stat__num {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #00d4aa;
+  line-height: 1;
+}
+
+.seo-proven-stat__label {
+  font-size: 0.78rem;
+  color: var(--color-text-2);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ── Key Features Grid ────────────────────────────── */
+.seo-features-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1200px) {
+  .seo-features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .seo-features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .seo-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.seo-feature-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.seo-feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 170, 0.3);
+  background: rgba(0, 212, 170, 0.05);
+  box-shadow: 0 12px 28px rgba(0, 212, 170, 0.1);
+}
+
+.seo-feature-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,212,170,0.15), rgba(0,153,170,0.1));
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d4aa;
+  flex-shrink: 0;
+}
+
+.seo-feature-card__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.seo-feature-card__desc {
+  font-size: 0.82rem;
+  color: var(--color-text-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Managed SEO — 3D Flip Cards ─────────────────── */
+.seo-managed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .seo-managed-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Card wrapper */
+.seo-managed-card {
+  position: relative;
+  height: 240px;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+/* Inner flip container */
+.seo-managed-card__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: 20px;
+}
+
+.seo-managed-card:hover .seo-managed-card__inner,
+.seo-managed-card--flipped .seo-managed-card__inner {
+  transform: rotateY(180deg);
+}
+
+/* Front face */
+.seo-managed-card__front,
+.seo-managed-card__back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.seo-managed-card__front {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.seo-managed-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--seo-card-color, #00d4aa), rgba(0,0,0,0.2));
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.seo-managed-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.seo-managed-card__hint {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Back face */
+.seo-managed-card__back {
+  background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(15,15,25,0.95));
+  border: 1px solid rgba(255,255,255,0.1);
+  transform: rotateY(180deg);
+  gap: 0.75rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+.seo-managed-card__back-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--seo-card-color, #00d4aa);
+  margin: 0;
+}
+
+.seo-managed-card__desc {
+  font-size: 0.82rem;
+  color: var(--color-text-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.seo-managed-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--seo-card-color, #00d4aa);
+  background: transparent;
+  border: 1px solid var(--seo-card-color, #00d4aa);
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: inherit;
+}
+
+.seo-managed-card__cta:hover {
+  background: var(--seo-card-color, #00d4aa);
+  color: #0a0a0f;
+}
+
+/* Flat view (mobile ≤600px) */
+.seo-managed-card__flat {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .seo-managed-card {
+    height: auto;
+    perspective: none;
+    cursor: default;
+  }
+
+  .seo-managed-card__inner {
+    display: none;
+  }
+
+  .seo-managed-card__flat {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.25rem;
+  }
+
+  .seo-managed-card__flat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--seo-card-color, #00d4aa), rgba(0,0,0,0.2));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .seo-managed-card__flat-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 0.4rem;
+  }
+
+  .seo-managed-card__flat-desc {
+    font-size: 0.82rem;
+    color: var(--color-text-2);
+    line-height: 1.6;
+    margin: 0 0 0.75rem;
+  }
+}
+
+/* ── Benefits Grid ────────────────────────────────── */
+.seo-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .seo-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .seo-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seo-benefit-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.seo-benefit-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 212, 170, 0.3);
+  background: rgba(0, 212, 170, 0.04);
+  box-shadow: 0 16px 40px rgba(0, 212, 170, 0.1);
+}
+
+.seo-benefit-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,212,170,0.18), rgba(0,153,170,0.08));
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d4aa;
+  flex-shrink: 0;
+}
+
+.seo-benefit-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.seo-benefit-card__desc {
+  font-size: 0.87rem;
+  color: var(--color-text-2);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Responsive — proven stats ────────────────────── */
+@media (max-width: 900px) {
+  .seo-proven__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .seo-proven__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .seo-proven__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

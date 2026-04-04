@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useEnquiry } from '../../context/EnquiryContext';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
 import {
@@ -13,6 +13,19 @@ import {
   Users,
   ArrowRight,
   Plus,
+  Smartphone,
+  BarChart2,
+  Search,
+  Code2,
+  AlertCircle,
+  Mic,
+  Youtube,
+  Store,
+  Globe,
+  Award,
+  DollarSign,
+  Zap,
+  Target,
 } from 'lucide-react';
 import SeoShowcase from '../../components/SeoShowcase/SeoShowcase';
 import './ServicePage.css';
@@ -58,23 +71,23 @@ const seoServices = [
 const steps = [
   {
     num: '01',
-    title: 'Audit & Analysis',
-    desc: "Deep technical and content audit to identify what's holding your rankings back.",
+    title: 'Research',
+    desc: 'Our team works to analyze the market in order to find significant opportunities within your market. With help of competitor analysis, customer behavior, local search trends, and keywords, we build up insights to advance your SEO tactics.',
   },
   {
     num: '02',
-    title: 'Keyword Strategy',
-    desc: 'Intent-mapped keyword research aligned to your buyer journey and competitive landscape.',
+    title: 'Strategy',
+    desc: 'We develop individualized digital marketing plans based on your goals. After agreeing on the right strategy, we employ several techniques to improve your online presence and how you can influence your target clients.',
   },
   {
     num: '03',
-    title: 'On-Page Optimisation',
-    desc: 'Implement on-page and technical changes to signal relevance and authority to search engines.',
+    title: 'Execution',
+    desc: 'Our SEO services are designed according to your objective and involve various activities performed by our SEO specialists to enhance the website\'s standing, visitors, and sales.',
   },
   {
     num: '04',
-    title: 'Authority Building',
-    desc: 'Build domain authority through link acquisition, content distribution, and digital PR.',
+    title: 'Tracking',
+    desc: 'The control of performance is one of our major activities. At every step, we monitor the outcome of each campaign, make changes as necessary, and identify new opportunities to ensure we get the best results.',
   },
 ];
 
@@ -127,28 +140,217 @@ const results = [
   },
 ];
 
-const faqs = [
+/* ── New data from reference page ───────────────────────── */
+const provenStats = [
+  { num: '350+', label: 'Projects Handled' },
+  { num: '50+',  label: 'Team of Professionals' },
+  { num: '1000+', label: 'Local Listings Optimized' },
+  { num: '20+',  label: 'Different Sectors' },
+  { num: '10X',  label: 'Brand Visibility' },
+  { num: '20M$', label: 'Traffic Value' },
+];
+
+const keyFeatures = [
   {
-    q: 'How long does SEO take to show results?',
-    a: "SEO is a long-term investment. Most clients start seeing measurable improvements in 3–4 months, with significant traffic and ranking gains typically visible within 6 months. Highly competitive industries may take 9–12 months to reach peak performance. The results compound over time and continue delivering value long after.",
+    icon: Settings,
+    title: 'Technical SEO Optimization',
+    desc: 'We optimize the more technical aspects of your website such as speed, mobile friendly and structured data to help ranking on search engines.',
   },
   {
-    q: 'What makes your SEO approach different from other agencies?',
-    a: "We combine technical excellence with content quality and authority building — treating all three as equally important. We don't rely on shortcuts or outdated tactics. Every strategy is custom-built around your competitive landscape, and we report with full transparency on what we're doing and why.",
+    icon: MapPin,
+    title: 'Local SEO Management',
+    desc: 'Stand out locally with our Local SEO services that have been designed to ensure your business appears in local searches and attracts clients in your area.',
   },
   {
-    q: 'Do you offer local SEO services?',
-    a: "Yes. Our local SEO service includes Google Business Profile optimisation, local citation building, geo-targeted content creation, review management strategy, and local schema implementation. We help brick-and-mortar businesses and service-area businesses dominate their local markets.",
+    icon: FileText,
+    title: 'Content Marketing & SEO Integration',
+    desc: 'We craft and optimize high-quality, SEO-friendly content that engages users and improves your website\'s organic search performance.',
   },
   {
-    q: 'Will you write the content or do we need to provide it?',
-    a: "We offer fully managed content creation as part of our SEO service. Our writers produce optimised blog posts, landing pages, and resource articles based on detailed SEO briefs. If you have an in-house team, we can provide the briefs and review the content instead.",
+    icon: Smartphone,
+    title: 'Mobile SEO Optimization',
+    desc: 'Our mobile SEO strategies ensure your website is fully optimized for mobile search, delivering a seamless experience across all devices and improving mobile rankings.',
   },
   {
-    q: 'How do you track and report SEO progress?',
-    a: "We connect Google Search Console, GA4, and Ahrefs to a live reporting dashboard. You receive a monthly SEO report covering keyword ranking movements, organic traffic growth, backlink profile health, Core Web Vitals, and strategic recommendations for the next period.",
+    icon: BookOpen,
+    title: 'SEO Consultation & Strategy Planning',
+    desc: 'Our team offers individual SEO consultation and concept creation for the further successful promotion of your company in terms of rankings.',
+  },
+  {
+    icon: BarChart2,
+    title: 'Conversion Rate Optimisation (CRO)',
+    desc: 'We study web traffic data to better market the site and boost conversion rates to make more visitors paying customers.',
+  },
+  {
+    icon: Search,
+    title: 'Competitor SEO Gap Analysis',
+    desc: 'Our detailed competitor analysis lets you know where your competitors are vulnerable and where they are missing the boat, SEO-wise.',
+  },
+  {
+    icon: Code2,
+    title: 'Schema Markup Implementation',
+    desc: 'We assist in improving search results and visibility by including schema markup to your site to make it easier for search engines to interpret your content.',
+  },
+  {
+    icon: Globe,
+    title: 'SEO-Friendly Web Design',
+    desc: 'Our websites are attractive and also optimized for quick loading and better positioning ensuring the sites are easily found by the search engine.',
+  },
+  {
+    icon: AlertCircle,
+    title: 'Penalty Recovery Services',
+    desc: 'In case your site has been penalized our specialists will establish the reasons and will work on recovering your rankings and traffic.',
   },
 ];
+
+const managedServices = [
+  {
+    icon: Award,
+    title: 'Enterprise SEO',
+    desc: 'We have enterprise level SEO services for large businesses or companies. These tactics demystify complicated issues of SEO, and lead to increased sales revenue.',
+    color: '#00d4aa',
+  },
+  {
+    icon: Youtube,
+    title: 'YouTube SEO',
+    desc: 'Improve your YouTube channel prominence with our professional YouTube SEO services. We ensure you get the best video titles, descriptions, thumbnails and tags to gain the most views from targeted traffic.',
+    color: '#ff4444',
+  },
+  {
+    icon: ShoppingBag,
+    title: 'E-commerce SEO',
+    desc: 'Unleash your E-commerce website potential using our tested SEO strategies. We assist you in reaching more customers and increase your sale many folds by enhancing every small feature of your online store.',
+    color: '#f59e0b',
+  },
+  {
+    icon: Mic,
+    title: 'Voice Search Optimization',
+    desc: 'We make your content easily reachable for voice assistants like Siri, Alexa, and Google Assistant by tuning in to long-tail natural and conversational keywords to rank for the voice search traffic.',
+    color: '#a855f7',
+  },
+  {
+    icon: MapPin,
+    title: 'Local SEO',
+    desc: 'Get the best out of Local SEO services we offer to ensure you have the best position in the local market. We assist you in ranking top for local related keywords and enhance customer trust, prominence, and traffic flow.',
+    color: '#3b82f6',
+  },
+  {
+    icon: Store,
+    title: 'App Store Optimization',
+    desc: 'App Store Optimization services will help you advance your app\'s promotion to a new level. We help enhance your app\'s searchability in the app stores and increase its discoverability and usage rates.',
+    color: '#ec4899',
+  },
+];
+
+const seoBenefits = [
+  {
+    icon: TrendingUp,
+    title: 'Increased Organic Traffic',
+    desc: 'When you partner with an SEO expert in Jaipur, you may safely count on a continuous stream of targeted visitors to your site. With keyword planning, on-page optimization, quality backlinking, and industry-leading content metrics, we deliver trustable outcomes.',
+  },
+  {
+    icon: DollarSign,
+    title: 'Reduced Dependency on Paid Ads',
+    desc: 'SEO works to build your organic search visibility, trust, and authority over time, relieving paid search. The Cogent offers help for long-term engagement and customer acquisition strategy, so you do not need to waste a fortune on ads.',
+  },
+  {
+    icon: Zap,
+    title: 'Branding and Awareness',
+    desc: 'We are experienced at using SEO, content marketing knowledge and social media for the benefit of your brand. Our proven techniques are focused on improving your online authority and visibility while creating awareness of your business.',
+  },
+  {
+    icon: Users,
+    title: 'Enhanced User Engagement',
+    desc: 'Great content, website development and integration with social media will allow you to entice, and keep, your audience engaged. We make sure your site is optimized to keep its visitors engaged through every search touchpoint.',
+  },
+  {
+    icon: Target,
+    title: 'Qualified Leads',
+    desc: 'The goal of our data-driven SEO is to attract the correct customers on their online journey. The Cogent brings you a stream of highly qualified leads with better conversion rates and better customer loyalty over time.',
+  },
+  {
+    icon: BarChart2,
+    title: 'Lower Cost Per Acquisition (CPA)',
+    desc: 'With a full SEO strategy we can improve the quality of your organic traffic, decrease your bounce rates, and increase your conversions — leading to a lower average cost per acquisition and more cost-efficient growth.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is search engine optimization, and why is it valuable to my business?',
+    a: 'SEO optimizes your site to enhance ranking and visibility on search engines, more so Google. This encompasses keyword research, page content optimization, and quality building of backlinks. The higher your ranking, the more organic traffic comes in — hence more leads and sales that boost brand awareness.',
+  },
+  {
+    q: 'How long does it take for SEO results to come along?',
+    a: 'SEO is a long-term approach and takes 3 to 6 months before any positive results can be seen. However, the time may vary depending on the market competition of your industry, the state of your website, and the tactics put in place for search engine optimization.',
+  },
+  {
+    q: 'What are the critical components of successful SEO?',
+    a: 'Optimized content on your website such as relevant keywords, meta tags optimization, and quality content — plus off-page work including link building, technical optimization such as site speed and mobile-friendliness, and continuous monitoring and adjustments according to analytics for sustained success.',
+  },
+  {
+    q: 'Does my website guarantee #1 rankings in Google?',
+    a: 'No SEO company can ever promise #1 rankings in Google. Algorithms of search engines are complex and constantly evolving. Many other factors like competitors and content quality influence rankings. However, an efficient SEO strategy will significantly enhance your search rankings and visibility over time.',
+  },
+  {
+    q: 'What is the difference between local SEO and general SEO?',
+    a: 'Local SEO is space-centric, using tactics like optimization of your Google My Business listing, obtaining local citations, and gathering local reviews. This is crucial for businesses that service clients based in a specific area. General SEO targets a much bigger, global, open-range audience.',
+  },
+];
+
+/* ── Sub-components ──────────────────────────────────────── */
+interface ManagedCardProps {
+  icon: React.ElementType;
+  title: string;
+  desc: string;
+  color: string;
+  index: number;
+  onEnquiry: () => void;
+}
+
+function ManagedCard({ icon: Icon, title, desc, color, onEnquiry }: ManagedCardProps) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className={`seo-managed-card${flipped ? ' seo-managed-card--flipped' : ''}`}
+      style={{ '--seo-card-color': color } as React.CSSProperties}
+      onClick={() => setFlipped(f => !f)}
+    >
+      <div className="seo-managed-card__inner">
+        {/* Front */}
+        <div className="seo-managed-card__front">
+          <div className="seo-managed-card__icon">
+            <Icon size={28} />
+          </div>
+          <h3 className="seo-managed-card__title">{title}</h3>
+          <span className="seo-managed-card__hint">Tap to learn more</span>
+        </div>
+        {/* Back */}
+        <div className="seo-managed-card__back">
+          <h3 className="seo-managed-card__back-title">{title}</h3>
+          <p className="seo-managed-card__desc">{desc}</p>
+          <button
+            className="seo-managed-card__cta"
+            onClick={e => { e.stopPropagation(); onEnquiry(); }}
+          >
+            Get Started <ArrowRight size={14} />
+          </button>
+        </div>
+      </div>
+      {/* Flat mobile view */}
+      <div className="seo-managed-card__flat">
+        <div className="seo-managed-card__flat-icon"><Icon size={24} /></div>
+        <div>
+          <h3 className="seo-managed-card__flat-title">{title}</h3>
+          <p className="seo-managed-card__flat-desc">{desc}</p>
+          <button className="seo-managed-card__cta" onClick={e => { e.stopPropagation(); onEnquiry(); }}>
+            Get Started <ArrowRight size={14} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -232,6 +434,24 @@ export default function SEO() {
         gsap.fromTo('.seo-stats',   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, delay: 1.0,  ease: 'power3.out' });
         gsap.fromTo('.seo-visual',  { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.9, delay: 0.6,  ease: 'power3.out' });
 
+        // Proven stats
+        gsap.fromTo(
+          '.seo-proven-stat',
+          { opacity: 0, y: 30, scale: 0.9 },
+          {
+            opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(1.4)',
+            scrollTrigger: { trigger: '.seo-proven', start: 'top 80%' },
+          }
+        );
+        gsap.fromTo(
+          '.seo-proven__text > *',
+          { opacity: 0, x: -40 },
+          {
+            opacity: 1, x: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: '.seo-proven', start: 'top 80%' },
+          }
+        );
+
         // Power of organic section
         gsap.fromTo(
           '.seo-power__text > *',
@@ -260,6 +480,16 @@ export default function SEO() {
           }
         );
 
+        // Key features
+        gsap.fromTo(
+          '.seo-feature-card',
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.65, stagger: 0.07, ease: 'power3.out',
+            scrollTrigger: { trigger: '.seo-features-grid', start: 'top 80%' },
+          }
+        );
+
         // Services
         gsap.fromTo(
           '.seo-services-grid .svc-card',
@@ -267,6 +497,16 @@ export default function SEO() {
           {
             opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
             scrollTrigger: { trigger: '.seo-services-grid', start: 'top 80%' },
+          }
+        );
+
+        // Managed services cards
+        gsap.fromTo(
+          '.seo-managed-card',
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.seo-managed-grid', start: 'top 80%' },
           }
         );
 
@@ -287,6 +527,16 @@ export default function SEO() {
           {
             opacity: 1, scale: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(1.5)',
             scrollTrigger: { trigger: '.seo-tools', start: 'top 80%' },
+          }
+        );
+
+        // Benefits
+        gsap.fromTo(
+          '.seo-benefit-card',
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '.seo-benefits-grid', start: 'top 80%' },
           }
         );
 
@@ -348,33 +598,33 @@ export default function SEO() {
                 Search Engine Optimisation
               </span>
               <h1 id="seo-h1-el" className="svc-hero__h1 seo-h1">
-                Rank Higher. Get Found.{' '}
-                <span className="text-gradient">Grow Faster.</span>
+                Drive Traffic and Leads with{' '}
+                <span className="text-gradient">Jaipur's Best SEO Company</span>
               </h1>
               <p className="svc-hero__sub seo-sub">
-                We build organic search engines for your business — driving sustained
-                traffic, qualified leads, and revenue growth without paying per click.
+                Skyrocket your website to the top of search results! Our expert SEO services
+                ensure higher visibility, increased traffic, and long-term business growth.
               </p>
               <div className="svc-hero__actions seo-actions">
-                <button onClick={openEnquiry}  className="btn btn-primary">
+                <button onClick={openEnquiry} className="btn btn-primary">
                   Get a Free SEO Audit <ArrowRight size={16} />
                 </button>
-                <button onClick={openEnquiry}  className="btn btn-outline">
+                <button onClick={openEnquiry} className="btn btn-outline">
                   See Our Results
                 </button>
               </div>
               <div className="svc-hero__stats seo-stats">
                 <div className="svc-stat-card">
-                  <span className="svc-stat-card__num">300%</span>
-                  <span className="svc-stat-card__label">Avg Traffic Growth</span>
+                  <span className="svc-stat-card__num">350+</span>
+                  <span className="svc-stat-card__label">Clients Served</span>
                 </div>
                 <div className="svc-stat-card">
-                  <span className="svc-stat-card__num">150+</span>
-                  <span className="svc-stat-card__label">Websites Optimised</span>
+                  <span className="svc-stat-card__num">10X</span>
+                  <span className="svc-stat-card__label">Sales Boosted</span>
                 </div>
                 <div className="svc-stat-card">
-                  <span className="svc-stat-card__num">90%</span>
-                  <span className="svc-stat-card__label">Clients in Top 3</span>
+                  <span className="svc-stat-card__num">50+</span>
+                  <span className="svc-stat-card__label">SEO Professionals</span>
                 </div>
               </div>
             </div>
@@ -391,24 +641,56 @@ export default function SEO() {
         </div>
       </section>
 
+      {/* ── Proven Results ────────────────────────────────── */}
+      <section id="seo-proven" className="svc-section seo-proven" aria-labelledby="seo-proven-h2">
+        <div className="container">
+          <div className="seo-proven__inner">
+            <div className="seo-proven__text">
+              <span className="tag">Proven Results</span>
+              <h2 id="seo-proven-h2">Proven Results by Top SEO Experts</h2>
+              <p>
+                We've provided the Best SEO Services in Jaipur to over 350+ clients, helping
+                them boost their sales by 10x! As the best SEO company in Jaipur, we are
+                committed to your success. Our team of skilled, creative, and driven
+                professionals works tirelessly to ensure your brand achieves top rankings
+                and sustainable growth.
+              </p>
+              <button onClick={openEnquiry} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+                Let's Connect <ArrowRight size={16} />
+              </button>
+            </div>
+            <div className="seo-proven__stats">
+              {provenStats.map((s) => (
+                <div key={s.label} className="seo-proven-stat">
+                  <span className="seo-proven-stat__num">{s.num}</span>
+                  <span className="seo-proven-stat__label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Power of Organic ──────────────────────────────── */}
-      <section id="power-of-organic-seo" className="svc-section seo-power" aria-labelledby="seo-power-h2">
+      <section id="power-of-organic-seo" className="svc-section svc-section--alt seo-power" aria-labelledby="seo-power-h2">
         <div className="container">
           <div className="svc-intro">
             <div className="svc-intro__text seo-power__text">
               <span className="tag">Why SEO Matters</span>
-              <h2 id="seo-power-h2">The Power of Organic Search</h2>
+              <h2 id="seo-power-h2">Skyrocket Your Business to Google's First Page</h2>
               <p>
-                Organic search is the single largest source of website traffic globally,
-                accounting for over 53% of all web visits. Unlike paid ads that stop the
-                moment you stop spending, SEO builds a compounding asset — rankings that
-                generate traffic and leads 24/7 without a cost-per-click.
+                Our expert SEO services in Jaipur are designed to help your business achieve
+                top rankings on Google. With a team of 50+ seasoned professionals, we employ
+                cutting-edge strategies and proven techniques to ensure your website stands
+                out in the crowded digital landscape. Over the years, we have helped over
+                350+ businesses improve their online presence and achieve better rankings on
+                SERPs resulting in higher online visibility.
               </p>
               <p>
-                Our SEO methodology combines technical precision, content quality, and
-                authority building to create sustainable ranking growth. We don't chase
-                algorithm shortcuts — we build the kind of digital presence that search
-                engines trust and users love.
+                Whether you are operating a small shop, restaurant, a small business, an
+                ecommerce company, or operating an international business, The Cogent holds
+                your hand and offers top notch SEO services. Our trained SEO professionals
+                use only legal, white hat SEO solutions that will yield long-term results.
               </p>
               <div style={{ display: 'flex', gap: '2rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                 {[
@@ -428,6 +710,28 @@ export default function SEO() {
                 <SeoGraphVisual />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Key Features ──────────────────────────────────── */}
+      <section id="seo-key-features" className="svc-section seo-key-features" aria-labelledby="seo-features-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">What We Offer</span>
+            <h2 id="seo-features-h2">Key Features of Our Comprehensive SEO Services Package</h2>
+            <p>Every dimension of SEO — technical, content, authority — covered under one roof.</p>
+          </div>
+          <div className="seo-features-grid">
+            {keyFeatures.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="seo-feature-card">
+                <div className="seo-feature-card__icon">
+                  <Icon size={22} />
+                </div>
+                <h3 className="seo-feature-card__title">{title}</h3>
+                <p className="seo-feature-card__desc">{desc}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -454,26 +758,47 @@ export default function SEO() {
         </div>
       </section>
 
+      {/* ── Managed SEO Services ──────────────────────────── */}
+      <section id="seo-managed" className="svc-section" aria-labelledby="seo-managed-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">Managed Services</span>
+            <h2 id="seo-managed-h2">Our Managed SEO Services</h2>
+            <p>We offer our clients the best possible services to improve their online visibility and increase sales.</p>
+          </div>
+          <div className="seo-managed-grid">
+            {managedServices.map((s, i) => (
+              <ManagedCard key={s.title} {...s} index={i} onEnquiry={openEnquiry} />
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+            <button onClick={openEnquiry} className="btn btn-primary">
+              Let's Talk About Your SEO <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* ── Methodology ───────────────────────────────────── */}
-      <section id="seo-methodology" className="svc-section" aria-labelledby="seo-method-h2">
+      <section id="seo-methodology" className="svc-section svc-section--alt" aria-labelledby="seo-method-h2">
         <div className="container">
           <div className="svc-section__header">
             <span className="tag">Our Approach</span>
-            <h2 id="seo-method-h2">Our SEO Methodology</h2>
+            <h2 id="seo-method-h2">Our Step By Step Working Process</h2>
             <p>A structured 4-phase approach that delivers predictable, scalable ranking improvements.</p>
           </div>
           <div className="svc-process seo-process">
             {steps.map((step, i) => (
-              <>
-                <div key={step.num} className="svc-process__step">
+              <React.Fragment key={step.num}>
+                <div className="svc-process__step">
                   <div className="svc-process__num">{step.num}</div>
                   <h3 className="svc-process__title">{step.title}</h3>
                   <p className="svc-process__desc">{step.desc}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <div key={`c-${i}`} className="svc-process__connector" />
+                  <div className="svc-process__connector" />
                 )}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
@@ -498,8 +823,30 @@ export default function SEO() {
         </div>
       </section>
 
+      {/* ── Benefits ──────────────────────────────────────── */}
+      <section id="seo-benefits" className="svc-section seo-benefits" aria-labelledby="seo-benefits-h2">
+        <div className="container">
+          <div className="svc-section__header">
+            <span className="tag">Why SEO</span>
+            <h2 id="seo-benefits-h2">Benefits of SEO Services from an SEO Expert in Jaipur</h2>
+            <p>Long-term advantages that compound over time and deliver real business impact.</p>
+          </div>
+          <div className="seo-benefits-grid">
+            {seoBenefits.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="seo-benefit-card">
+                <div className="seo-benefit-card__icon">
+                  <Icon size={24} />
+                </div>
+                <h3 className="seo-benefit-card__title">{title}</h3>
+                <p className="seo-benefit-card__desc">{desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Results ──────────────────────────────────────── */}
-      <section id="seo-results" className="svc-section seo-results" aria-labelledby="seo-results-h2">
+      <section id="seo-results" className="svc-section svc-section--alt seo-results" aria-labelledby="seo-results-h2">
         <div className="container">
           <div className="svc-section__header">
             <span className="tag">Proven Impact</span>
@@ -520,7 +867,7 @@ export default function SEO() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section id="seo-faq" className="svc-section svc-section--alt" aria-labelledby="seo-faq-h2">
+      <section id="seo-faq" className="svc-section" aria-labelledby="seo-faq-h2">
         <div className="container">
           <div className="svc-section__header">
             <span className="tag">FAQ</span>
@@ -542,17 +889,18 @@ export default function SEO() {
         <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
           <span className="tag">Get Started</span>
           <h2 id="seo-cta-h2" className="svc-cta__title">
-            Start <span className="text-gradient">Ranking Today</span>
+            Ready to Take Your Website{' '}
+            <span className="text-gradient">to the Top</span>
           </h2>
           <p className="svc-cta__sub">
             Get a free SEO audit and competitive analysis — we'll show you exactly where
             your biggest organic growth opportunities are hiding.
           </p>
           <div className="svc-cta__actions">
-            <button onClick={openEnquiry}  className="btn btn-primary">
+            <button onClick={openEnquiry} className="btn btn-primary">
               Get Your Free SEO Audit <ArrowRight size={16} />
             </button>
-            <button onClick={openEnquiry}  className="btn btn-outline">
+            <button onClick={openEnquiry} className="btn btn-outline">
               Talk to an SEO Expert
             </button>
           </div>
