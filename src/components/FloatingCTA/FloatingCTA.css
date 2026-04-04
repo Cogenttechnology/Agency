@@ -168,6 +168,7 @@
   border: 2px dashed rgba(168, 85, 247, 0.4);
   animation: fcta-ring-spin 6s linear infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
 .fcta--open .fcta__fab-ring {
@@ -201,6 +202,7 @@
   background: rgba(168, 85, 247, 0.35);
   animation: fcta-pulse 2.4s ease-out infinite;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @keyframes fcta-pulse {
@@ -248,5 +250,19 @@
     height: 100%;
     background: transparent;
     box-shadow: none;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fcta__fab-ring,
+  .fcta__fab-pulse {
+    animation: none !important;
+  }
+
+  .fcta__fab,
+  .fcta__btn,
+  .fcta__fab-icon {
+    transition: none !important;
   }
 }

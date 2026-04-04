@@ -280,6 +280,7 @@
   border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,0.12);
   animation: cvsRing 2.8s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .cvs-card__play-ring--2 {

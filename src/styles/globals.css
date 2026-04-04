@@ -233,3 +233,19 @@ body::before {
   opacity: 0;
   transform: translateY(60px);
 }
+
+/* ── Global reduced-motion override ─────────────────────
+   Stops ALL decorative infinite animations site-wide.
+   Functional animations (spinners, progress) keep their
+   own !important overrides where needed (e.g. Admin.css).
+─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

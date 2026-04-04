@@ -51,14 +51,20 @@ export const meta: Route.MetaFunction = ({ data }: { data?: Awaited<ReturnType<t
 };
 
 export const links: Route.LinksFunction = () => [
-  { rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
-  { rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
+  // Preconnect before any font request — must come first
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
+  // Preload the CSS so the browser fetches it with high priority
+  {
+    rel: "preload",
+    as: "style",
+    href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap",
+  },
+  // Then load as stylesheet (browser de-dupes the request)
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap",

@@ -7,7 +7,12 @@ export default function Cursor() {
   const followerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    // Don't mount on touch/coarse-pointer devices — saves JS budget and avoids
+    // an invisible fixed element from blocking tap events on mobile.
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;

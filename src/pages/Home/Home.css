@@ -20,6 +20,9 @@
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  /* Promote to own compositor layer — keeps blur off the main thread */
+  will-change: transform;
+  contain: strict;
 }
 .hero__bg-orb--1 {
   width: 700px; height: 700px;
@@ -110,6 +113,7 @@
   background: #00d4aa;
   flex-shrink: 0;
   animation: heroPulse 2.5s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes heroPulse {
@@ -255,6 +259,7 @@
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(255,255,255,0.07);
+  will-change: transform;
 }
 
 .hero__orb-ring--1 {
@@ -292,6 +297,7 @@
     0 0 200px rgba(0,212,170,0.1);
   animation: orbPulse 3s ease-in-out infinite;
   opacity: 0;
+  will-change: transform;
 }
 
 @keyframes orbPulse {
@@ -321,6 +327,7 @@
   opacity: 0;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  will-change: transform;
 }
 .hero__channel-card:hover {
   transform: scale(1.1) !important;
@@ -1037,6 +1044,7 @@
   gap: 0.75rem;
   animation: marquee 28s linear infinite;
   width: max-content;
+  will-change: transform;
 }
 
 .marquee-track--reverse {
@@ -1560,4 +1568,33 @@
   .testi-card__stars    { margin-bottom: 1rem; }
   .testi-card__quote-icon { display: none; }
   .testi-wrapper        { gap: 1.5rem; }
+}
+
+/* ──────────────────────────────────────────────────────────
+   REDUCED MOTION — stop all decorative animations
+────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__eyebrow-dot,
+  .hero__orb-ring--1,
+  .hero__orb-ring--2,
+  .hero__orb-ring--3,
+  .hero__orb-core,
+  .hero__channel-card,
+  .scroll-line {
+    animation: none !important;
+  }
+
+  .hero__bg-orb {
+    will-change: auto;
+    contain: none;
+  }
+
+  /* Instant transitions instead of animated ones */
+  .hero__metric-pill,
+  .hero__channel-card,
+  .hero__ghost-link svg,
+  .service-card__icon,
+  .service-card__arrow {
+    transition: none !important;
+  }
 }
