@@ -211,7 +211,7 @@ const managedServices = [
     color: '#00d4aa',
   },
   {
-    icon: Youtube,
+    icon: PlayCircle,
     title: 'YouTube SEO',
     desc: 'Improve your YouTube channel prominence with our professional YouTube SEO services. We ensure you get the best video titles, descriptions, thumbnails and tags to gain the most views from targeted traffic.',
     color: '#ff4444',
