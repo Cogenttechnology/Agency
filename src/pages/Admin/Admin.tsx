@@ -3,7 +3,7 @@ import {
   LogOut, Mail, Phone, Inbox, CheckCircle, XCircle,
   Trash2, Eye, Search, BarChart2, Users, TrendingUp, RefreshCw,
   FileText, Plus, Edit2, Globe, EyeOff, ChevronLeft, Bold, Italic,
-  List, Link as LinkIcon, Heading, Minus,
+  List, Link as LinkIcon, Heading, Minus, Code2, ToggleLeft, ToggleRight,
 } from 'lucide-react';
 import {
   getEnquiries, updateEnquiryStatus, deleteEnquiry,
@@ -11,6 +11,10 @@ import {
 } from '../../lib/enquiryStore';
 import type { BlogPost } from '../../lib/blogStore';
 import type { PageSeo, PageSchema } from '../../lib/seoStore';
+import {
+  getScripts, saveScripts, addScript, updateScript, deleteScript,
+  type TrackingScript,
+} from '../../lib/scriptStore';
 import './Admin.css';
 
 /* ── Auth ─────────────────────────────────────────────────── */
@@ -1195,8 +1199,212 @@ function SeoManager() {
   );
 }
 
+/* ── Scripts Manager ───────────────────────────────────────── */
+const SCRIPT_PRESETS = [
+  { name: 'Meta Pixel',        placement: 'head'       as const },
+  { name: 'Google Tag Manager',placement: 'head'       as const },
+  { name: 'GA4 (gtag.js)',     placement: 'head'       as const },
+  { name: 'Hotjar',            placement: 'head'       as const },
+  { name: 'Custom Script',     placement: 'body_end'   as const },
+];
+
+const PLACEMENT_LABELS: Record<TrackingScript['placement'], string> = {
+  head:       '<head>',
+  body_start: '<body> start',
+  body_end:   '<body> end',
+};
+
+const EMPTY_SCRIPT: Omit<TrackingScript, 'id'> = {
+  name: '',
+  placement: 'head',
+  code: '',
+  enabled: true,
+};
+
+function ScriptsManager() {
+  const [scripts, setScripts]   = useState<TrackingScript[]>([]);
+  const [editing, setEditing]   = useState<TrackingScript | null>(null);
+  const [isNew, setIsNew]       = useState(false);
+  const [saved, setSaved]       = useState(false);
+  const [form, setForm]         = useState<Omit<TrackingScript, 'id'>>(EMPTY_SCRIPT);
+
+  const load = () => setScripts(getScripts());
+  useEffect(() => { load(); }, []);
+
+  const openNew = (preset?: typeof SCRIPT_PRESETS[0]) => {
+    setForm(preset ? { ...EMPTY_SCRIPT, name: preset.name, placement: preset.placement } : EMPTY_SCRIPT);
+    setEditing(null);
+    setIsNew(true);
+    setSaved(false);
+  };
+
+  const openEdit = (s: TrackingScript) => {
+    setForm({ name: s.name, placement: s.placement, code: s.code, enabled: s.enabled });
+    setEditing(s);
+    setIsNew(false);
+    setSaved(false);
+  };
+
+  const closeForm = () => { setEditing(null); setIsNew(false); };
+
+  const handleSave = () => {
+    if (!form.name.trim() || !form.code.trim()) return;
+    if (isNew) {
+      addScript(form);
+    } else if (editing) {
+      updateScript(editing.id, form);
+    }
+    load();
+    setSaved(true);
+    setTimeout(() => { setSaved(false); closeForm(); }, 900);
+  };
+
+  const handleToggle = (id: string, enabled: boolean) => {
+    updateScript(id, { enabled });
+    load();
+  };
+
+  const handleDelete = (id: string) => {
+    if (!confirm('Delete this script? It will stop loading on the site immediately.')) return;
+    deleteScript(id);
+    load();
+  };
+
+  const showForm = isNew || !!editing;
+
+  return (
+    <div className="scripts-manager">
+      <header className="admin-topbar">
+        <div>
+          <h1 className="admin-topbar__title">Tracking Scripts</h1>
+          <p className="admin-topbar__sub">Add Meta Pixel, GTM, GA4 and other scripts — injected globally on every page</p>
+        </div>
+        {!showForm && (
+          <button className="admin-btn admin-btn--primary" onClick={() => openNew()}>
+            <Plus size={15} /> Add Script
+          </button>
+        )}
+      </header>
+
+      {/* Quick-add presets */}
+      {!showForm && (
+        <div className="scripts-presets">
+          <span className="scripts-presets__label">Quick Add:</span>
+          {SCRIPT_PRESETS.map(p => (
+            <button key={p.name} className="scripts-preset-btn" onClick={() => openNew(p)}>
+              <Plus size={12} /> {p.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Script list */}
+      {!showForm && (
+        <div className="scripts-list">
+          {scripts.length === 0 ? (
+            <div className="admin-empty">
+              <Code2 size={48} />
+              <p>No scripts added yet. Add Meta Pixel, GTM, or any custom script above.</p>
+            </div>
+          ) : (
+            scripts.map(s => (
+              <div key={s.id} className={`scripts-item ${s.enabled ? '' : 'scripts-item--disabled'}`}>
+                <div className="scripts-item__left">
+                  <span className="scripts-item__name">{s.name}</span>
+                  <span className="scripts-item__placement">{PLACEMENT_LABELS[s.placement]}</span>
+                </div>
+                <div className="scripts-item__actions">
+                  <button
+                    className={`scripts-toggle ${s.enabled ? 'on' : 'off'}`}
+                    onClick={() => handleToggle(s.id, !s.enabled)}
+                    title={s.enabled ? 'Disable' : 'Enable'}
+                  >
+                    {s.enabled ? <ToggleRight size={22} /> : <ToggleLeft size={22} />}
+                    <span>{s.enabled ? 'Live' : 'Off'}</span>
+                  </button>
+                  <button className="admin-action-btn" title="Edit" onClick={() => openEdit(s)}>
+                    <Edit2 size={15} />
+                  </button>
+                  <button className="admin-action-btn admin-action-btn--danger" title="Delete" onClick={() => handleDelete(s.id)}>
+                    <Trash2 size={15} />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {/* Add / Edit form */}
+      {showForm && (
+        <div className="scripts-form">
+          <div className="seo-editor__header">
+            <button className="seo-editor__back" onClick={closeForm}>
+              <ChevronLeft size={16} /> All Scripts
+            </button>
+            <button
+              className={`seo-editor__save ${saved ? 'saved' : ''}`}
+              onClick={handleSave}
+              disabled={!form.name.trim() || !form.code.trim()}
+            >
+              {saved ? <><CheckCircle size={14} /> Saved!</> : isNew ? 'Add Script' : 'Save Changes'}
+            </button>
+          </div>
+
+          <div className="scripts-form__body">
+            <div className="scripts-form__row">
+              <div className="admin-input-group">
+                <label>Script Name</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Meta Pixel, GTM, GA4"
+                  value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                />
+              </div>
+              <div className="admin-input-group">
+                <label>Placement</label>
+                <select
+                  value={form.placement}
+                  onChange={e => setForm(f => ({ ...f, placement: e.target.value as TrackingScript['placement'] }))}
+                >
+                  <option value="head">In &lt;head&gt; (recommended for pixels &amp; GTM)</option>
+                  <option value="body_start">After &lt;body&gt; opens</option>
+                  <option value="body_end">Before &lt;/body&gt; closes</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="admin-input-group">
+              <label>Script Code</label>
+              <p className="scripts-form__hint">Paste the full snippet including <code>&lt;script&gt;</code> tags or any HTML provided by the platform.</p>
+              <textarea
+                className="scripts-form__code"
+                rows={14}
+                placeholder={'<!-- Paste your script here -->\n<script>\n  // e.g. Meta Pixel base code\n  !function(f,b,e,v,n,t,s){...}(window, document, \'script\', \'https://connect.facebook.net/en_US/fbevents.js\');\n  fbq(\'init\', \'YOUR_PIXEL_ID\');\n  fbq(\'track\', \'PageView\');\n</script>'}
+                value={form.code}
+                onChange={e => setForm(f => ({ ...f, code: e.target.value }))}
+                spellCheck={false}
+              />
+            </div>
+
+            <label className="scripts-form__enabled">
+              <input
+                type="checkbox"
+                checked={form.enabled}
+                onChange={e => setForm(f => ({ ...f, enabled: e.target.checked }))}
+              />
+              <span>Active — inject this script on the live site</span>
+            </label>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── Dashboard ─────────────────────────────────────────────── */
-type ActiveSection = 'enquiries' | 'blog' | 'seo';
+type ActiveSection = 'enquiries' | 'blog' | 'seo' | 'scripts';
 
 function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [enquiries, setEnquiries]     = useState<Enquiry[]>([]);
@@ -1285,6 +1493,12 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
             onClick={() => setActiveSection('seo')}
           >
             <Globe size={18} /> SEO
+          </div>
+          <div
+            className={`admin-sidebar__nav-item ${activeSection === 'scripts' ? 'active' : ''}`}
+            onClick={() => setActiveSection('scripts')}
+          >
+            <Code2 size={18} /> Scripts
           </div>
           <div className="admin-sidebar__nav-item">
             <Users size={18} /> Contacts
@@ -1434,6 +1648,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
         {activeSection === 'blog' && <BlogManager />}
         {activeSection === 'seo' && <SeoManager />}
+        {activeSection === 'scripts' && <ScriptsManager />}
       </main>
 
       {/* Detail modal */}

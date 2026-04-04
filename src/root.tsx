@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { getSeoByPath } from "./lib/seoStore.server";
 import { ScrollTrigger } from "./lib/gsap";
 import { reportWebVitals } from "./lib/webVitals";
+import { getScripts } from "./lib/scriptStore";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -70,6 +71,10 @@ export const links: Route.LinksFunction = () => [
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isAdmin = location.pathname === "/admin";
+  const scripts = typeof window !== 'undefined' ? getScripts() : [];
+  const headScripts    = scripts.filter(s => s.enabled && s.placement === 'head');
+  const bodyStartScripts = scripts.filter(s => s.enabled && s.placement === 'body_start');
+  const bodyEndScripts = scripts.filter(s => s.enabled && s.placement === 'body_end');
 
   return (
     <html lang="en">
@@ -79,8 +84,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="theme-color" content="#0a0a0f" />
         <Meta />
         <Links />
+        {headScripts.map(s => (
+          <script key={s.id} dangerouslySetInnerHTML={{ __html: s.code.replace(/<\/?script[^>]*>/gi, '') }} />
+        ))}
       </head>
       <body>
+        {bodyStartScripts.map(s => (
+          <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
+        ))}
         <EnquiryProvider>
           <Cursor />
           {!isAdmin && <Navbar />}
@@ -93,6 +104,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </EnquiryProvider>
         <ScrollRestoration />
         <Scripts />
+        {bodyEndScripts.map(s => (
+          <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
+        ))}
       </body>
     </html>
   );
