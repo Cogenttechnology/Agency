@@ -8,7 +8,7 @@ import type { Route } from "./+types/Blog";
 import './Blog.css';
 
 export async function loader() {
-  return { posts: getPublishedBlogs() };
+  return { posts: await getPublishedBlogs() };
 }
 
 export const meta: Route.MetaFunction = () => {

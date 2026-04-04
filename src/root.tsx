@@ -51,30 +51,26 @@ export const meta: Route.MetaFunction = ({ data }: { data?: Awaited<ReturnType<t
 };
 
 export const links: Route.LinksFunction = () => [
-  // DNS prefetch as a fast non-blocking hint
   { rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
   { rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
-  // Preconnect to establish early TLS handshake
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
-  // Load fonts — display=swap prevents FOIT
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap",
   },
 ];
 
+// Layout is a pure HTML shell — no router hooks allowed here
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
-  const isAdmin = location.pathname === "/admin";
   const scripts = typeof window !== 'undefined' ? getScripts() : [];
-  const headScripts    = scripts.filter(s => s.enabled && s.placement === 'head');
+  const headScripts     = scripts.filter(s => s.enabled && s.placement === 'head');
   const bodyStartScripts = scripts.filter(s => s.enabled && s.placement === 'body_start');
-  const bodyEndScripts = scripts.filter(s => s.enabled && s.placement === 'body_end');
+  const bodyEndScripts  = scripts.filter(s => s.enabled && s.placement === 'body_end');
 
   return (
     <html lang="en">
@@ -92,16 +88,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {bodyStartScripts.map(s => (
           <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
         ))}
-        <EnquiryProvider>
-          <Cursor />
-          {!isAdmin && <Navbar />}
-          <main className={!isAdmin ? "page-content" : ""}>
-            {children}
-          </main>
-          {!isAdmin && <Footer />}
-          {!isAdmin && <EnquiryModal />}
-          {!isAdmin && <FloatingCTA />}
-        </EnquiryProvider>
+        {children}
         <ScrollRestoration />
         <Scripts />
         {bodyEndScripts.map(s => (
@@ -112,8 +99,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+// App runs inside the router — useLocation is safe here
 export default function App() {
   const location = useLocation();
+  const isAdmin = location.pathname === "/admin";
   useLenis();
 
   useEffect(() => { reportWebVitals(); }, []);
@@ -125,11 +114,21 @@ export default function App() {
     } else {
       window.scrollTo(0, 0);
     }
-    // After route change + scroll reset, re-measure scroll positions
     ScrollTrigger.refresh();
   }, [location.pathname]);
 
-  return <Outlet />;
+  return (
+    <EnquiryProvider>
+      <Cursor />
+      {!isAdmin && <Navbar />}
+      <main className={!isAdmin ? "page-content" : ""}>
+        <Outlet />
+      </main>
+      {!isAdmin && <Footer />}
+      {!isAdmin && <EnquiryModal />}
+      {!isAdmin && <FloatingCTA />}
+    </EnquiryProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

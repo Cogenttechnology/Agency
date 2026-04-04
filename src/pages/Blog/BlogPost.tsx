@@ -7,9 +7,9 @@ import type { Route } from "./+types/BlogPost";
 import './BlogPost.css';
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const post = getBlogBySlug(params.slug || '');
+  const post = await getBlogBySlug(params.slug || '');
   const related = post
-    ? getPublishedBlogs()
+    ? (await getPublishedBlogs())
         .filter((p) => p.id !== post.id)
         .slice(0, 3)
     : [];

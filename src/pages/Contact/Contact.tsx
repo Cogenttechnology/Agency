@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Mail, Phone, MapPin, Send, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { gsap, ScrollTrigger } from '../../lib/gsap';
-import { saveEnquiry } from '../../lib/enquiryStore';
 import './Contact.css';
 
 const services = [
@@ -102,16 +101,21 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    saveEnquiry({
-      source: 'contact',
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      company: form.company,
-      services: selectedServices,
-      budget: selectedBudget,
-      message: form.message,
-    });
+    fetch('/api/enquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _action: 'submit',
+        source: 'contact',
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.company,
+        services: selectedServices,
+        budget: selectedBudget,
+        message: form.message,
+      }),
+    }).catch(err => console.error('Enquiry submit error:', err));
     gsap.to('.ct-form-card', {
       scale: 0.97, opacity: 0, duration: 0.3,
       onComplete: () => { setSubmitted(true); },

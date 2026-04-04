@@ -5,10 +5,7 @@ import {
   FileText, Plus, Edit2, Globe, EyeOff, ChevronLeft, Bold, Italic,
   List, Link as LinkIcon, Heading, Minus, Code2, ToggleLeft, ToggleRight,
 } from 'lucide-react';
-import {
-  getEnquiries, updateEnquiryStatus, deleteEnquiry,
-  type Enquiry, type EnquiryStatus,
-} from '../../lib/enquiryStore';
+import type { Enquiry, EnquiryStatus } from '../../lib/enquiryStore';
 import type { BlogPost } from '../../lib/blogStore';
 import type { PageSeo, PageSchema } from '../../lib/seoStore';
 import {
@@ -1413,18 +1410,31 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [selected, setSelected]       = useState<Enquiry | null>(null);
   const [activeSection, setActiveSection] = useState<ActiveSection>('enquiries');
 
-  const load = () => setEnquiries(getEnquiries());
+  const enquiryApi = (body: Record<string, unknown>) =>
+    fetch('/api/enquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': 'cogent_admin_auth' },
+      body: JSON.stringify(body),
+    });
+
+  const load = async () => {
+    const res = await fetch('/api/enquiries', {
+      headers: { 'x-admin-token': 'cogent_admin_auth' },
+    });
+    const data: Enquiry[] = await res.json();
+    setEnquiries(data);
+  };
 
   useEffect(() => { load(); }, []);
 
-  const handleStatusChange = (id: string, status: EnquiryStatus) => {
-    updateEnquiryStatus(id, status);
+  const handleStatusChange = async (id: string, status: EnquiryStatus) => {
+    await enquiryApi({ _action: 'updateStatus', id, status });
     load();
     if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
   };
 
-  const handleDelete = (id: string) => {
-    deleteEnquiry(id);
+  const handleDelete = async (id: string) => {
+    await enquiryApi({ _action: 'delete', id });
     load();
   };
 

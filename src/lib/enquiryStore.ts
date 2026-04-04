@@ -1,6 +1,8 @@
 /* ─────────────────────────────────────────────────────────
-   Enquiry Store — localStorage-based persistence
+   Enquiry Store — Supabase-backed persistence
    ───────────────────────────────────────────────────────── */
+
+import { supabase } from './supabase';
 
 export type EnquiryStatus = 'new' | 'read' | 'replied' | 'closed';
 
@@ -18,46 +20,96 @@ export interface Enquiry {
   createdAt: string; // ISO string
 }
 
-const KEY = 'cogent_enquiries';
+export async function getEnquiries(): Promise<Enquiry[]> {
+  const { data, error } = await supabase
+    .from('enquiries')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-export function getEnquiries(): Enquiry[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    return JSON.parse(window.localStorage.getItem(KEY) || '[]');
-  } catch {
+  if (error) {
+    console.error('getEnquiries error:', error.message);
     return [];
   }
+
+  return (data ?? []).map(dbToEnquiry);
 }
 
-export function saveEnquiry(data: Omit<Enquiry, 'id' | 'status' | 'createdAt'>): Enquiry {
-  const enquiry: Enquiry = {
-    ...data,
-    id: `enq_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-    status: 'new',
-    createdAt: new Date().toISOString(),
+export async function saveEnquiry(
+  input: Omit<Enquiry, 'id' | 'status' | 'createdAt'>
+): Promise<Enquiry | null> {
+  const { data, error } = await supabase
+    .from('enquiries')
+    .insert({
+      source: input.source,
+      name: input.name,
+      email: input.email,
+      phone: input.phone,
+      company: input.company,
+      services: input.services,
+      budget: input.budget,
+      message: input.message,
+      status: 'new',
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error('saveEnquiry error:', error.message);
+    return null;
+  }
+
+  return dbToEnquiry(data);
+}
+
+export async function updateEnquiryStatus(
+  id: string,
+  status: EnquiryStatus
+): Promise<void> {
+  const { error } = await supabase
+    .from('enquiries')
+    .update({ status })
+    .eq('id', id);
+
+  if (error) console.error('updateEnquiryStatus error:', error.message);
+}
+
+export async function deleteEnquiry(id: string): Promise<void> {
+  const { error } = await supabase
+    .from('enquiries')
+    .delete()
+    .eq('id', id);
+
+  if (error) console.error('deleteEnquiry error:', error.message);
+}
+
+export async function getUnreadCount(): Promise<number> {
+  const { count, error } = await supabase
+    .from('enquiries')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'new');
+
+  if (error) {
+    console.error('getUnreadCount error:', error.message);
+    return 0;
+  }
+
+  return count ?? 0;
+}
+
+// ── DB row → Enquiry ──────────────────────────────────────
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function dbToEnquiry(row: any): Enquiry {
+  return {
+    id: row.id,
+    source: row.source,
+    name: row.name,
+    email: row.email,
+    phone: row.phone ?? '',
+    company: row.company ?? '',
+    services: row.services ?? [],
+    budget: row.budget ?? '',
+    message: row.message ?? '',
+    status: row.status,
+    createdAt: row.created_at,
   };
-  const all = getEnquiries();
-  all.unshift(enquiry);
-  if (typeof window !== 'undefined') {
-    window.localStorage.setItem(KEY, JSON.stringify(all));
-  }
-  return enquiry;
-}
-
-export function updateEnquiryStatus(id: string, status: EnquiryStatus): void {
-  const all = getEnquiries().map(e => e.id === id ? { ...e, status } : e);
-  if (typeof window !== 'undefined') {
-    window.localStorage.setItem(KEY, JSON.stringify(all));
-  }
-}
-
-export function deleteEnquiry(id: string): void {
-  const all = getEnquiries().filter(e => e.id !== id);
-  if (typeof window !== 'undefined') {
-    window.localStorage.setItem(KEY, JSON.stringify(all));
-  }
-}
-
-export function getUnreadCount(): number {
-  return getEnquiries().filter(e => e.status === 'new').length;
 }

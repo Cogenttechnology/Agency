@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { X, Send, Sparkles } from 'lucide-react';
 import { gsap } from '../../lib/gsap';
 import { useEnquiry } from '../../context/EnquiryContext';
-import { saveEnquiry } from '../../lib/enquiryStore';
 import './EnquiryModal.css';
 
 const services = [
@@ -90,16 +89,21 @@ export default function EnquiryModal() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveEnquiry({
-      source: 'modal',
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      company: form.company,
-      services: selectedServices,
-      budget: selectedBudget,
-      message: form.message,
-    });
+    fetch('/api/enquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _action: 'submit',
+        source: 'modal',
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.company,
+        services: selectedServices,
+        budget: selectedBudget,
+        message: form.message,
+      }),
+    }).catch(err => console.error('Enquiry submit error:', err));
     gsap.to(cardRef.current, {
       opacity: 0, scale: 0.97, duration: 0.22,
       onComplete: () => {

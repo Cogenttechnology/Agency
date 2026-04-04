@@ -31,7 +31,7 @@ function verifyAuth(request: Request): boolean {
 /** GET /api/blogs — list all posts (admin) */
 export async function loader({ request }: Route.LoaderArgs) {
   if (!verifyAuth(request)) return json({ error: "Unauthorized" }, 401);
-  return json(getBlogs());
+  return json(await getBlogs());
 }
 
 /** POST /api/blogs — create | update | delete | publish | unpublish */
@@ -47,40 +47,40 @@ export async function action({ request }: Route.ActionArgs) {
 
   switch (_action) {
     case "create": {
-      const post = saveBlog(data as unknown as Omit<BlogPost, "id" | "createdAt" | "updatedAt">);
+      const post = await saveBlog(data as unknown as Omit<BlogPost, "id" | "createdAt" | "updatedAt">);
       return json(post, 201);
     }
     case "update": {
       const { id, ...fields } = data as { id: string; [k: string]: unknown };
       if (!id) return json({ error: "id required" }, 400);
-      const updated = updateBlog(id, fields as Partial<BlogPost>);
+      const updated = await updateBlog(id, fields as Partial<BlogPost>);
       if (!updated) return json({ error: "Not found" }, 404);
       return json(updated);
     }
     case "delete": {
       const { id } = data as { id: string };
       if (!id) return json({ error: "id required" }, 400);
-      deleteBlog(id);
+      await deleteBlog(id);
       return json({ ok: true });
     }
     case "publish": {
       const { id } = data as { id: string };
       if (!id) return json({ error: "id required" }, 400);
-      const post = publishBlog(id);
+      const post = await publishBlog(id);
       if (!post) return json({ error: "Not found" }, 404);
       return json(post);
     }
     case "unpublish": {
       const { id } = data as { id: string };
       if (!id) return json({ error: "id required" }, 400);
-      const post = unpublishBlog(id);
+      const post = await unpublishBlog(id);
       if (!post) return json({ error: "Not found" }, 404);
       return json(post);
     }
     case "getBySlug": {
       const { slug } = data as { slug: string };
       if (!slug) return json({ error: "slug required" }, 400);
-      const post = getBlogBySlug(slug);
+      const post = await getBlogBySlug(slug);
       if (!post) return json({ error: "Not found" }, 404);
       return json(post);
     }

@@ -23,4 +23,5 @@ export default [
   route("admin", "pages/Admin/Admin.tsx"),
   route("api/blogs", "pages/api/blogs.ts"),
   route("api/seo", "pages/api/seo.ts"),
+  route("api/enquiries", "pages/api/enquiries.ts"),
 ] as RouteConfig;
