@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { Menu, X, ChevronDown, Monitor, Video, Search, Share2, BarChart2, Mic2, ArrowRight, RefreshCw, Package } from 'lucide-react';
+import { Menu, X, ChevronDown, Monitor, Video, Search, Share2, BarChart2, Mic2, ArrowRight, RefreshCw } from 'lucide-react';
 import { gsap } from '../../lib/gsap';
 import { useEnquiry } from '../../context/EnquiryContext';
 import logoSrc from '../../assets/Logo.png';
@@ -14,15 +14,15 @@ const serviceLinks = [
   { path: '/services/influencer-marketing',                      label: 'Influencer Marketing',   icon: Mic2,       color: '#ec4899', desc: 'Authentic reach through creators' },
   { path: '/website-development-company-in-jaipur',              label: 'Web Design & Dev',       icon: Monitor,    color: '#6c63ff', desc: 'High-performance websites & apps' },
   { path: '/best-digital-marketing-company-in-jaipur',           label: '360° Digital Marketing', icon: RefreshCw,  color: '#00d4ff', desc: 'Full-funnel presence across every channel' },
-  { path: '/d2c-marketing-agency-in-jaipur',                     label: 'D2C',                    icon: Package,    color: '#ff6b35', desc: 'Growth partner for India\'s D2C brands' },
 ];
 
 const navLinks = [
   { path: '/',          label: 'Home' },
   { path: '/about-us',  label: 'About' },
   { path: '/services',  label: 'Services', hasDropdown: true },
-  { path: '/portfolio', label: 'Portfolio' },
-  { path: '/studio',    label: 'Cogent Studio' },
+  { path: '/portfolio',                    label: 'Portfolio' },
+  { path: '/d2c-marketing-agency-in-jaipur', label: 'D2C' },
+  { path: '/studio',                       label: 'Cogent Studio' },
   { path: '/blog',      label: 'Blog' },
   { path: '/contact',   label: 'Contact' },
 ];
@@ -117,7 +117,7 @@ export default function Navbar() {
     }
   };
 
-  const serviceTopPaths = ['/ppc-company-in-jaipur', '/best-seo-company-in-jaipur', '/best-social-media-marketing-company-in-jaipur', '/website-development-company-in-jaipur', '/best-digital-marketing-company-in-jaipur', '/d2c-marketing-agency-in-jaipur'];
+  const serviceTopPaths = ['/ppc-company-in-jaipur', '/best-seo-company-in-jaipur', '/best-social-media-marketing-company-in-jaipur', '/website-development-company-in-jaipur', '/best-digital-marketing-company-in-jaipur'];
   const isServiceActive = location.pathname.startsWith('/services') || serviceTopPaths.includes(location.pathname);
 
   return (
