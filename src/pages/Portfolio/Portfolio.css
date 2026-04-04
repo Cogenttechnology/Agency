@@ -12,6 +12,11 @@
   max-width: 700px;
 }
 
+.portfolio-hero__text h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.1;
+}
+
 .portfolio-hero__text p { font-size: 1.1rem; }
 
 /* Filter Bar */
