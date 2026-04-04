@@ -40,10 +40,24 @@ export default defineConfig({
   },
   // Optimize deps pre-bundling
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router'],
+    include: [
+      'react',
+      'react-dom',
+      'react-router',
+      'use-sync-external-store/shim/with-selector',
+      'use-sync-external-store/shim',
+    ],
     exclude: ['three', '@react-three/fiber', '@react-three/drei'],
   },
   ssr: {
-    noExternal: ['gsap', 'three', '@react-three/fiber', '@react-three/drei', 'lucide-react', 'lenis'],
+    noExternal: [
+      'gsap',
+      'three',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'lucide-react',
+      'lenis',
+      'use-sync-external-store',
+    ],
   },
 });
