@@ -1228,6 +1228,90 @@
 
 .blog-editor__add-link:hover { background: rgba(108,99,255,0.08); border-color: rgba(108,99,255,0.5); }
 
+/* ── Cover Image Upload ──────────────────────────────────────── */
+.blog-editor__upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px dashed rgba(108, 99, 255, 0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(108, 99, 255, 0.05);
+  color: var(--color-accent-light);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.blog-editor__upload-btn:hover:not(:disabled) {
+  border-color: rgba(108, 99, 255, 0.6);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.blog-editor__upload-btn:disabled,
+.blog-editor__upload-btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.blog-editor__cover-preview {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.blog-editor__cover-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-editor__cover-remove {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  border-radius: var(--radius-sm);
+  color: #ff6b6b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.blog-editor__cover-remove:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.blog-editor__upload-error {
+  font-size: 0.78rem;
+  color: #ff6b6b;
+  margin: 0.35rem 0 0;
+}
+
+.blog-editor__upload-hint {
+  font-size: 0.74rem;
+  color: var(--color-muted);
+  margin: 0.4rem 0 0;
+}
+
+.admin-spinner--sm {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
 /* ── SEO Manager ─────────────────────────────────────────────── */
 .seo-manager { display: flex; flex-direction: column; height: 100%; }
 

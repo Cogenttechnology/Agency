@@ -7,6 +7,7 @@ import './Footer.css';
 const navLinks = [
   { path: '/', label: 'Home' },
   { path: '/about-us', label: 'About' },
+  { path: '/life-at-cogent', label: 'Life at Cogent' },
   { path: '/services', label: 'Services' },
   { path: '/portfolio', label: 'Portfolio' },
   { path: '/content-marketing-agency-in-jaipur', label: 'Content Marketing' },

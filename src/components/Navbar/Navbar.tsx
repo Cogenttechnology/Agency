@@ -16,9 +16,14 @@ const serviceLinks = [
   { path: '/best-digital-marketing-company-in-jaipur',           label: '360° Digital Marketing', icon: RefreshCw,  color: '#00d4ff', desc: 'Full-funnel presence across every channel' },
 ];
 
+const aboutLinks = [
+  { path: '/about-us',        label: 'About Us',        desc: 'Our story, values & the team behind the work' },
+  { path: '/life-at-cogent',  label: 'Life at Cogent',  desc: 'Events, culture & moments that make us, us' },
+];
+
 const navLinks = [
   { path: '/',          label: 'Home' },
-  { path: '/about-us',  label: 'About' },
+  { path: '/about-us',  label: 'About', hasAboutDropdown: true },
   { path: '/services',  label: 'Services', hasDropdown: true },
   { path: '/portfolio',                    label: 'Portfolio' },
   { path: '/d2c-marketing-agency-in-jaipur', label: 'D2C' },
@@ -28,15 +33,19 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const navRef        = useRef<HTMLElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const dropdownRef   = useRef<HTMLDivElement>(null);
-  const location      = useLocation();
-  const [isOpen,       setIsOpen]       = useState(false);
-  const [dropOpen,     setDropOpen]     = useState(false);
-  const [mobileServOpen, setMobileServOpen] = useState(false);
-  const lastScrollY   = useRef(0);
-  const dropTimer     = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef          = useRef<HTMLElement>(null);
+  const mobileMenuRef   = useRef<HTMLDivElement>(null);
+  const dropdownRef     = useRef<HTMLDivElement>(null);
+  const aboutDropRef    = useRef<HTMLDivElement>(null);
+  const location        = useLocation();
+  const [isOpen,          setIsOpen]          = useState(false);
+  const [dropOpen,        setDropOpen]        = useState(false);
+  const [aboutDropOpen,   setAboutDropOpen]   = useState(false);
+  const [mobileServOpen,  setMobileServOpen]  = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const lastScrollY     = useRef(0);
+  const dropTimer       = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const aboutDropTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { openEnquiry } = useEnquiry();
 
   /* Initial reveal */
@@ -55,6 +64,7 @@ export default function Navbar() {
       } else if (current > lastScrollY.current) {
         gsap.to(navRef.current, { y: -100, duration: 0.4, ease: 'power3.out' });
         setDropOpen(false);
+        setAboutDropOpen(false);
       } else {
         gsap.to(navRef.current, { y: 0, duration: 0.4, ease: 'power3.out' });
       }
@@ -68,11 +78,13 @@ export default function Navbar() {
   useEffect(() => {
     setIsOpen(false);
     setDropOpen(false);
+    setAboutDropOpen(false);
     setMobileServOpen(false);
+    setMobileAboutOpen(false);
     mobileMenuRef.current?.classList.remove('open');
   }, [location]);
 
-  /* Dropdown mouse handlers — delay close so cursor can travel */
+  /* Services dropdown handlers */
   const onServicesEnter = () => {
     if (dropTimer.current) clearTimeout(dropTimer.current);
     setDropOpen(true);
@@ -87,7 +99,22 @@ export default function Navbar() {
     dropTimer.current = setTimeout(() => setDropOpen(false), 180);
   };
 
-  /* Animate dropdown in */
+  /* About dropdown handlers */
+  const onAboutEnter = () => {
+    if (aboutDropTimer.current) clearTimeout(aboutDropTimer.current);
+    setAboutDropOpen(true);
+  };
+  const onAboutLeave = () => {
+    aboutDropTimer.current = setTimeout(() => setAboutDropOpen(false), 180);
+  };
+  const onAboutDropEnter = () => {
+    if (aboutDropTimer.current) clearTimeout(aboutDropTimer.current);
+  };
+  const onAboutDropLeave = () => {
+    aboutDropTimer.current = setTimeout(() => setAboutDropOpen(false), 180);
+  };
+
+  /* Animate services dropdown in */
   useEffect(() => {
     if (!dropdownRef.current) return;
     if (dropOpen) {
@@ -99,6 +126,19 @@ export default function Navbar() {
         { opacity: 1, y: 0, stagger: 0.04, duration: 0.3, ease: 'power2.out' });
     }
   }, [dropOpen]);
+
+  /* Animate about dropdown in */
+  useEffect(() => {
+    if (!aboutDropRef.current) return;
+    if (aboutDropOpen) {
+      gsap.fromTo(aboutDropRef.current,
+        { opacity: 0, y: -8 },
+        { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' });
+      gsap.fromTo(aboutDropRef.current.querySelectorAll('.about-drop-item'),
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, stagger: 0.06, duration: 0.3, ease: 'power2.out' });
+    }
+  }, [aboutDropOpen]);
 
   /* Mobile toggle */
   const toggleMenu = () => {
@@ -114,11 +154,13 @@ export default function Navbar() {
     } else {
       menu.classList.remove('open');
       setMobileServOpen(false);
+      setMobileAboutOpen(false);
     }
   };
 
   const serviceTopPaths = ['/ppc-company-in-jaipur', '/best-seo-company-in-jaipur', '/best-social-media-marketing-company-in-jaipur', '/website-development-company-in-jaipur', '/best-digital-marketing-company-in-jaipur'];
   const isServiceActive = location.pathname.startsWith('/services') || serviceTopPaths.includes(location.pathname);
+  const isAboutActive   = location.pathname === '/about-us' || location.pathname === '/life-at-cogent';
 
   return (
     <nav ref={navRef} className="navbar glass">
@@ -131,26 +173,35 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="navbar__links" id="nav-links">
-          {navLinks.map(({ path, label, hasDropdown }) => (
+          {navLinks.map(({ path, label, hasDropdown, hasAboutDropdown }) => (
             <li
               key={path}
-              className={hasDropdown ? 'nav-item--has-drop' : ''}
-              onMouseEnter={hasDropdown ? onServicesEnter : undefined}
-              onMouseLeave={hasDropdown ? onServicesLeave : undefined}
+              className={(hasDropdown || hasAboutDropdown) ? 'nav-item--has-drop' : ''}
+              onMouseEnter={hasDropdown ? onServicesEnter : hasAboutDropdown ? onAboutEnter : undefined}
+              onMouseLeave={hasDropdown ? onServicesLeave : hasAboutDropdown ? onAboutLeave : undefined}
             >
               <Link
                 to={path}
-                className={`navbar__link ${(path === '/services' ? isServiceActive : location.pathname === path) ? 'active' : ''}`}
+                className={`navbar__link ${
+                  hasDropdown
+                    ? isServiceActive ? 'active' : ''
+                    : hasAboutDropdown
+                    ? isAboutActive ? 'active' : ''
+                    : location.pathname === path ? 'active' : ''
+                }`}
                 id={`nav-${label.toLowerCase().replace(/\s/g, '-')}`}
               >
                 {label}
-                {hasDropdown && (
-                  <ChevronDown size={14} className={`nav-chevron ${dropOpen ? 'nav-chevron--open' : ''}`} />
+                {(hasDropdown || hasAboutDropdown) && (
+                  <ChevronDown
+                    size={14}
+                    className={`nav-chevron ${(hasDropdown ? dropOpen : aboutDropOpen) ? 'nav-chevron--open' : ''}`}
+                  />
                 )}
                 <span className="navbar__link-underline" />
               </Link>
 
-              {/* Dropdown */}
+              {/* Services Dropdown */}
               {hasDropdown && dropOpen && (
                 <div
                   ref={dropdownRef}
@@ -178,6 +229,28 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
+
+              {/* About Dropdown */}
+              {hasAboutDropdown && aboutDropOpen && (
+                <div
+                  ref={aboutDropRef}
+                  className="nav-dropdown nav-dropdown--about"
+                  onMouseEnter={onAboutDropEnter}
+                  onMouseLeave={onAboutDropLeave}
+                >
+                  <div className="nav-dropdown__list">
+                    {aboutLinks.map(({ path: ap, label: al, desc }) => (
+                      <Link key={ap} to={ap} className="about-drop-item">
+                        <span className="drop-item__text">
+                          <span className="drop-item__label">{al}</span>
+                          <span className="drop-item__desc">{desc}</span>
+                        </span>
+                        <ArrowRight size={14} className="about-drop-item__arrow" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -195,7 +268,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div ref={mobileMenuRef} className="mobile-menu glass">
-        {navLinks.map(({ path, label, hasDropdown }) =>
+        {navLinks.map(({ path, label, hasDropdown, hasAboutDropdown }) =>
           hasDropdown ? (
             <div key={path} className="mobile-services">
               <button
@@ -213,6 +286,25 @@ export default function Navbar() {
                         <Icon size={15} />
                       </span>
                       {sl}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : hasAboutDropdown ? (
+            <div key={path} className="mobile-services">
+              <button
+                className={`mobile-link mobile-link--toggle ${isAboutActive ? 'active' : ''}`}
+                onClick={() => setMobileAboutOpen(v => !v)}
+              >
+                {label}
+                <ChevronDown size={16} className={`nav-chevron ${mobileAboutOpen ? 'nav-chevron--open' : ''}`} />
+              </button>
+              {mobileAboutOpen && (
+                <div className="mobile-drop">
+                  {aboutLinks.map(({ path: ap, label: al }) => (
+                    <Link key={ap} to={ap} className="mobile-drop-item">
+                      {al}
                     </Link>
                   ))}
                 </div>

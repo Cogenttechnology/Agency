@@ -28,6 +28,7 @@ function dbToPost(row: any): BlogPost {
     category: row.category ?? '',
     tags: row.tags ?? [],
     coverGradient: row.cover_gradient ?? '',
+    coverImage: row.cover_image ?? null,
     author: row.author ?? '',
     authorRole: row.author_role ?? '',
     status: row.status,
@@ -96,6 +97,7 @@ export async function saveBlog(
       category: input.category,
       tags: input.tags,
       cover_gradient: input.coverGradient,
+      cover_image: input.coverImage ?? null,
       author: input.author,
       author_role: input.authorRole,
       status: input.status,
@@ -129,6 +131,7 @@ export async function updateBlog(
   if (fields.category !== undefined) updatePayload.category = fields.category;
   if (fields.tags !== undefined) updatePayload.tags = fields.tags;
   if (fields.coverGradient !== undefined) updatePayload.cover_gradient = fields.coverGradient;
+  if (fields.coverImage !== undefined) updatePayload.cover_image = fields.coverImage;
   if (fields.author !== undefined) updatePayload.author = fields.author;
   if (fields.authorRole !== undefined) updatePayload.author_role = fields.authorRole;
   if (fields.status !== undefined) updatePayload.status = fields.status;

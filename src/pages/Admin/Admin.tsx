@@ -4,7 +4,9 @@ import {
   Trash2, Eye, Search, BarChart2, Users, TrendingUp, RefreshCw,
   FileText, Plus, Edit2, Globe, EyeOff, ChevronLeft, Bold, Italic,
   List, Link as LinkIcon, Heading, Minus, Code2, ToggleLeft, ToggleRight,
+  Upload, X as XIcon,
 } from 'lucide-react';
+import { uploadBlogImage, deleteBlogImage } from '../../lib/supabase';
 import type { Enquiry, EnquiryStatus } from '../../lib/enquiryStore';
 import type { BlogPost } from '../../lib/blogStore';
 import type { PageSeo, PageSchema } from '../../lib/seoStore';
@@ -251,6 +253,7 @@ interface EditorState {
   metaTitle: string;
   metaDescription: string;
   coverGradient: string;
+  coverImage: string | null;
   author: string;
   authorRole: string;
   readTime: number;
@@ -267,6 +270,7 @@ const EMPTY_EDITOR: EditorState = {
   metaTitle: '',
   metaDescription: '',
   coverGradient: COVER_GRADIENTS[0].value,
+  coverImage: null,
   author: '',
   authorRole: '',
   readTime: 5,
@@ -289,25 +293,29 @@ function BlogEditor({
   onSave: () => void;
   onBack: () => void;
 }) {
-  const contentRef = useRef<HTMLTextAreaElement>(null);
-  const [showPreview, setShowPreview] = useState(false);
-  const [slugManual, setSlugManual] = useState(!!post);
-  const [form, setForm] = useState<EditorState>(() => {
+  const contentRef   = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showPreview,    setShowPreview]    = useState(false);
+  const [slugManual,     setSlugManual]     = useState(!!post);
+  const [imgUploading,   setImgUploading]   = useState(false);
+  const [imgError,       setImgError]       = useState('');
+  const [form, setForm] = useState<EditorState>((): EditorState => {
     if (!post) return EMPTY_EDITOR;
     return {
-      title: post.title,
-      slug: post.slug,
-      category: post.category,
-      tags: post.tags.join(', '),
-      excerpt: post.excerpt,
-      metaTitle: post.metaTitle,
+      title:           post.title,
+      slug:            post.slug,
+      category:        post.category,
+      tags:            post.tags.join(', '),
+      excerpt:         post.excerpt,
+      metaTitle:       post.metaTitle,
       metaDescription: post.metaDescription,
-      coverGradient: post.coverGradient,
-      author: post.author,
-      authorRole: post.authorRole,
-      readTime: post.readTime,
-      internalLinks: post.internalLinks,
-      content: post.content,
+      coverGradient:   post.coverGradient,
+      coverImage:      post.coverImage ?? null,
+      author:          post.author,
+      authorRole:      post.authorRole,
+      readTime:        post.readTime,
+      internalLinks:   post.internalLinks,
+      content:         post.content,
     };
   });
 
@@ -361,22 +369,55 @@ function BlogEditor({
   };
 
   const buildPayload = (): Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'> => ({
-    title: form.title,
-    slug: form.slug || slugify(form.title),
-    category: form.category,
-    tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-    excerpt: form.excerpt,
-    metaTitle: form.metaTitle,
+    title:           form.title,
+    slug:            form.slug || slugify(form.title),
+    category:        form.category,
+    tags:            form.tags.split(',').map(t => t.trim()).filter(Boolean),
+    excerpt:         form.excerpt,
+    metaTitle:       form.metaTitle,
     metaDescription: form.metaDescription,
-    coverGradient: form.coverGradient,
-    author: form.author,
-    authorRole: form.authorRole,
-    readTime: form.readTime,
-    internalLinks: form.internalLinks.filter(l => l.text && l.url),
-    content: form.content,
-    status: post?.status ?? 'draft',
-    publishedAt: post?.publishedAt ?? null,
+    coverGradient:   form.coverGradient,
+    coverImage:      form.coverImage,
+    author:          form.author,
+    authorRole:      form.authorRole,
+    readTime:        form.readTime,
+    internalLinks:   form.internalLinks.filter(l => l.text && l.url),
+    content:         form.content,
+    status:          post?.status ?? 'draft',
+    publishedAt:     post?.publishedAt ?? null,
   });
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setImgError('Only image files are allowed.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setImgError('Image must be under 5 MB.');
+      return;
+    }
+    setImgError('');
+    setImgUploading(true);
+    try {
+      const url = await uploadBlogImage(file);
+      set('coverImage', url);
+    } catch (err) {
+      setImgError(err instanceof Error ? err.message : 'Upload failed.');
+    } finally {
+      setImgUploading(false);
+      // reset input so same file can be re-selected
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleImageRemove = async () => {
+    if (form.coverImage) {
+      await deleteBlogImage(form.coverImage);
+      set('coverImage', null);
+    }
+  };
 
   const blogApi = (body: Record<string, unknown>) =>
     fetch('/api/blogs', {
@@ -624,6 +665,46 @@ function BlogEditor({
                 style={{ background: form.coverGradient }}
               />
             )}
+          </div>
+
+          {/* Cover Image */}
+          <div className="admin-input-group">
+            <label>Cover Image</label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageUpload}
+            />
+            {form.coverImage ? (
+              <div className="blog-editor__cover-preview">
+                <img src={form.coverImage} alt="Cover" className="blog-editor__cover-img" />
+                <button
+                  type="button"
+                  className="blog-editor__cover-remove"
+                  onClick={handleImageRemove}
+                  title="Remove image"
+                >
+                  <XIcon size={14} /> Remove
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className={`blog-editor__upload-btn ${imgUploading ? 'loading' : ''}`}
+                onClick={() => fileInputRef.current?.click()}
+                disabled={imgUploading}
+              >
+                {imgUploading
+                  ? <span className="admin-spinner admin-spinner--sm" />
+                  : <><Upload size={15} /> Upload Image</>}
+              </button>
+            )}
+            {imgError && <p className="blog-editor__upload-error">{imgError}</p>}
+            <p className="blog-editor__upload-hint">
+              JPG, PNG or WebP · max 5 MB · displayed as post cover
+            </p>
           </div>
 
           {/* Meta Title */}

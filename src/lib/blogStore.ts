@@ -13,6 +13,7 @@ export interface BlogPost {
   category: string;
   tags: string[];
   coverGradient: string; // CSS gradient used as cover placeholder
+  coverImage: string | null;  // Supabase Storage public URL
   author: string;
   authorRole: string;
   status: 'draft' | 'published';
@@ -91,6 +92,7 @@ const SEED_POSTS: BlogPost[] = [
     category: 'SEO',
     tags: ['SEO', 'Google Rankings', 'Core Web Vitals', 'Technical SEO', 'Content Strategy'],
     coverGradient: 'linear-gradient(135deg, #0a0a1a 0%, #0d1f3c 40%, #00d4aa22 100%)',
+    coverImage: null,
     author: 'Rohan Mehta',
     authorRole: 'SEO Strategist',
     status: 'published',
@@ -173,6 +175,7 @@ const SEED_POSTS: BlogPost[] = [
     category: 'Performance Marketing',
     tags: ['Meta Ads', 'ROAS', 'Facebook Ads', 'E-commerce Marketing', 'Paid Social'],
     coverGradient: 'linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 40%, #a855f722 100%)',
+    coverImage: null,
     author: 'Priya Sharma',
     authorRole: 'Head of Performance Marketing',
     status: 'published',
@@ -244,6 +247,7 @@ const SEED_POSTS: BlogPost[] = [
     category: 'Brand Strategy',
     tags: ['Brand Identity', 'Brand Strategy', 'Marketing Strategy', 'Brand Equity', 'Positioning'],
     coverGradient: 'linear-gradient(135deg, #0a0a1a 0%, #1a1000 40%, #f59e0b22 100%)',
+    coverImage: null,
     author: 'Ananya Kapoor',
     authorRole: 'Brand Strategist',
     status: 'published',

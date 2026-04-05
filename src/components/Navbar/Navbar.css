@@ -234,6 +234,45 @@
 
 .drop-footer-link:hover { gap: 0.7rem; }
 
+/* ── About dropdown (slim list variant) ────────────── */
+.nav-dropdown--about {
+  width: 300px;
+}
+
+.nav-dropdown__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-drop-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.18s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.about-drop-item:last-child { border-bottom: none; }
+.about-drop-item:hover { background: rgba(108, 99, 255, 0.08); }
+
+.about-drop-item__arrow {
+  color: #8080a0;
+  flex-shrink: 0;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.about-drop-item:hover .about-drop-item__arrow {
+  transform: translateX(4px);
+  color: var(--color-accent-light);
+}
+
+.about-drop-item:hover .drop-item__label { color: #fff; }
+.about-drop-item:hover .drop-item__desc  { color: #a0a0c0; }
+
 /* ── Mobile Menu ────────────────────────────────────── */
 .mobile-menu {
   display: none;

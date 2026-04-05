@@ -956,7 +956,7 @@
 /* ──────────────────────────────────────────────────────────
    MID CTA
 ────────────────────────────────────────────────────────── */
-.cta-mid-section { background: var(--color-bg); overflow: hidden; }
+.cta-mid-section { background: var(--color-bg); overflow: hidden; padding-top: 1.5rem; padding-bottom: 1.5rem; }
 
 .cta-mid {
   position: relative;
@@ -965,7 +965,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 3rem clamp(1.5rem, 5vw, 5rem);
+  padding: 1.25rem clamp(1.5rem, 5vw, 5rem);
 }
 
 .cta-mid__glow {
