@@ -6,16 +6,16 @@ import './Portfolio.css';
 
 const categories = ['All', 'Branding', 'Digital', 'Web', 'Video'];
 
-const projects = [
-  { id: 1, title: 'Novo Retail', category: 'Branding', img: 'https://picsum.photos/seed/p1/600/400', tag: 'Brand Identity' },
-  { id: 2, title: 'PulseX Campaign', category: 'Digital', img: 'https://picsum.photos/seed/p2/600/400', tag: 'Performance' },
-  { id: 3, title: 'Ecliptic.io', category: 'Web', img: 'https://picsum.photos/seed/p3/600/400', tag: 'Web Design' },
-  { id: 4, title: 'FlowState Film', category: 'Video', img: 'https://picsum.photos/seed/p4/600/400', tag: 'Brand Film' },
-  { id: 5, title: 'Synapse Labs', category: 'Branding', img: 'https://picsum.photos/seed/p5/600/400', tag: 'Identity' },
-  { id: 6, title: 'Catalyst Growth', category: 'Digital', img: 'https://picsum.photos/seed/p6/600/400', tag: 'Social Media' },
-  { id: 7, title: 'Axion Store', category: 'Web', img: 'https://picsum.photos/seed/p7/600/400', tag: 'E-Commerce' },
-  { id: 8, title: 'Zenith Intro', category: 'Video', img: 'https://picsum.photos/seed/p8/600/400', tag: 'Motion Reel' },
-  { id: 9, title: 'Brandify', category: 'Branding', img: 'https://picsum.photos/seed/p9/600/400', tag: 'Rebranding' },
+const projects: { id: number; title: string; category: string; img: string; tag: string; keywords?: string }[] = [
+  { id: 1, title: 'Dr. Ankit Kayal', category: 'Digital', img: '/assets/work/ankit-kayal.jpg', tag: 'SEO — Healthcare', keywords: 'Best Urologist in Jaipur' },
+  { id: 2, title: 'Dr. Nikhil Mehta', category: 'Digital', img: '/assets/work/nikhil-mehta.jpg', tag: 'SEO — Oncology', keywords: 'Best Oncologist in Jaipur' },
+  { id: 3, title: 'CKS Hospital', category: 'Digital', img: '/assets/work/cks-hospital.jpg', tag: 'SEO — Hospital', keywords: 'Best Multispeciality Hospital in Jaipur' },
+  { id: 4, title: 'Noonmoon Events', category: 'Digital', img: '/assets/work/noonmoon.jpg', tag: 'SEO — Events', keywords: 'Event Planner in Jaipur' },
+  { id: 5, title: 'RNM Financial', category: 'Digital', img: '/assets/work/rnm.jpg', tag: 'SEO — Finance', keywords: 'Financial Consulting Companies in India' },
+  { id: 6, title: 'JKJ Jewellers', category: 'Branding', img: '/assets/work/jkj-jewellers.jpg', tag: 'SEO — Jewellery', keywords: 'Best Jadau Jewellery in Jaipur' },
+  { id: 7, title: 'Manohar Bikaneri', category: 'Digital', img: '/assets/work/manohar-bikaneri.jpg', tag: 'SEO — FMCG', keywords: 'Bhaji Boxes in Delhi' },
+  { id: 8, title: 'Goldnest', category: 'Branding', img: '/assets/work/goldnest.jpg', tag: 'SEO — Fashion', keywords: 'Best Menswear Shop in Jaipur' },
+  { id: 9, title: 'Ultimates', category: 'Web', img: '/assets/work/ultimates.jpg', tag: 'SEO — Industrial', keywords: 'Aluminium Matting & Custom Floor Mats' },
 ];
 
 export default function Portfolio() {
@@ -76,7 +76,7 @@ export default function Portfolio() {
         <div className="container portfolio-hero__text">
           <span className="tag">Our Work</span>
           <h1>Case Studies &amp;<br /><span className="text-gradient">Real Results</span></h1>
-          <p>A curated collection of projects across branding, digital, web, and video.</p>
+          <p>From ranking <em>best urologist in Jaipur</em> to dominating <em>event planner in Jaipur</em> — real clients, real keywords, real page-1 results.</p>
         </div>
       </section>
 
@@ -118,6 +118,9 @@ export default function Portfolio() {
                 <div className="project-card__info">
                   <h3 className="project-card__title">{proj.title}</h3>
                   <span className="project-card__cat">{proj.category}</span>
+                  {proj.keywords && (
+                    <span className="project-card__keywords">#{proj.keywords}</span>
+                  )}
                 </div>
               </div>
             ))}

@@ -672,6 +672,9 @@ export default function SEO() {
         </div>
       </section>
 
+      {/* ── Work Showcase ────────────────────────────────── */}
+      <SeoShowcase />
+
       {/* ── Power of Organic ──────────────────────────────── */}
       <section id="power-of-organic-seo" className="svc-section svc-section--alt seo-power" aria-labelledby="seo-power-h2">
         <div className="container">
@@ -881,9 +884,6 @@ export default function SEO() {
           </div>
         </div>
       </section>
-
-      {/* ── Work Showcase ────────────────────────────────── */}
-      <SeoShowcase />
 
       {/* ── CTA ──────────────────────────────────────────── */}
       <section id="seo-cta" className="svc-section svc-cta svc-cta--seo" aria-labelledby="seo-cta-h2">

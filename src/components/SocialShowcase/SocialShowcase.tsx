@@ -37,64 +37,83 @@ interface SocialProfile {
   engagementRate: string;
   reachPerPost: string;
   topContent: string;
+  // optional custom labels for non-follower metrics
+  primaryMetricLabel?: string;
+  secondaryMetricLabel?: string;
+  engagementLabel?: string;
+  reachLabel?: string;
 }
 
 /* ── Data ────────────────────────────────────────────────── */
 const profiles: SocialProfile[] = [
   {
-    id: 'glowup',
-    handle: '@glowupco',
-    name: 'GlowUp Cosmetics',
-    industry: 'D2C Beauty',
+    id: 'sanjay-textile',
+    handle: '@sanjaytextile',
+    name: 'Sanjay Textile',
+    industry: 'Fashion & Textiles',
     accentColor: '#f59e0b',
-    avatar: 'linear-gradient(135deg, #f59e0b, #ec4899)',
-    beforeFollowers: '4.2K', afterFollowers: '86K',
-    beforeEngagement: '0.8%', afterEngagement: '6.4%',
-    growthPct: '+1,948%', period: '6 Months',
-    engagementRate: '6.4%', reachPerPost: '42K avg', topContent: 'Reels & Carousels',
+    avatar: 'linear-gradient(135deg, #f59e0b, #d97706)',
+    beforeFollowers: '~180K/mo', afterFollowers: '4.3M',
+    beforeEngagement: '0.9%',   afterEngagement: '2.6%',
+    growthPct: '+20%', period: '9 Months',
+    engagementRate: '2.6%', reachPerPost: '37K', topContent: 'Reels & Posts',
+    primaryMetricLabel: 'Views',
+    secondaryMetricLabel: 'Interactions',
+    engagementLabel: 'Content Interactions',
+    reachLabel: 'Profile Visits',
     grid: [
-      { gradient: 'linear-gradient(135deg,#f59e0b,#ec4899)', type: 'reel',     likes: '12.4K', comments: '318', isReel: true },
-      { gradient: 'linear-gradient(135deg,#ec4899,#a855f7)', type: 'post',     likes: '8.1K',  comments: '142' },
-      { gradient: 'linear-gradient(135deg,#a855f7,#6c63ff)', type: 'carousel', likes: '6.8K',  comments: '205' },
-      { gradient: 'linear-gradient(135deg,#f59e0b,#ff8e53)', type: 'post',     likes: '9.3K',  comments: '267' },
-      { gradient: 'linear-gradient(135deg,#ff6b6b,#f59e0b)', type: 'reel',     likes: '18.2K', comments: '492', isReel: true },
-      { gradient: 'linear-gradient(135deg,#ec4899,#f59e0b)', type: 'carousel', likes: '5.4K',  comments: '188' },
-      { gradient: 'linear-gradient(135deg,#00d4aa,#f59e0b)', type: 'reel',     likes: '14.6K', comments: '381', isReel: true },
-      { gradient: 'linear-gradient(135deg,#f59e0b,#d97706)', type: 'post',     likes: '7.2K',  comments: '159' },
-      { gradient: 'linear-gradient(135deg,#a855f7,#ec4899)', type: 'carousel', likes: '11.1K', comments: '344' },
+      { gradient: 'linear-gradient(135deg,#f59e0b,#d97706)', type: 'reel',     likes: '28.4K', comments: '614', isReel: true },
+      { gradient: 'linear-gradient(135deg,#d97706,#92400e)', type: 'post',     likes: '11.2K', comments: '248' },
+      { gradient: 'linear-gradient(135deg,#f59e0b,#fbbf24)', type: 'carousel', likes: '9.6K',  comments: '312' },
+      { gradient: 'linear-gradient(135deg,#92400e,#f59e0b)', type: 'post',     likes: '14.1K', comments: '381' },
+      { gradient: 'linear-gradient(135deg,#fbbf24,#d97706)', type: 'reel',     likes: '34.8K', comments: '792', isReel: true },
+      { gradient: 'linear-gradient(135deg,#d97706,#f59e0b)', type: 'carousel', likes: '7.9K',  comments: '218' },
+      { gradient: 'linear-gradient(135deg,#f59e0b,#92400e)', type: 'reel',     likes: '22.1K', comments: '504', isReel: true },
+      { gradient: 'linear-gradient(135deg,#fbbf24,#f59e0b)', type: 'post',     likes: '8.7K',  comments: '196' },
+      { gradient: 'linear-gradient(135deg,#92400e,#d97706)', type: 'carousel', likes: '12.3K', comments: '427' },
     ],
     growth: [
-      { month: 'Jan', value: 5, label: '4.2K' }, { month: 'Feb', value: 12, label: '8.1K' },
-      { month: 'Mar', value: 24, label: '18K' },  { month: 'Apr', value: 42, label: '32K' },
-      { month: 'May', value: 68, label: '56K' },  { month: 'Jun', value: 100, label: '86K' },
+      { month: 'Aug', value: 60,  label: '240K' },
+      { month: 'Sep', value: 80,  label: '320K' },
+      { month: 'Nov', value: 40,  label: '160K' },
+      { month: 'Dec', value: 25,  label: '100K' },
+      { month: 'Feb', value: 20,  label: '80K'  },
+      { month: 'Apr', value: 100, label: '4.3M' },
     ],
   },
   {
-    id: 'urbaneats',
-    handle: '@urbaneats',
-    name: 'UrbanEats Delivery',
-    industry: 'Food & Beverage',
-    accentColor: '#ff6b6b',
-    avatar: 'linear-gradient(135deg, #ff6b6b, #f59e0b)',
-    beforeFollowers: '11K', afterFollowers: '142K',
-    beforeEngagement: '1.1%', afterEngagement: '4.8%',
-    growthPct: '+1,191%', period: '9 Months',
-    engagementRate: '4.8%', reachPerPost: '78K avg', topContent: 'Reels & Stories',
+    id: 'jkj-jewellers',
+    handle: '@jkjjewellers',
+    name: 'JKJ Jewellers',
+    industry: 'Jewellery & Fashion',
+    accentColor: '#c9a227',
+    avatar: 'linear-gradient(135deg, #c9a227, #f5d061)',
+    beforeFollowers: '~800K/mo', afterFollowers: '25.1M',
+    beforeEngagement: '0.7%',   afterEngagement: '1.6%',
+    growthPct: '+3,038%', period: '9 Months',
+    engagementRate: '394.4K', reachPerPost: '114.1K', topContent: 'Reels & Carousels',
+    primaryMetricLabel: 'Views',
+    secondaryMetricLabel: 'Interactions',
+    engagementLabel: 'Content Interactions',
+    reachLabel: 'Link Clicks',
     grid: [
-      { gradient: 'linear-gradient(135deg,#ff6b6b,#f59e0b)', type: 'reel',     likes: '22.1K', comments: '614', isReel: true },
-      { gradient: 'linear-gradient(135deg,#f59e0b,#d97706)', type: 'post',     likes: '9.4K',  comments: '211' },
-      { gradient: 'linear-gradient(135deg,#d97706,#ff6b6b)', type: 'carousel', likes: '7.8K',  comments: '188' },
-      { gradient: 'linear-gradient(135deg,#ff8e53,#ff6b6b)', type: 'reel',     likes: '31.5K', comments: '842', isReel: true },
-      { gradient: 'linear-gradient(135deg,#ff6b6b,#cc3344)', type: 'post',     likes: '12.2K', comments: '303' },
-      { gradient: 'linear-gradient(135deg,#f59e0b,#ff6b6b)', type: 'carousel', likes: '8.6K',  comments: '241' },
-      { gradient: 'linear-gradient(135deg,#ff6b6b,#f59e0b)', type: 'post',     likes: '14.3K', comments: '376' },
-      { gradient: 'linear-gradient(135deg,#d97706,#ff8e53)', type: 'reel',     likes: '19.7K', comments: '528', isReel: true },
-      { gradient: 'linear-gradient(135deg,#cc3344,#ff6b6b)', type: 'carousel', likes: '6.9K',  comments: '194' },
+      { gradient: 'linear-gradient(135deg,#c9a227,#f5d061)', type: 'reel',     likes: '48.2K', comments: '1.1K', isReel: true },
+      { gradient: 'linear-gradient(135deg,#f5d061,#c9a227)', type: 'carousel', likes: '22.4K', comments: '518' },
+      { gradient: 'linear-gradient(135deg,#92740f,#c9a227)', type: 'post',     likes: '16.8K', comments: '384' },
+      { gradient: 'linear-gradient(135deg,#c9a227,#92740f)', type: 'reel',     likes: '61.3K', comments: '1.4K', isReel: true },
+      { gradient: 'linear-gradient(135deg,#f5d061,#e8b923)', type: 'post',     likes: '19.1K', comments: '442' },
+      { gradient: 'linear-gradient(135deg,#e8b923,#c9a227)', type: 'carousel', likes: '14.7K', comments: '336' },
+      { gradient: 'linear-gradient(135deg,#c9a227,#f5d061)', type: 'reel',     likes: '52.6K', comments: '1.2K', isReel: true },
+      { gradient: 'linear-gradient(135deg,#92740f,#e8b923)', type: 'post',     likes: '18.3K', comments: '408' },
+      { gradient: 'linear-gradient(135deg,#f5d061,#92740f)', type: 'carousel', likes: '24.9K', comments: '574' },
     ],
     growth: [
-      { month: 'Jan', value: 8, label: '11K' },  { month: 'Mar', value: 18, label: '26K' },
-      { month: 'May', value: 35, label: '52K' }, { month: 'Jun', value: 52, label: '76K' },
-      { month: 'Aug', value: 74, label: '112K' },{ month: 'Sep', value: 100, label: '142K' },
+      { month: 'Aug', value: 8,   label: '2M'    },
+      { month: 'Oct', value: 20,  label: '5M'    },
+      { month: 'Dec', value: 38,  label: '9.5M'  },
+      { month: 'Feb', value: 62,  label: '15.6M' },
+      { month: 'Mar', value: 80,  label: '20.1M' },
+      { month: 'Apr', value: 100, label: '25.1M' },
     ],
   },
   {
@@ -240,11 +259,11 @@ function Slide({ profile, active }: { profile: SocialProfile; active: boolean })
             <div className="ssc-ba__row">
               <div className="ssc-ba__item">
                 <span className="ssc-ba__num">{profile.beforeFollowers}</span>
-                <span className="ssc-ba__key">Followers</span>
+                <span className="ssc-ba__key">{profile.primaryMetricLabel ?? 'Followers'}</span>
               </div>
               <div className="ssc-ba__item">
                 <span className="ssc-ba__num">{profile.beforeEngagement}</span>
-                <span className="ssc-ba__key">Engagement</span>
+                <span className="ssc-ba__key">{profile.secondaryMetricLabel ?? 'Engagement'}</span>
               </div>
             </div>
           </div>
@@ -255,11 +274,11 @@ function Slide({ profile, active }: { profile: SocialProfile; active: boolean })
             <div className="ssc-ba__row">
               <div className="ssc-ba__item">
                 <span className="ssc-ba__num" style={{ color: profile.accentColor }}>{profile.afterFollowers}</span>
-                <span className="ssc-ba__key">Followers</span>
+                <span className="ssc-ba__key">{profile.primaryMetricLabel ?? 'Followers'}</span>
               </div>
               <div className="ssc-ba__item">
                 <span className="ssc-ba__num" style={{ color: profile.accentColor }}>{profile.afterEngagement}</span>
-                <span className="ssc-ba__key">Engagement</span>
+                <span className="ssc-ba__key">{profile.secondaryMetricLabel ?? 'Engagement'}</span>
               </div>
             </div>
             <div className="ssc-ba__badge" style={{ color: profile.accentColor }}>
@@ -282,11 +301,11 @@ function Slide({ profile, active }: { profile: SocialProfile; active: boolean })
           <div className="ssc-eng__grid">
             <div className="ssc-eng__item">
               <span className="ssc-eng__val">{profile.engagementRate}</span>
-              <span className="ssc-eng__key">Eng. Rate</span>
+              <span className="ssc-eng__key">{profile.engagementLabel ?? 'Eng. Rate'}</span>
             </div>
             <div className="ssc-eng__item">
               <span className="ssc-eng__val">{profile.reachPerPost}</span>
-              <span className="ssc-eng__key">Reach / Post</span>
+              <span className="ssc-eng__key">{profile.reachLabel ?? 'Reach / Post'}</span>
             </div>
             <div className="ssc-eng__item">
               <span className="ssc-eng__val" style={{ fontSize: '0.78rem' }}>{profile.topContent}</span>

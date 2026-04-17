@@ -126,8 +126,12 @@
 .project-card__info {
   padding: 1.25rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.project-card__info > span:first-of-type {
+  align-self: flex-start;
 }
 
 .project-card__title {
@@ -142,6 +146,15 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.project-card__keywords {
+  font-size: 0.7rem;
+  color: var(--color-muted, #888);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Responsive ── */

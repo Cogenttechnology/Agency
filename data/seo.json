@@ -248,18 +248,18 @@
     "id": "portfolio",
     "label": "Portfolio",
     "path": "/portfolio",
-    "title": "Portfolio | Our Work & Case Studies — Cogent Agency",
-    "metaTitle": "Portfolio & Case Studies | Cogent Agency",
-    "metaDescription": "Explore Cogent's work across e-commerce, fintech, healthcare, real estate, SaaS and fashion brands.",
+    "title": "Our Work | Real Results for Real Clients — Cogent Agency",
+    "metaTitle": "Our Work & Client Results | Cogent Agency Portfolio",
+    "metaDescription": "See how Cogent Agency helped clients rank #1 on Google — from best urologist in Jaipur and best oncologist in Jaipur to event planners, jewellers, hospitals, and D2C brands. Real SEO results, real growth.",
     "ogImage": "https://cogent.agency/og-portfolio.jpg",
     "canonical": "https://cogent.agency/portfolio",
     "robots": "index, follow",
-    "keywords": "digital marketing portfolio, case studies, agency work",
+    "keywords": "digital marketing portfolio, SEO case studies, best urologist in jaipur, best oncologist in jaipur, best multispeciality hospital in jaipur, event planner in jaipur, best jewellers in jaipur, financial consulting companies in india, bhaji boxes in delhi, digital marketing agency in jaipur, website development company in jaipur, social media marketing company in jaipur",
     "schemas": [
       {
         "type": "WebPage",
         "enabled": true,
-        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Portfolio\",\n  \"url\": \"https://cogent.agency/portfolio\",\n  \"description\": \"Explore our work and case studies.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
+        "custom": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Our Work & Client Results — Cogent Agency\",\n  \"url\": \"https://cogent.agency/portfolio\",\n  \"description\": \"Cogent Agency has helped clients across healthcare, hospitality, fashion, finance, and FMCG rank on page 1 of Google. Explore real SEO results and case studies.\",\n  \"isPartOf\": {\n    \"@type\": \"WebSite\",\n    \"url\": \"https://cogent.agency\"\n  }\n}"
       }
     ],
     "updatedAt": "2026-03-31T15:13:05.830Z"
