@@ -25,4 +25,6 @@ export default [
   route("api/blogs", "pages/api/blogs.ts"),
   route("api/seo", "pages/api/seo.ts"),
   route("api/enquiries", "pages/api/enquiries.ts"),
+  route("api/leads", "pages/api/leads.ts"),
+  route("scale", "pages/api/scale.ts"),
 ] as RouteConfig;

@@ -21,6 +21,10 @@ dist-ssr
 build
 .react-router
 
+# Database backups
+backup/
+backup.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

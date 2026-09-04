@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { uploadBlogImage, deleteBlogImage } from '../../lib/supabase';
 import type { Enquiry, EnquiryStatus } from '../../lib/enquiryStore';
+import type { Lead, LeadStatus } from '../../lib/leadStore';
 import type { BlogPost } from '../../lib/blogStore';
 import type { PageSeo, PageSchema } from '../../lib/seoStore';
 import {
@@ -1481,8 +1482,299 @@ function ScriptsManager() {
   );
 }
 
+/* ── Leads Manager (scale landing page) ───────────────────── */
+const LEAD_STATUSES: LeadStatus[] = ['new', 'contacted', 'qualified', 'won', 'lost'];
+
+const leadStatusMeta: Record<LeadStatus, { label: string; color: string; icon: React.ReactNode }> = {
+  new:       { label: 'New',       color: '#6c63ff', icon: <Inbox size={13} /> },
+  contacted: { label: 'Contacted', color: '#f59e0b', icon: <Eye size={13} /> },
+  qualified: { label: 'Qualified', color: '#00d4aa', icon: <CheckCircle size={13} /> },
+  won:       { label: 'Won',       color: '#22c55e', icon: <CheckCircle size={13} /> },
+  lost:      { label: 'Lost',      color: '#ff6b6b', icon: <XCircle size={13} /> },
+};
+
+function LeadDetail({
+  lead, onClose, onStatusChange, onDelete,
+}: {
+  lead: Lead;
+  onClose: () => void;
+  onStatusChange: (id: string, s: LeadStatus) => void;
+  onDelete: (id: string) => void;
+}) {
+  return (
+    <div className="admin-modal-overlay" onClick={e => { if (e.currentTarget === e.target) onClose(); }}>
+      <div className="admin-modal">
+        <div className="admin-modal__header">
+          <div>
+            <h2 className="admin-modal__name">{lead.brand}</h2>
+            <p className="admin-modal__meta">{formatDate(lead.createdAt)} · via {lead.source || 'Scale Landing Page'}</p>
+          </div>
+          <button className="admin-modal__close" onClick={onClose}><XCircle size={20} /></button>
+        </div>
+
+        <div className="admin-modal__body">
+          <div className="admin-modal__grid">
+            <div className="admin-modal__field">
+              <span className="admin-modal__field-label">Phone</span>
+              <a href={`tel:${lead.phone}`} className="admin-modal__field-value admin-modal__link">{lead.phone}</a>
+            </div>
+            <div className="admin-modal__field">
+              <span className="admin-modal__field-label">Website</span>
+              <a href={lead.website} target="_blank" rel="noopener noreferrer" className="admin-modal__field-value admin-modal__link">{lead.website}</a>
+            </div>
+            <div className="admin-modal__field">
+              <span className="admin-modal__field-label">Monthly Sales</span>
+              <span className="admin-modal__field-value">{lead.monthlySales || '—'}</span>
+            </div>
+            <div className="admin-modal__field">
+              <span className="admin-modal__field-label">Monthly Ad Spend</span>
+              <span className="admin-modal__field-value">{lead.monthlyAdSpend || '—'}</span>
+            </div>
+            <div className="admin-modal__field">
+              <span className="admin-modal__field-label">Status</span>
+              <div className="admin-modal__status-select">
+                {LEAD_STATUSES.map(s => (
+                  <button
+                    key={s}
+                    className={`admin-status-btn ${lead.status === s ? 'active' : ''}`}
+                    style={{ '--sc': leadStatusMeta[s].color } as React.CSSProperties}
+                    onClick={() => onStatusChange(lead.id, s)}
+                  >
+                    {leadStatusMeta[s].icon} {leadStatusMeta[s].label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {lead.utm && Object.keys(lead.utm).length > 0 && (
+            <div className="admin-modal__field admin-modal__field--full">
+              <span className="admin-modal__field-label">UTM / Ad Tracking</span>
+              <div className="admin-modal__tags">
+                {Object.entries(lead.utm).map(([k, v]) => (
+                  <span key={k} className="admin-tag">{k}: {v}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="admin-modal__field admin-modal__field--full">
+            <span className="admin-modal__field-label">Referrer</span>
+            <p className="admin-modal__message">{lead.referrer || '—'}</p>
+          </div>
+        </div>
+
+        <div className="admin-modal__footer">
+          <a href={`https://wa.me/${lead.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="admin-btn admin-btn--primary">
+            <Phone size={15} /> WhatsApp {lead.phone}
+          </a>
+          <button className="admin-btn admin-btn--danger" onClick={() => { onDelete(lead.id); onClose(); }}>
+            <Trash2 size={15} /> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LeadsManager() {
+  const [leads, setLeads]             = useState<Lead[]>([]);
+  const [search, setSearch]           = useState('');
+  const [filterStatus, setFilterStatus] = useState<LeadStatus | 'all'>('all');
+  const [selected, setSelected]       = useState<Lead | null>(null);
+
+  const leadApi = (body: Record<string, unknown>) =>
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': 'cogent_admin_auth' },
+      body: JSON.stringify(body),
+    });
+
+  const load = async () => {
+    const res = await fetch('/api/leads', {
+      headers: { 'x-admin-token': 'cogent_admin_auth' },
+    });
+    const data: Lead[] = await res.json();
+    setLeads(data);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const handleStatusChange = async (id: string, status: LeadStatus) => {
+    await leadApi({ _action: 'updateStatus', id, status });
+    load();
+    if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
+  };
+
+  const handleDelete = async (id: string) => {
+    await leadApi({ _action: 'delete', id });
+    load();
+  };
+
+  const filtered = leads.filter(l => {
+    const matchSearch =
+      l.brand.toLowerCase().includes(search.toLowerCase()) ||
+      l.phone.toLowerCase().includes(search.toLowerCase()) ||
+      l.website.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = filterStatus === 'all' || l.status === filterStatus;
+    return matchSearch && matchStatus;
+  });
+
+  const counts = {
+    all:       leads.length,
+    new:       leads.filter(l => l.status === 'new').length,
+    contacted: leads.filter(l => l.status === 'contacted').length,
+    qualified: leads.filter(l => l.status === 'qualified').length,
+    won:       leads.filter(l => l.status === 'won').length,
+    lost:      leads.filter(l => l.status === 'lost').length,
+  };
+
+  const statCards = [
+    { label: 'Total Leads', value: counts.all,       icon: <Inbox size={20} />,       color: '#6c63ff' },
+    { label: 'New',         value: counts.new,       icon: <TrendingUp size={20} />,  color: '#ff6b6b' },
+    { label: 'Qualified',   value: counts.qualified, icon: <CheckCircle size={20} />, color: '#00d4aa' },
+    { label: 'Won',         value: counts.won,       icon: <BarChart2 size={20} />,   color: '#22c55e' },
+  ];
+
+  const filterTabs: { key: LeadStatus | 'all'; label: string }[] = [
+    { key: 'all',       label: `All (${counts.all})` },
+    { key: 'new',       label: `New (${counts.new})` },
+    { key: 'contacted', label: `Contacted (${counts.contacted})` },
+    { key: 'qualified', label: `Qualified (${counts.qualified})` },
+    { key: 'won',       label: `Won (${counts.won})` },
+    { key: 'lost',      label: `Lost (${counts.lost})` },
+  ];
+
+  return (
+    <>
+      <header className="admin-topbar">
+        <div>
+          <h1 className="admin-topbar__title">Leads</h1>
+          <p className="admin-topbar__sub">Leads from the Scale landing page (/scale)</p>
+        </div>
+        <button className="admin-refresh" onClick={load} title="Refresh">
+          <RefreshCw size={16} />
+        </button>
+      </header>
+
+      <div className="admin-stats-grid">
+        {statCards.map(c => (
+          <div key={c.label} className="admin-stat-card" style={{ '--ac': c.color } as React.CSSProperties}>
+            <div className="admin-stat-card__icon">{c.icon}</div>
+            <div className="admin-stat-card__info">
+              <span className="admin-stat-card__value">{c.value}</span>
+              <span className="admin-stat-card__label">{c.label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="admin-toolbar">
+        <div className="admin-filter-tabs">
+          {filterTabs.map(t => (
+            <button
+              key={t.key}
+              className={`admin-filter-tab ${filterStatus === t.key ? 'active' : ''}`}
+              onClick={() => setFilterStatus(t.key)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <div className="admin-search">
+          <Search size={15} />
+          <input
+            type="text"
+            placeholder="Search leads…"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="admin-table-wrap">
+        {filtered.length === 0 ? (
+          <div className="admin-empty">
+            <Inbox size={48} />
+            <p>{leads.length === 0 ? 'No leads yet. Submit the form on /scale to see it here.' : 'No results match your filter.'}</p>
+          </div>
+        ) : (
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Brand</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Sales/mo</th>
+                <th>Ad Spend/mo</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(lead => (
+                <tr
+                  key={lead.id}
+                  className={`admin-table__row ${lead.status === 'new' ? 'admin-table__row--new' : ''}`}
+                  onClick={() => setSelected(lead)}
+                >
+                  <td onClick={e => e.stopPropagation()}>
+                    <select
+                      className="admin-status-select"
+                      value={lead.status}
+                      style={{ '--sc': leadStatusMeta[lead.status].color } as React.CSSProperties}
+                      onChange={e => handleStatusChange(lead.id, e.target.value as LeadStatus)}
+                    >
+                      {LEAD_STATUSES.map(s => (
+                        <option key={s} value={s}>{leadStatusMeta[s].label}</option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="admin-table__name">
+                    {lead.status === 'new' && <span className="admin-table__dot" />}
+                    {lead.brand}
+                  </td>
+                  <td>
+                    <a href={`https://wa.me/${lead.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="admin-table__link" onClick={e => e.stopPropagation()}>
+                      {lead.phone}
+                    </a>
+                  </td>
+                  <td>{lead.website || '—'}</td>
+                  <td>{lead.monthlySales || '—'}</td>
+                  <td>{lead.monthlyAdSpend || '—'}</td>
+                  <td className="admin-muted">{formatDate(lead.createdAt)}</td>
+                  <td onClick={e => e.stopPropagation()}>
+                    <div className="admin-table__actions">
+                      <button className="admin-action-btn" title="View" onClick={() => setSelected(lead)}>
+                        <Eye size={15} />
+                      </button>
+                      <button className="admin-action-btn admin-action-btn--danger" title="Delete" onClick={() => handleDelete(lead.id)}>
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      {selected && (
+        <LeadDetail
+          lead={selected}
+          onClose={() => setSelected(null)}
+          onStatusChange={handleStatusChange}
+          onDelete={handleDelete}
+        />
+      )}
+    </>
+  );
+}
+
 /* ── Dashboard ─────────────────────────────────────────────── */
-type ActiveSection = 'enquiries' | 'blog' | 'seo' | 'scripts';
+type ActiveSection = 'enquiries' | 'leads' | 'blog' | 'seo' | 'scripts';
 
 function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [enquiries, setEnquiries]     = useState<Enquiry[]>([]);
@@ -1572,6 +1864,12 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           >
             <Inbox size={18} /> Enquiries
             {counts.new > 0 && <span className="admin-sidebar__badge">{counts.new}</span>}
+          </div>
+          <div
+            className={`admin-sidebar__nav-item ${activeSection === 'leads' ? 'active' : ''}`}
+            onClick={() => setActiveSection('leads')}
+          >
+            <TrendingUp size={18} /> Leads
           </div>
           <div
             className={`admin-sidebar__nav-item ${activeSection === 'blog' ? 'active' : ''}`}
@@ -1737,6 +2035,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           </>
         )}
 
+        {activeSection === 'leads' && <LeadsManager />}
         {activeSection === 'blog' && <BlogManager />}
         {activeSection === 'seo' && <SeoManager />}
         {activeSection === 'scripts' && <ScriptsManager />}
